@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+  
+      <span> Project Tracker</span>
+  
+      <!-- <div fxFlex fxLayout="row">
+        <ul fxLayout="row" fxLayoutGap="20px">
+          <li>
+            <button color="primary">
+              <a mat-list-item routerLinkActive='list-item-active' routerLink="/">Your Work</a>
+            </button>
+          </li>
+          <li>
+            <button color="primary">
+              <a mat-list-item routerLinkActive='list-item-active' routerLink="/">Projects</a>
+            </button>
+          </li>
+          <li>
+            <button color="primary">
+              <a mat-list-item routerLinkActive='list-item-active' routerLink="/">Filters</a>
+            </button>
+          </li>
+          <li>
+            <button>
+              <a mat-list-item routerLinkActive='list-item-active' routerLink="/">Team</a>
+            </button>
+          </li>
+        </ul>
+      </div> -->
+  
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <ul fxLayout="row" fxLayoutGap="20px">
+            <li>
+                <button mat-icon-button>
+                  <mat-icon>contact_phone</mat-icon>
+                </button>
+              </li>
+          <li>
+            <button mat-icon-button>
+              <mat-icon>settings</mat-icon>
+            </button>
+          </li>
+          <li>
+            <button mat-icon-button>
+              <mat-icon>help_outline</mat-icon>
+            </button>
+          </li>
+          <li>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>person_outline</mat-icon>
+            </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+               <mat-icon>exit_to_app</mat-icon>
+                  Sign Out
+            </button>
+          </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>

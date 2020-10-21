@@ -1,0 +1,78 @@
+<!--Project Details-->
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" style="text-align:left;">
+                <br />
+                <h2>{{projectName}}</h2>
+                <h4>Owner : {{ownerName}}</h4>
+                <h4>SME : {{smeName}}</h4>
+            </div>
+            <div class="col-md-4" style="text-align:right;">
+                <br />
+                <button class="btn btn-lg btn-block btn-outline-primary" type="button" data-toggle="collapse"
+                    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">File
+                    Uploader <img src="https://www.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png"
+                        style="height:40px; width:40px"></button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <input type="file" id="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <hr />
+    <!--Project Status Bar-->
+    <div class="col-md-12">
+        <div class="container">
+            <span *ngFor="let item of counts;let i = index">
+                <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
+                <span class="circles" [class.active]="orderStatus == item"></span>
+                <span class="bar" *ngIf="(i != counts.length-1)"></span>
+            </span>
+        </div>
+    </div>
+    <br />
+    <hr />
+    <div class="col-md-12" style="text-align:center;">
+        <h6>Created Date : {{createdDate}} , Code Freeze Date : {{codeFreezeDate}} , Release Date :
+            {{releaseDate}}</h6>
+    </div>
+    <hr />
+    <br />
+    <!--Allocated Resourse-->
+    <div>
+        <h5>Allocated Resourses</h5>
+        <br />
+        <div>
+            <ag-grid-angular style="width: 100%; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
+                [columnDefs]="columnDefs">
+            </ag-grid-angular>
+        </div>
+
+    </div>
+    <hr />
+    <!--Document Checklist-->
+    <div>
+        <h5>Checklist</h5>
+        <ul>
+            <li>
+                <h6>AFD <span class="badge badge-success">O</span></h6>
+            </li>
+            <li>
+                <h6>TSD <span class="badge badge-danger">X</span></h6>
+            </li>
+            <li>
+                <h6>Runbook <span class="badge badge-success">O</span></h6>
+            </li>
+            <li>
+                <h6>DDL/DML <span class="badge badge-success">O</span></h6>
+            </li>
+            <li>
+                <h6>Github <span class="badge badge-success">O</span></h6>
+            </li>
+        </ul>
+    </div>
+</div>
