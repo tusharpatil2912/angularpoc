@@ -12,6 +12,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatSelectModule } from "@angular/material/select";
+import { MatMenuModule } from "@angular/material/menu";
 
 import { RouterModule } from '@angular/router';
 import { SharedModule } from "../shared/shared.module";
@@ -22,6 +27,7 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
 import { ProjectSettingsComponent } from './project-settings/project-settings.component';
 import { SwimLanesComponent } from './swim-lanes/swim-lanes.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { TasksettingsComponent } from './tasksettings/tasksettings.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,8 @@ import { ProjectListComponent } from './project-list/project-list.component';
     ProjectDetailsComponent,
     ProjectSettingsComponent,
     SwimLanesComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    TasksettingsComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +53,12 @@ import { ProjectListComponent } from './project-list/project-list.component';
     MatIconModule,
     MatToolbarModule,
     DragDropModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatMenuModule
   ],
   providers:[
     DashboardService
