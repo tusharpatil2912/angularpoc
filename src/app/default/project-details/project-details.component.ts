@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectDetailsService } from "../../services/project-details.service";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project-details',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-  constructor() { }
+  projectDetails;
+  projectId:number;
+
+  constructor(private detailsapi: ProjectDetailsService, 
+              private router: Router,
+              private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.projectId=this.activeRoute.snapshot.params.id;
+    this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
+      //console.log(data);
+      this.projectDetails = data;
+    });
   }
 
   projectName = 'MyApp';

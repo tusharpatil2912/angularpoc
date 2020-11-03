@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ProjectDetailsService } from "../../services/project-details.service";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project-settings',
@@ -8,12 +10,24 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class ProjectSettingsComponent implements OnInit {
 
-  constructor() { }
+  projectDetails;
+  projectId:number;
+
+  constructor(private detailsapi: ProjectDetailsService, 
+    private router: Router,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.projectId=this.activeRoute.snapshot.params.id;
+    this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
+      //console.log(data);
+      this.projectDetails = data;
+      //this.projSettingsForm.get('name').setValue(this.projectDetails.name);
+      this.projSettingsForm.patchValue({name:this.projectDetails.name, 
+                                        sme : this.projectDetails.sme, 
+                                        owner:this.projectDetails.owner})
+    });
   }
-
-  name = 'Project Status';
 
   //Demo purpose only, Data might come from Api calls/service
   public counts = ["Gathering Info","Planning","Design",
