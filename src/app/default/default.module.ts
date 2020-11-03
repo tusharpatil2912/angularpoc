@@ -21,6 +21,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { RouterModule } from '@angular/router';
 import { SharedModule } from "../shared/shared.module";
 import { AgGridModule } from 'ag-grid-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DashboardService } from "../services/dashboard.service";
 import { ProjectDetailsComponent } from './project-details/project-details.component';
@@ -58,7 +59,8 @@ import { TasksettingsComponent } from './tasksettings/tasksettings.component';
     MatInputModule,
     MatGridListModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
   providers:[
     DashboardService

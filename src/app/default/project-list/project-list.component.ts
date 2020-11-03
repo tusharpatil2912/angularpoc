@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectDetailsService } from "../../services/project-details.service";
 
 @Component({
   selector: 'app-project-list',
@@ -7,20 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectListComponent implements OnInit {
 
-  constructor() { }
+  projectList;
+
+  constructor(private detailsapi: ProjectDetailsService) { }
 
   ngOnInit(): void {
+    this.detailsapi.getProjecttList().subscribe((data)=>{
+      console.log(data);
+      this.projectList = data;
+    });
   }
 
-  columnDefs = [
-    { field: 'id', sortable: true, filter: true },
-    { field: 'name', sortable: true, filter: true },
-    { field: 'settings', sortable: true, filter: true}
-];
-
 rowData = [
-  {id:'1',name:'rishi',settings:'3'},
-  {id:'2',name:'tushar',settings:'4'}
+  {id:'1',name:'rishi',release:'Dec20',settings:'3'},
+  {id:'2',name:'tushar',release:'Dec20',settings:'4'}
 ];
 
 }
