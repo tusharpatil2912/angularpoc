@@ -18,7 +18,7 @@ const routes: Routes = [
       {path:'addproject',component:ProjectSettingsComponent},
       {path:'swimlanes',component:SwimLanesComponent},
       {path:'projectlist',component:ProjectListComponent},
-      {path:'tasksettings', component:TasksettingsComponent}
+      {path:'task', component:TasksettingsComponent}
     ]
   }
 ];

@@ -1,95 +1,118 @@
-<mat-grid-list cols="1" rowHeight="500px" guttersize="1000px">
+
+<mat-grid-list cols="1" rowHeight="500px"  gutterSize="1000px">
+    
     <mat-grid-tile rows="2">
-        <div clas="container-fluid">
-            <h1>Task</h1>
-            <mat-form-field appearance="fill" class="width-50">
-                <mat-label>Select Project</mat-label>
-                <mat-select>
-                    <mat-option value="p1">P</mat-option>
-                    <mat-option value="R2">R</mat-option>
-                    <mat-option value="13">13</mat-option>
-                    <mat-option value="others">others</mat-option>
-                </mat-select>
+     <div clas ="container-fluid">
+         <h1>Task</h1>
+         <mat-form-field appearance="fill" class="width-50">
+             <mat-label>Select Project</mat-label>
+           <mat-select>   
+                  <mat-option value="p1">P</mat-option>
+                  <mat-option value="R2">R</mat-option>
+                  <mat-option value="I3">I3</mat-option>
+                  <mat-option value="others">others</mat-option>
+           </mat-select>
+         </mat-form-field>
+             
+     
+             <mat-form-field appearance="fill" class="width-50 ml-2">
+                 <mat-label>Task Name</mat-label>
+                 <input matInput placeholder="Task Name">
+                 <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
+                  <br>
+              <mat-form-field appearance="fill" class="width-50">
+                     <mat-label>Sub Task Name</mat-label>
+                     <input matInput placeholder="Sub Task Name">
+              </mat-form-field>  
+                    
+                    
+              <mat-form-field appearance="fill" class="width-50 ml-2">
+                       <mat-label>Task Eta</mat-label>
+                       <input matInput placeholder="Task Eta">
+                       <mat-icon matSuffix>schedule</mat-icon>
+               </mat-form-field>
+               <br>  
+                     
+         <mat-form-field appearance="fill" class="width-50">
+             <mat-label>SME name</mat-label>
+             <input matInput placeholder="SME name">
             </mat-form-field>
+            
+         <mat-form-field appearance="fill" class="width-50 ml-2">
+             <mat-label>Skills Required</mat-label>
+           <mat-select>   
+                  <mat-option value="dotnet">dotnet</mat-option>
+                  <mat-option value="sql">sql</mat-option>
+                  <mat-option value="webservice">webservice</mat-option>
+                  <mat-option value="angular">angular</mat-option>
+           </mat-select>
+         </mat-form-field>
+         <br>
+ 
+         <mat-form-field appearance="fill" class="width-50">
+             <mat-label>Owner Name</mat-label>
+             <input matInput placeholder="Owner Name">
+              </mat-form-field>
+ 
             <mat-form-field appearance="fill" class="width-50 ml-2">
-                <mat-label>Task Name</mat-label>
-                <input matInput placeholder="Task Name">
-                <mat-icon matsuffix>search</mat-icon>
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="fill" class="width-50">
-                <mat-label>Sub Task Name</mat-label>
-                <input matInput placehelder="Sub Task Name">
-            </mat-form-field>
-            <mat-form-field anpearance="Eill" lass="width-50 ml-2">
-                <mat-label>Task Eta</mat-label>
-                <input matInput placeholder="Task Eta">
-                <mat-icon matsuffix>schedules</mat-icon>
-            </mat-form-field>
-            <br />
-            <mat-form-field appearance="fill" class="width-50">
-                <mat-label>SME name</mat-label> <input matInput placeholder="SME name">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="width-50 ml-2">
-                <mat-label>Skills Required</mat-label>
-                <mat-select>
-                    <mat-option value="dotnet">dotnet</mat-option>
-                    <mat-option value="sql">sql</mat-option>
-                    <mat-option value="webservice">webservice</mat-option>
-                    <mat-option value="angular">angular</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <br />
-            <mat-form-field appearance="fill" class="width-50">
-                <mat-label>Owner Name</mat-label>
-                <input matInput placeholder="OWner Name">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="width-50 ml-2">
-                <mat-label>Resources required count</mat-label>
-                <input matInput placeholcer="Resources required count">
-            </mat-form-field>
-            <br />
-            <mat-form-field appearance="fill" class="width-100">
-                <mat-label>Description</mat-label>
-                <textarea matinput placeholder="Description"></textarea>
-            </mat-form-field>
-        </div>
-    </mat-grid-tile>
-</mat-grid-list> 
-<div> 
-    <button class="btn btn-lg btn block btn-outline-primary" type="button" data-toggle="collapse"
-        data-target="tcollapseExample" aria-expanded="false" aria-controls="collapseExample">File Uploader 
-        <img src="https://www.iconfinder.com/data/icons/hawgons/32/698394-icon-130-cloud-upload-512.pag" 
-        style="height:40px; width: 40px"></button>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body"> <input type="file" id="file"> 
-        </div>
-    </div> 
-    <div style="position:center"> 
-        <h2>Asign task</h2>
-        <table class="table table-striped ml-2" style="border-style:solid;text-align:center"> 
-            <thead> 
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">name</th>
-                    <th scope="col">project</th>
-                    <th scope="col">task</th>
-                    <th scope="col">open task</th>
-                    <th scope="col">skills</th>
-                    <th scope="col">select</th>
-                </tr>
+               <mat-label>Resources required count</mat-label>
+               <input matInput placeholder="Resources required count">
+           </mat-form-field>
+           <br>
+           <mat-form-field appearance="fill" class="width-100">
+               <mat-label>Description</mat-label>
+               <textarea matInput placeholder="Descriptiont"></textarea>
+           </mat-form-field>  
+            
+         </div>
+        
+          
+         
+       </mat-grid-tile>
+       
+ </mat-grid-list>
+ <div>
+    <button class="btn btn-lg btn-block btn-outline-primary" type="button" data-toggle="collapse"
+               data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">File
+               Uploader <img src="https://www.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png"
+                   style="height:40px; width:40px"></button>
+           <div class="collapse" id="collapseExample">
+               <div class="card card-body">
+                   <input type="file" id="file">
+               </div>
+           </div>
+       </div>
+ <div style="position:center">
+    <h2>Assign task</h2>
+   
+        <table class="table table-striped;ml-2" style="border-style:solid;text-align:center">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">project</th>
+                <th scope="col">task</th>
+                <th scope="col">open task</th>
+                <th scope="col">skills</th>
+                <th scope="col">select</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>chethan ip</td>
-                    <td>p1</td>
-                    <td>automation</td>
-                    <td>footer</td>
-                    <td>dotnet,sql</td>
-                    <td>yes</td>
-                </tr>
+              <tr>
+                  <th scope="row">1</th>
+                  <td>chethan ip</td>
+                  <td>p1</td>
+                  <td>autonatiom</td>
+                  <td>footer</td>
+                  <td>dotnet,sql</td>
+                  <td>yes</td>
+              </tr>
+              
             </tbody>
-        </table>    
-    </div>
-</div>
+            </table>
+   
+    
+  </div>
+
+
