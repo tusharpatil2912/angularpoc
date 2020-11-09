@@ -2,18 +2,24 @@
 <div>
     <div>
         <br/>
-        <h3>Project Settings</h3>
+        <h3>{{pageTitile}}</h3>
     </div>
     <hr />
     <!--Project Settings Form-->
     <div class="row">
         <div class="col-md-5">
-            <form [formGroup]="projSettingsForm">
+            <form [formGroup]="projSettingsForm" (ngSubmit)="submitForm()">
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Project Name</span>
                       </div>
                     <input type="text" formControlName="name" class="form-control" placeholder="Project Name">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Description</span>
+                      </div>
+                    <input type="text" formControlName="description" class="form-control" placeholder="Project Description">
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
@@ -37,15 +43,20 @@
                         <option>BO</option>
                     </select>
                 </div>
+                <br />
+                <button class="btn btn-block btn-lg btn-success" type="submit">{{submitbtnTitile}}</button>
             </form>
-            <label><h6>Add Milestone</h6></label>
+            <div *ngIf="visibility">
+                <br />
+            <!-- <label><h6>Add Milestone</h6></label>
             <div class="input-group mb-3">
                 <input type="date" class="form-control" placeholder="Add Milestone" aria-label="Add Milestone"
                     aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
                 </div>
-            </div>
+            </div> -->
+        </div>
         </div>
         <!--Important Dates-->
         <div class="col-md-5">
@@ -77,12 +88,18 @@
                         <input type="date" formControlName="codeFreezeDate" class="form-control">
                     </div>
                 </div>
+                <br />
+                <br />
+                <br />
+                <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
+                    reply
+                    </span> Back to List</a>
             </form>
         </div>
     </div>
-    <hr />
+    <hr  *ngIf="visibility"/>
     <!--progress bar-->
-    <div>
+    <div *ngIf="visibility">
         <h5>Project Status</h5>
         <hr />
         <div class="container">
@@ -94,9 +111,9 @@
         </div>
     </div>
     <br />
-    <hr />
+    <hr  *ngIf="visibility"/>
     <!--Resourse Status-->
-    <div>
+    <div *ngIf="visibility">
         <h5>Resourse Status</h5>
         <br />
         <div>
