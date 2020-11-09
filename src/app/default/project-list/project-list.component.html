@@ -1,14 +1,13 @@
-<!-- <div>
-    <ag-grid-angular style="width: 100%; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
-        [columnDefs]="columnDefs">
-    </ag-grid-angular>
-</div> -->
-<div>
+<div class="row">
+  <div class="col-md-4">
     <h3>Projects</h3>
+  </div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4 text-right"><a class="btn btn-lg btn-primary" routerLink="/addproject">Add New Project</a></div>
 </div>
-    <hr/>
-    
-    <!-- <div *ngFor="let item of projectList" class="card shadow my-5">
+<hr />
+
+<!-- <div *ngFor="let item of projectList" class="card shadow my-5">
         <div class="card-body">
             <h3>{{item.name}}</h3>
             <p class="lead">{{item.description}}</p>
@@ -21,24 +20,30 @@
         </div>
     </div> -->
 
-    <table class="table sorttable">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Details</th>
-            <th scope="col">Settings</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of projectList">
-            <th scope="row">{{item.id}}</th>
-            <td>{{item.name}}</td>
-            <td><a [routerLink]="['/project',item.id]"
-                class="btn btn-outline-success btn-lg" style="margin-right:25px;">Details</a></td>
-            <td><a [routerLink]="['/settings',item.id]"
-                class="btn btn-outline-primary btn-lg">
-                <span class="material-icons">settings</span></a></td>
-          </tr>
-        </tbody>
-      </table>
+<!-- <table class="table sorttable">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Details</th>
+      <th scope="col">Settings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of projectList">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.name}}</td>
+      <td><a [routerLink]="['/project',item.id]" class="btn btn-outline-success btn-lg"
+          style="margin-right:25px;">Details</a></td>
+      <td><a [routerLink]="['/settings',item.id]" class="btn btn-light btn-lg">
+          <span class="material-icons">settings</span></a></td>
+    </tr>
+  </tbody>
+</table>
+<hr/>
+<br/> -->
+ <div>
+    <ag-grid-angular style="width: 100%; height: 550px;" class="ag-theme-alpine" [rowData]="rowData"
+        [columnDefs]="columnDefs" [rowHeight]="55">
+    </ag-grid-angular>
+</div> 

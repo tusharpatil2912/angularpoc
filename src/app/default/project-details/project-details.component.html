@@ -5,10 +5,15 @@
             <div class="col-md-8" style="text-align:left;">
                 <br />
                 <h2>{{projectDetails.name}}</h2>
+                <h4>Description : {{projectDetails.description}}</h4>
                 <h4>Owner : {{projectDetails.owner}}</h4>
                 <h4>SME : {{projectDetails.sme}}</h4>
             </div>
             <div class="col-md-4" style="text-align:right;">
+              <br />
+              <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
+                reply
+                </span> Back to List</a>
                 <br />
                 <button class="btn btn-lg btn-block btn-outline-primary" type="button" data-toggle="collapse"
                     data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">File
@@ -16,7 +21,21 @@
                         style="height:40px; width:40px"></button>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-                        <input type="file" id="file">
+                        <!-- <input type="file" id="file"> -->
+                        <div class="row" style="margin-bottom:15px;">
+                            <div class="col-md-3">
+                              <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+                              <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+                            </div>
+                            <div class="col-md-4">
+                              <span class="upload" *ngIf="progress > 0">
+                                {{progress}}%
+                              </span>
+                              <span class="upload" *ngIf="message">
+                                {{message}}
+                              </span>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +74,7 @@
     </div>
     <hr />
     <!--Document Checklist-->
-    <div>
+    <!-- <div>
         <h5>Checklist</h5>
         <ul>
             <li>
@@ -74,5 +93,53 @@
                 <h6>Github <span class="badge badge-success">O</span></h6>
             </li>
         </ul>
-    </div>
+    </div> -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Document Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">View/Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>AFD</td>
+              <td><span class="badge badge-success">O</span></td>
+              <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>TSD</td>
+                <td><span class="badge badge-success">O</span></td>
+                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Runbook</td>
+                <td><span class="badge badge-success">O</span></td>
+                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>Unit Test Case Document</td>
+                <td><span class="badge badge-danger">X</span></td>
+                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>DDL/DML</td>
+                <td><span class="badge badge-danger">X</span></td>
+                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td>Github</td>
+                <td><span class="badge badge-danger">X</span></td>
+                <td><a href="#" class="btn btn-primary btn-block">View</a></td>
+              </tr>
+          </tbody>
+    </table>      
 </div>

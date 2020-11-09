@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-project-settings',
@@ -12,21 +13,51 @@ export class ProjectSettingsComponent implements OnInit {
 
   projectDetails;
   projectId:number;
+  pId:number;
+  pageTitile:string;
+  submitbtnTitile:string;
+  visibility = false;
+  projSettingsForm: FormGroup;
+  
 
-  constructor(private detailsapi: ProjectDetailsService, 
+  constructor(
+    private fb: FormBuilder,
+    private detailsapi: ProjectDetailsService,
+    private notifier: NotifierService, 
     private router: Router,
     private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.projectId=this.activeRoute.snapshot.params.id;
+    if(this.projectId){
+      this.pageTitile = "Project Settings";
+      this.submitbtnTitile = "Update";
+      this.visibility = true;
     this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
       //console.log(data);
       this.projectDetails = data;
       //this.projSettingsForm.get('name').setValue(this.projectDetails.name);
-      this.projSettingsForm.patchValue({name:this.projectDetails.name, 
+      this.projSettingsForm.patchValue({name:this.projectDetails.name,
+                                        description : this.projectDetails.description, 
                                         sme : this.projectDetails.sme, 
                                         owner:this.projectDetails.owner})
     });
+  }
+  else{
+    this.pageTitile = "Add New Project";
+    this.submitbtnTitile = "Submit";
+  }
+  this.projSettingsForm = this.fb.group({
+    name: [''],
+    release: [''],
+    codeDropDate: [''],
+    codeFreezeDate: [''],
+    description: [''],
+    sme: [''],
+    owner: [''],
+    projectPhase: [''],
+  });
   }
 
   //Demo purpose only, Data might come from Api calls/service
@@ -34,19 +65,42 @@ export class ProjectSettingsComponent implements OnInit {
   "Development","Testing"];
   public orderStatus = "Planning"
 
-  projSettingsForm = new FormGroup({
-    name: new FormControl(''),
-    release: new FormControl(''),
-    codeDropDate: new FormControl(''),
-    codeFreezeDate: new FormControl(''),
-    sme: new FormControl(''),
-    owner: new FormControl(''),
-    projectPhase: new FormControl(''),
-  });
+  
 
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.projSettingsForm.value);
+  submitForm() {
+    //console.warn(this.projSettingsForm.value);
+    var formData: any = new FormData();
+    formData.append('name', this.projSettingsForm.get('name').value);
+    formData.append('description', this.projSettingsForm.get('description').value);
+    formData.append('sme', this.projSettingsForm.get('sme').value);
+    formData.append('owner', this.projSettingsForm.get('owner').value);
+    //console.warn(formData);
+    const jsonForm ={
+      name:this.projSettingsForm.get('name').value,
+      description:this.projSettingsForm.get('description').value,
+      sme:this.projSettingsForm.get('sme').value,
+      owner:this.projSettingsForm.get('owner').value
+    };
+    this.pId=this.activeRoute.snapshot.params.id;
+    if(this.pId){
+      this.notifier.notify("error", "add update function");
+    }
+    else{
+    this.detailsapi.addNewProject(jsonForm).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    );
+    this.router.navigate(['/projectlist']).then(()=>{
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
+    // .then(() => {
+    //   window.location.reload();
+    // });
+    this.notifier.notify("success", "New Project Added Successfully!");
+    //this.notifier.notify("info", "Refreshing the List");
+    }
   }
 
   resources = [
@@ -55,16 +109,18 @@ export class ProjectSettingsComponent implements OnInit {
   ];
 
   columnDefs = [
-    { field: 'id', sortable: true, filter: true },
-    { field: 'name', sortable: true, filter: true },
-    { field: 'project', sortable: true, filter: true},
-    { field: 'tasks', sortable: true, filter: true},
-    { field: 'opentasks', sortable: true, filter: true}
+    { headerName:'ID',field: 'id', width: 150, sortable: true, filter: true },
+    { headerName:'Resourse Name',field: 'name', width: 350, sortable: true, filter: true },
+    { headerName:'# of Projects',field: 'project', width: 150, sortable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasks', width: 150, sortable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,  sortable: true, filter: true},
+    { headerName:'Remove', field: 'remove', width: 150, sortable: true, filter: true}
 ];
 
 rowData = [
-  {id:'1',name:'rishi',project:'3',tasks:'5',opentasks:'4'},
-  {id:'2',name:'tushar',project:'4',tasks:'8',opentasks:'2'}
+  {id:'1',name:'rishi',project:'3',tasks:'5',opentasks:'4',remove:'Remove'},
+  {id:'2',name:'tushar',project:'4',tasks:'8',opentasks:'2',remove:'Remove'},
+  {id:'3',name:'chethan',project:'2',tasks:'7',opentasks:'3',remove:'Remove'}
 ];
 
 }
