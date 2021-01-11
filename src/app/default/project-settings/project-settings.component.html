@@ -9,29 +9,35 @@
     <div class="row">
         <div class="col-md-5">
             <form [formGroup]="projSettingsForm" (ngSubmit)="submitForm()">
+                <div class="input-group form-group" style="display: none;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Project Id</span>
+                      </div>
+                    <input type="text" formControlName="id" class="form-control" placeholder="Project Id">
+                </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Project Name</span>
                       </div>
-                    <input type="text" formControlName="name" class="form-control" placeholder="Project Name">
+                    <input type="text" formControlName="name" class="form-control" placeholder="Project Name" required>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Description</span>
                       </div>
-                    <input type="text" formControlName="description" class="form-control" placeholder="Project Description">
+                    <input type="text" formControlName="description" class="form-control" placeholder="Project Description" required>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Owner Name</span>
                       </div>
-                    <input type="text" formControlName="owner" class="form-control" placeholder="Owner Name">
+                    <input type="text" formControlName="owner" class="form-control" placeholder="Owner Name" required>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">SME Name</span>
                       </div>
-                    <input type="text" formControlName="sme" class="form-control" placeholder="SME Name">
+                    <input type="text" formControlName="sme" class="form-control" placeholder="SME Name" required>
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="skillrequired">
@@ -44,7 +50,7 @@
                     </select>
                 </div>
                 <br />
-                <button class="btn btn-block btn-lg btn-success" type="submit">{{submitbtnTitile}}</button>
+                <button class="btn btn-block btn-lg btn-success" type="submit" [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button>
             </form>
             <div *ngIf="visibility">
                 <br />
@@ -85,7 +91,7 @@
                 <div class="form-group-row form-inline">
                     <label class="col-md-6 col-form-label">Created Date :</label>
                     <div class="col-md-6">
-                        <input type="date" formControlName="codeFreezeDate" class="form-control">
+                        <input type="date" formControlName="createdDate" class="form-control" disabled>
                     </div>
                 </div>
                 <br />

@@ -5,21 +5,28 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 })
 export class ProjectDetailsService {
 
+  //readonly rootURL = 'http://localhost/latestapi/api';
+  readonly rootURL = 'https://localhost:5001/api';
+
   constructor(private httpClient: HttpClient) { }
 
   public getProjectDetails(id){
-    return this.httpClient.get(`http://localhost/newwebapi/api/project/${id}`);
+    return this.httpClient.get(`${this.rootURL}/project/${id}`);
   }
 
   public getProjecttList(){
-    return this.httpClient.get(`http://localhost/newwebapi/api/project`);
+    return this.httpClient.get(`${this.rootURL}/project`);
   }
 
   public addNewProject(project) {
     // const headers = new HttpHeaders();
     // headers.set('Content-Type', 'application/json; charset=utf-8');
     // let formdata = JSON.stringify(project);
-     console.warn(project);
-    return this.httpClient.post<any>(`http://localhost/newwebapi/api/project`, project);
+    // console.warn(project);
+    return this.httpClient.post<any>(`${this.rootURL}/project`, project);
+  }
+  public updateProject(id,project) {
+    // console.warn(project);
+    return this.httpClient.put<any>(`${this.rootURL}/project/${id}`, project);
   }
 }

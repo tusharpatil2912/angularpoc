@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { AgDetailsButtonComponent } from "../agCustomCells/ag-details-button/ag-details-button.component";
 import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/ag-settings-button.component";
+import { AgSwimlanesButtonComponent } from "../agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component";
 
 @Component({
   selector: 'app-project-list',
@@ -24,8 +25,9 @@ export class ProjectListComponent implements OnInit {
 
   columnDefs = [
     { headerName:'Project ID',field: 'id', width: 150, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'name', width: 650, sortable: true, filter: true },
+    { headerName:'Project Name',field: 'name', width: 527, sortable: true, filter: true },
     { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, sortable: true, filter: true},
+    { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150, sortable: true, filter: true},
     { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, sortable: true,  filter: true}
 ];
 

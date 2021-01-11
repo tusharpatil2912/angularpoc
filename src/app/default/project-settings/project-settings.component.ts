@@ -18,6 +18,7 @@ export class ProjectSettingsComponent implements OnInit {
   submitbtnTitile:string;
   visibility = false;
   projSettingsForm: FormGroup;
+  projCreatedDate;
   
 
   constructor(
@@ -38,10 +39,15 @@ export class ProjectSettingsComponent implements OnInit {
       //console.log(data);
       this.projectDetails = data;
       //this.projSettingsForm.get('name').setValue(this.projectDetails.name);
-      this.projSettingsForm.patchValue({name:this.projectDetails.name,
+      //this.projCreatedDate= formatDate(this.projectDetails.createdDate, 'yyyy-MM-dd', 'en-US');
+      //this.projCreatedDate= this.datePipe.transform(this.projectDetails.createdDate, 'yyyy-MM-dd');
+      //console.log(this.projCreatedDate);
+      this.projSettingsForm.patchValue({id:this.projectDetails.id,
+                                        name:this.projectDetails.name,
                                         description : this.projectDetails.description, 
                                         sme : this.projectDetails.sme, 
-                                        owner:this.projectDetails.owner})
+                                        owner:this.projectDetails.owner,
+                                        createdDate:this.projectDetails.createdDate})
     });
   }
   else{
@@ -49,10 +55,12 @@ export class ProjectSettingsComponent implements OnInit {
     this.submitbtnTitile = "Submit";
   }
   this.projSettingsForm = this.fb.group({
+    id: [''],
     name: [''],
     release: [''],
     codeDropDate: [''],
     codeFreezeDate: [''],
+    createdDate:[''],
     description: [''],
     sme: [''],
     owner: [''],
@@ -68,8 +76,9 @@ export class ProjectSettingsComponent implements OnInit {
   
 
   submitForm() {
-    //console.warn(this.projSettingsForm.value);
+    console.warn(this.projSettingsForm.value);
     var formData: any = new FormData();
+    formData.append('id',this.activeRoute.snapshot.params.id);
     formData.append('name', this.projSettingsForm.get('name').value);
     formData.append('description', this.projSettingsForm.get('description').value);
     formData.append('sme', this.projSettingsForm.get('sme').value);
@@ -81,15 +90,33 @@ export class ProjectSettingsComponent implements OnInit {
       sme:this.projSettingsForm.get('sme').value,
       owner:this.projSettingsForm.get('owner').value
     };
+    const putjsonForm ={
+      id:this.projSettingsForm.get('id').value,
+      name:this.projSettingsForm.get('name').value,
+      description:this.projSettingsForm.get('description').value,
+      sme:this.projSettingsForm.get('sme').value,
+      owner:this.projSettingsForm.get('owner').value
+    };
     this.pId=this.activeRoute.snapshot.params.id;
     if(this.pId){
-      this.notifier.notify("error", "add update function");
+      //this.notifier.notify("error", "add update function");
+      this.detailsapi.updateProject(this.pId,putjsonForm).subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
+      this.router.navigate(['/projectlist']).then(()=>{
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      });
+      this.notifier.notify("success", "Project updated successfully");
     }
     else{
     this.detailsapi.addNewProject(jsonForm).subscribe(
       (response) => console.log(response),
       (error) => console.log(error)
     );
+    //console.warn(jsonForm);
     this.router.navigate(['/projectlist']).then(()=>{
       setTimeout(() => {
         window.location.reload();

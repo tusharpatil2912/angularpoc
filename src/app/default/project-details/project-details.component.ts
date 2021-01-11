@@ -74,7 +74,7 @@ public uploadFile = (files) => {
   let fileToUpload = <File>files[0];
   const formData = new FormData();
   formData.append('files', fileToUpload, fileToUpload.name);
-  this.http.post('http://localhost/newwebapi/api/FileUpload', formData, {reportProgress: true, observe: 'events',responseType: 'text'})
+  this.http.post('http://localhost/latestapi/api/FileUpload', formData, {reportProgress: true, observe: 'events',responseType: 'text'})
     .subscribe(event => {
       if (event.type === HttpEventType.UploadProgress)
         this.progress = Math.round(100 * event.loaded / event.total);

@@ -6,6 +6,7 @@ import { SidebarComponent } from './ui/sidebar/sidebar.component';
 import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,6 +36,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     FlexLayoutModule,
     MatMenuModule,
     MatListModule,
+    MatDialogModule,
     RouterModule,
     HighchartsChartModule,
     MatSidenavModule

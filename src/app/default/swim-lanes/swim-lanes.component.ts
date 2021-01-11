@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { TaskDetailsService } from "../../services/task-details.service";
+import { ProjectDetailsService } from "../../services/project-details.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpEventType, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-swim-lanes',
@@ -8,10 +12,29 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class SwimLanesComponent implements OnInit {
 
-  constructor() { }
+  projectTaskDetails:any;
+  projectDetails:any;
+  projectId:number;
+
+  constructor(private detailsapi: TaskDetailsService,
+    private projectdetailsapi: ProjectDetailsService, 
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.projectId=this.activeRoute.snapshot.params.id;
+    this.detailsapi.getTaskByProjectId(this.projectId).subscribe((data)=>{
+      //console.log(data);
+      this.projectTaskDetails = data;
+    });
+    this.projectdetailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
+      //console.log(data);
+      this.projectDetails = data;
+    });
   }
+
+  projectName = "Project 1";
 
   todo = [
     'Get to work',

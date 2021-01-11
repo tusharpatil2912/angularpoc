@@ -1,5 +1,5 @@
 <br />
-<div class="container">
+<!-- <div class="container">
   <div cdkDropListGroup>
     <div class="example-container" style="border-style:outset; text-align: center; background-color:#3f51b5;">
       <h3 class="laneHeading">To Do</h3>
@@ -22,4 +22,41 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="container" style="text-align: center;">
+  <h1 *ngIf="projectDetails">{{projectDetails.name}} Tasks</h1>
+  <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
+    reply
+    </span> Back to List</a>
 </div>
+
+<hr/>
+
+<div class="container row" *ngIf="projectTaskDetails">
+  <div class="container col-md-3" style="border: solid;text-align: center;background-color:#3f51b5;border-color: darkgray;">
+    <h3 class="laneHeading">To Do</h3>
+    <hr style="background-color: white;"/>
+    <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
+      <h4 *ngIf="item.taskStatus==='To Do'">{{item.taskName}}</h4>
+    </div>
+  </div>
+  <div class="container col-md-3" style="border: solid;text-align: center;background-color:#3f51b5;border-color: darkgray;">
+    <h3 class="laneHeading">In Progress</h3>
+    <hr style="background-color: white;"/>
+    <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
+      <h4 *ngIf="item.taskStatus==='in progress'">{{item.taskName}}</h4>
+    </div>
+  </div>
+  <div class="container col-md-3" style="border: solid;text-align: center;background-color:#3f51b5;border-color: darkgray;">
+    <h3 class="laneHeading">Done</h3>
+    <hr style="background-color: white;"/>
+    <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
+      <h4 *ngIf="item.taskStatus==='completed'">{{item.taskName}}</h4>
+    </div>
+  </div>
+</div>
+
+<!-- <div>
+  {{projectTaskDetails | json}}
+</div> -->
