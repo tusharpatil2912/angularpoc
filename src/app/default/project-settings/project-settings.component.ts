@@ -48,6 +48,15 @@ export class ProjectSettingsComponent implements OnInit {
                                         sme : this.projectDetails.sme, 
                                         owner:this.projectDetails.owner,
                                         createdDate:this.projectDetails.createdDate})
+    },(error)=>{
+      this.notifier.notify("error","API Error. Showing Mockup Data");
+      this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
+      this.projSettingsForm.patchValue({id:this.projectDetails.id,
+        name:this.projectDetails.name,
+        description : this.projectDetails.description, 
+        sme : this.projectDetails.sme, 
+        owner:this.projectDetails.owner,
+        createdDate:this.projectDetails.createdDate})
     });
   }
   else{

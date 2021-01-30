@@ -46,7 +46,18 @@ import { HighchartsChartModule } from 'highcharts-angular';
     FooterComponent,
     SidebarComponent,
     CardComponent,
-    PieComponent
+    PieComponent,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MatMenuModule,
+    MatListModule,
+    MatDialogModule,
+    RouterModule,
+    HighchartsChartModule,
+    MatDividerModule,
+    MatSidenavModule
   ]
 })
 export class SharedModule { }
