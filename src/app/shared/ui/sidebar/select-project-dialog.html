@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Select Project</h1>
+<div mat-dialog-content>
+    <div *ngFor="let item of data.name">
+        <h3>{{item.name}}</h3>
+    </div>
+    <h3>{{data.name}}</h3>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

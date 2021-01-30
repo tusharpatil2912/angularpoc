@@ -31,6 +31,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { TasksettingsComponent } from './tasksettings/tasksettings.component';
 import { AgDetailsButtonComponent } from './agCustomCells/ag-details-button/ag-details-button.component';
 import { AgSettingsButtonComponent } from './agCustomCells/ag-settings-button/ag-settings-button.component';
+import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component';
 
 @NgModule({
   declarations: [
@@ -42,13 +43,14 @@ import { AgSettingsButtonComponent } from './agCustomCells/ag-settings-button/ag
     ProjectListComponent,
     TasksettingsComponent,
     AgDetailsButtonComponent,
-    AgSettingsButtonComponent
+    AgSettingsButtonComponent,
+    AgSwimlanesButtonComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    AgGridModule.withComponents([AgDetailsButtonComponent,AgSettingsButtonComponent]),
+    AgGridModule.withComponents([AgDetailsButtonComponent,AgSettingsButtonComponent,AgSwimlanesButtonComponent]),
     MatSidenavModule,
     MatDividerModule,
     FlexLayoutModule,

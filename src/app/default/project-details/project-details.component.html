@@ -55,8 +55,8 @@
     </div>
     <br />
     <hr />
-    <div class="col-md-12" style="text-align:center;">
-        <h6>Created Date : {{createdDate}} , Code Freeze Date : {{codeFreezeDate}} , Release Date :
+    <div class="col-md-12" style="text-align:center;" *ngIf="projectDetails">
+        <h6>Created Date : {{projectDetails.createdDate}} , Code Freeze Date : {{codeFreezeDate}} , Release Date :
             {{releaseDate}}</h6>
     </div>
     <hr />

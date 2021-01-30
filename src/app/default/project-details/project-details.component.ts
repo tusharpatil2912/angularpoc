@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpEventType, HttpClient } from '@angular/common/http';
+import { NotifierService } from "angular-notifier";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   constructor(private detailsapi: ProjectDetailsService, 
               private router: Router,
+              private notifier:NotifierService,
               private activeRoute: ActivatedRoute,
               private http: HttpClient) { }
 
@@ -25,6 +27,9 @@ export class ProjectDetailsComponent implements OnInit {
     this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
       //console.log(data);
       this.projectDetails = data;
+    },(error)=>{
+      this.notifier.notify("error","API Error. Showing Mockup Data");
+      this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
     });
   }
 
@@ -74,7 +79,7 @@ public uploadFile = (files) => {
   let fileToUpload = <File>files[0];
   const formData = new FormData();
   formData.append('files', fileToUpload, fileToUpload.name);
-  this.http.post('http://localhost/newwebapi/api/FileUpload', formData, {reportProgress: true, observe: 'events',responseType: 'text'})
+  this.http.post('http://localhost/latestapi/api/FileUpload', formData, {reportProgress: true, observe: 'events',responseType: 'text'})
     .subscribe(event => {
       if (event.type === HttpEventType.UploadProgress)
         this.progress = Math.round(100 * event.loaded / event.total);

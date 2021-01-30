@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { AgDetailsButtonComponent } from "../agCustomCells/ag-details-button/ag-details-button.component";
 import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/ag-settings-button.component";
+import { AgSwimlanesButtonComponent } from "../agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component";
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-project-list',
@@ -11,22 +13,27 @@ import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/a
 export class ProjectListComponent implements OnInit {
 
   projectList;
+  mockupprojectList=[{"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"},{"id":2,"name":"My Second Project","description":"Desc 2","owner":"Owner 2","sme":"Sme 2","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-27"},{"id":3,"name":"My Third Project","description":"Desc 3","owner":"Owner 3","sme":"Sme 3","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"},{"id":4,"name":"My Fourth Project","description":"Desc 4","owner":"Owner 4","sme":"Sme 4","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"}];
 
-  constructor(private detailsapi: ProjectDetailsService) { }
+  constructor(private detailsapi: ProjectDetailsService,private notifier: NotifierService,) { }
 
   ngOnInit(): void {
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
       this.projectList = data;
       this.rowData = data;
+    },(error)=>{
+      this.rowData=this.mockupprojectList;
+      this.notifier.notify("error", "API Error. Showing Mockup Data");
     });
   }
 
   columnDefs = [
-    { headerName:'Project ID',field: 'id', width: 150, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'name', width: 650, sortable: true, filter: true },
-    { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, sortable: true, filter: true},
-    { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, sortable: true,  filter: true}
+    { headerName:'Project ID',field: 'id', width: 150, resizable: true, sortable: true, filter: true },
+    { headerName:'Project Name',field: 'name', width: 527, resizable: true, sortable: true, filter: true },
+    { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
+    { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
+    { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true}
 ];
 
 rowData = null;
@@ -37,5 +44,6 @@ rowData = null;
 OnGridReady(){
 
 }
+
 
 }
