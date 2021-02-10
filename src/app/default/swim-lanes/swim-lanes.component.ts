@@ -4,6 +4,7 @@ import { TaskDetailsService } from "../../services/task-details.service";
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpEventType, HttpClient } from '@angular/common/http';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-swim-lanes',
@@ -19,6 +20,7 @@ export class SwimLanesComponent implements OnInit {
   constructor(private detailsapi: TaskDetailsService,
     private projectdetailsapi: ProjectDetailsService, 
     private router: Router,
+    private notifier: NotifierService,
     private activeRoute: ActivatedRoute,
     private http: HttpClient) { }
 
@@ -27,10 +29,16 @@ export class SwimLanesComponent implements OnInit {
     this.detailsapi.getTaskByProjectId(this.projectId).subscribe((data)=>{
       //console.log(data);
       this.projectTaskDetails = data;
+    },(error)=>{
+      //this.notifier.notify("error","API Error. Showing Mockup Data");
+      this.projectTaskDetails =[{"taskId":1,"projectId":1,"taskName":"First task for p1","taskStatus":"completed","taskDetails":"desc for First task for p1","empId":"1"},{"taskId":2,"projectId":1,"taskName":"Second task for p1","taskStatus":"To Do","taskDetails":"Desc for second task for p1","empId":"2"},{"taskId":4,"projectId":1,"taskName":"Third Task for p1","taskStatus":"in progress","taskDetails":"desc for my third task of p1","empId":"1"},{"taskId":5,"projectId":1,"taskName":"fourth task for p1","taskStatus":"To Do","taskDetails":"desc of 4th task of p1","empId":"1"}];
     });
     this.projectdetailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
       //console.log(data);
       this.projectDetails = data;
+    },(error)=>{
+      this.notifier.notify("error","API Error. Showing Mockup Data");
+      this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
     });
   }
 

@@ -26,22 +26,45 @@
 
 <div class="container" style="text-align: center;">
   <h1 *ngIf="projectDetails">{{projectDetails.name}} Tasks</h1>
-  <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
+  <a class="btn btn-block btn-lg btn-link text-primary" routerLink="/projectlist"><span class="material-icons">
     reply
     </span> Back to List</a>
 </div>
 
 <hr/>
-
+<!-- <div  style="text-align: center; width: 100%;align-content: center;"> -->
 <div class="container row" *ngIf="projectTaskDetails">
-  <div class="container col-md-3" style="border: solid;text-align: center;background-color:#3f51b5;border-color: darkgray;">
-    <h3 class="laneHeading">To Do</h3>
-    <hr style="background-color: white;"/>
+  <div class="container col-md-4" style="text-align: center;">
+    <h3 class="laneHeading" style="background-color:#3f51b5;border: solid;border-width: 1px; border-radius: 15px;">To Do</h3>
+    <hr style="background-color: #3f51b5;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
-      <h4 *ngIf="item.taskStatus==='To Do'">{{item.taskName}}</h4>
+      <a [routerLink]="['/taskdetails',item.taskId]">
+        <div *ngIf="item.taskStatus==='To Do'" style="border: solid;border-width: 1px; border-inline-start-color: red; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
+        <span style="font-size: larger;"> {{item.taskName}}</span>
+    </div></a>
     </div>
   </div>
-  <div class="container col-md-3" style="border: solid;text-align: center;background-color:#3f51b5;border-color: darkgray;">
+  <div class="container col-md-4" style="text-align: center;">
+    <h3 class="laneHeading" style="background-color:#3f51b5;border: solid;border-width: 1px; border-radius: 15px;">In Progress</h3>
+    <hr style="background-color: #3f51b5;"/>
+    <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
+      <a [routerLink]="['/taskdetails',item.taskId]">
+      <div *ngIf="item.taskStatus==='in progress'" style="border: solid;border-width: 1px; border-inline-start-color: blue; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
+        <span style="font-size: larger;text-align: start;"> {{item.taskName}}</span>
+    </div></a>
+    </div>
+  </div>
+  <div class="container col-md-4" style="text-align: center;">
+    <h3 class="laneHeading" style="background-color:#3f51b5;border: solid;border-width: 1px; border-radius: 15px;">Completed</h3>
+    <hr style="background-color: #3f51b5;"/>
+    <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
+      <a [routerLink]="['/taskdetails',item.taskId]">
+      <div *ngIf="item.taskStatus==='completed'" style="border: solid;border-width: 1px; border-inline-start-color: green; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
+        <span style="font-size: larger;text-align: start;"> {{item.taskName}}</span>
+    </div></a>
+    </div>
+  </div>
+  <!-- <div class="container col-md-3" style="border: solid;text-align: center;background-color:#3f51b5;border-color: darkgray;">
     <h3 class="laneHeading">In Progress</h3>
     <hr style="background-color: white;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
@@ -54,9 +77,9 @@
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
       <h4 *ngIf="item.taskStatus==='completed'">{{item.taskName}}</h4>
     </div>
-  </div>
+  </div> -->
 </div>
-
+<!-- </div> -->
 <!-- <div>
   {{projectTaskDetails | json}}
 </div> -->
