@@ -32,6 +32,7 @@ import { TasksettingsComponent } from './tasksettings/tasksettings.component';
 import { AgDetailsButtonComponent } from './agCustomCells/ag-details-button/ag-details-button.component';
 import { AgSettingsButtonComponent } from './agCustomCells/ag-settings-button/ag-settings-button.component';
 import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/
     TasksettingsComponent,
     AgDetailsButtonComponent,
     AgSettingsButtonComponent,
-    AgSwimlanesButtonComponent
+    AgSwimlanesButtonComponent,
+    TasksComponent
   ],
   imports: [
     CommonModule,

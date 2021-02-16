@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ProjectTracker"
+    }
+  },
+  "defaultProject": "ProjectTracker",
+  "cli": {
+    "analytics": false
+  }
 }
