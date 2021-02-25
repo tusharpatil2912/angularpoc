@@ -7,7 +7,7 @@ import { ProjectSettingsComponent } from "./default/project-settings/project-set
 import { SwimLanesComponent } from "./default/swim-lanes/swim-lanes.component";
 import { ProjectListComponent } from "./default/project-list/project-list.component";
 import { TasksettingsComponent } from "./default/tasksettings/tasksettings.component";
-
+import { TasksComponent } from './default/tasks/tasks.component';
 const routes: Routes = [
   {
     path:'',component: DefaultComponent,
@@ -19,7 +19,9 @@ const routes: Routes = [
       //{path:'swimlanes',component:SwimLanesComponent},
       {path:'swimlanes/:id',component:SwimLanesComponent},
       {path:'projectlist',component:ProjectListComponent},
-      {path:'task', component:TasksettingsComponent}
+      {path:'Tasks', component:TasksettingsComponent},
+      {path:'task', component:TasksComponent}
+
     ]
   }
 ];
