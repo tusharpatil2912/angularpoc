@@ -1,11 +1,20 @@
 <div class="mat-typography">
     <mat-divider></mat-divider>
     
-    <div  fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+    <div  class="stats-cards row">
+      <div class="col-md-3" *ngFor="let project of project_Details">
+      <mat-card style="margin: 2px;">
+        <mat-card-title style="margin-bottom: 20px;">
+          <a [routerLink]="['/project',project.id]">{{project.name}}</a>
+        </mat-card-title>
+          <app-widget-card total="{{project.task}}" percentage="{{project.target}}" [data]='bigChart'></app-widget-card>
+      </mat-card>
+    </div>
+    <!-- <div  fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
          <mat-card *ngFor="let project of project_Details" fxFlex="25">
             <a [routerLink]="['/project',project.id]">{{project.name}}</a>
              <app-widget-card total="{{project.task}}" percentage="{{project.target}}" [data]='bigChart'></app-widget-card>
-         </mat-card>
+         </mat-card> -->
          <!-- <mat-card fxFlex="25">
             <a routerLink="/project/2">RegBI</a>
                 <app-widget-card total="31 tasks" percentage="40" [data]='bigChart'></app-widget-card>
@@ -25,8 +34,9 @@
     
     <br>
     
-    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-        <div fxFlex="60">
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px"> -->
+    <div class="row">
+        <div class="col-md-7">
             <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource">
           
@@ -61,7 +71,8 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
           </div>
         </div>
-        <div fxFlex="40">
+        <div class="col-md-5 col-sm-10">
+          <br/>
             <app-widget-pie [data]='pieChart'></app-widget-pie>
         </div>
     </div>

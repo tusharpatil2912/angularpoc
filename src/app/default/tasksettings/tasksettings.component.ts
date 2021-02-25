@@ -32,6 +32,11 @@ export class TasksettingsComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.taskSettingsForm = this.fb.group({
+      id: [''],
+      name: [''],
+      time: [''],
+    });
   }
 
   columnDefs = [
