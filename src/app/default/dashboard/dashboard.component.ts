@@ -18,6 +18,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 4, name: 'InvestCloud', weight: 3, symbol: 'Low'},
 
 ];
+
+ 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -39,6 +42,13 @@ export class DashboardComponent implements OnInit {
     this.pieChart=this.dashboardService.pieChart();
     this.dataSource.paginator = this.paginator;
   }
-
+  project_Details = 
+  [
+   {id: 1, name: 'RWM', task: "25 tasks", target: '100'},
+   {id: 2, name: 'Bonus', task: "12 tasks", target: '25'},
+   {id: 3, name: 'RegBI', task: "4 tasks", target: '50'},
+   {id: 4, name: 'InvestCloud', task: "3 tasks", target: '75'},
+ 
+ ];
 
 }
