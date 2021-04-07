@@ -17,6 +17,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatSelectModule } from "@angular/material/select";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatTabsModule } from "@angular/material/tabs";
 
 import { RouterModule } from '@angular/router';
 import { SharedModule } from "../shared/shared.module";
@@ -33,6 +34,7 @@ import { AgDetailsButtonComponent } from './agCustomCells/ag-details-button/ag-d
 import { AgSettingsButtonComponent } from './agCustomCells/ag-settings-button/ag-settings-button.component';
 import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { TasksComponent } from './tasks/tasks.component';
     AgDetailsButtonComponent,
     AgSettingsButtonComponent,
     AgSwimlanesButtonComponent,
-    TasksComponent
+    TasksComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,
@@ -68,6 +71,7 @@ import { TasksComponent } from './tasks/tasks.component';
     MatGridListModule,
     MatSelectModule,
     MatMenuModule,
+    MatTabsModule,
     HttpClientModule
   ],
   providers:[

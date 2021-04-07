@@ -5,9 +5,13 @@
     height:100%;
 }
 
+.myHeader{
+    background: linear-gradient(to right,orange,blueviolet);
+}
+
 mat-drawer
 {
-    width:350px;
+    width:200px;
 }
 mat-drawer-container
 {

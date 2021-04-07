@@ -52,12 +52,12 @@ export class ProjectDetailsComponent implements OnInit {
   ]
 
   columnDefs = [
-    { headerName:'ID',field: 'id', width: 150, sortable: true, filter: true },
-    { headerName:'Resourse Name',field: 'name', width: 350, sortable: true, filter: true },
-    { headerName:'# of Projects',field: 'project', width: 150, sortable: true, filter: true},
-    { headerName:'# of Tasks',field: 'tasks', width: 150, sortable: true, filter: true},
-    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,  sortable: true, filter: true},
-    { headerName:'Remove', field: 'remove', width: 150, sortable: true, filter: true}
+    { headerName:'ID',field: 'id', width: 150, sortable: true, resizable: true, filter: true },
+    { headerName:'Resourse Name',field: 'name', width: 500, sortable: true,resizable: true, filter: true },
+    { headerName:'# of Projects',field: 'project', width: 150, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasks', width: 150, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,  sortable: true, resizable: true, filter: true},
+    { headerName:'Remove', field: 'remove', width: 150, sortable: true, resizable: true, filter: true}
 ];
 
 rowData = [

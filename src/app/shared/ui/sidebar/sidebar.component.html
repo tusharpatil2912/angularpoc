@@ -2,19 +2,24 @@
 
     <mat-divider></mat-divider>
   
-    <h2 matSubheader>Menu</h2>
-    
-    <a mat-list-item routerLinkActive='list-item-active' routerLink="/">My Dashboard</a>
-    <a mat-list-item routerLinkActive='list-item-active' routerLink="/projectlist">Projects</a>
-    <a mat-list-item routerLinkActive='list-item-active' routerLink="/Tasks">Add Task</a>
+    <!-- <h2 matSubheader>Menu</h2> -->
+    <div class="sideMenuBtnList">
+    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/">My Dashboard</a>
+    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/projectlist">Projects</a>
+    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/Tasks">Add Task</a>
     <!-- <a mat-list-item routerLinkActive='list-item-active' routerLink="/swimlanes">Swimlanes</a> -->
     <!-- <a mat-list-item routerLinkActive='list-item-active' (click)="openDialog()">Swimlanes</a> -->
     <!-- <a mat-list-item routerLinkActive='list-item-active' data-toggle="modal" data-target="#projectListModal">Swimlanes</a> -->
     <!-- <a mat-list-item routerLinkActive='list-item-active' routerLink="/reports">Reports</a> -->
-    <a mat-list-item routerLinkActive='list-item-active' href="#">Reports</a>
-    
+    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/reports">Reports</a>
+  </div>
     <mat-divider></mat-divider>
-     
+    
+     <div class="UserCard">
+       <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="" style="border-radius: 50%;box-sizing: border-box;width: 80%;">
+       <h1>User Name</h1>
+       <h4>Technical Lead</h4>
+     </div>
   
   </mat-nav-list>
  

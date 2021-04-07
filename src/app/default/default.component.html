@@ -1,12 +1,12 @@
 <!-- <app-header class="mat-typography"></app-header> -->
 <div  class="mat-typography">
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="myHeader">
     <mat-toolbar-row>
       <button mat-icon-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
   
-      <span style="margin-left: 15px; font-size: x-large;" routerLink="/"> Project Tracker</span>
+      <span style="margin-left: 15px; font-size: x-large;cursor: pointer; font-weight: 600;" routerLink="/"> Project Tracker</span>
 
       <app-header class="mat-typography" style="width: 100%;"></app-header>
       
@@ -27,8 +27,9 @@
   </mat-toolbar>
 </div>  
 <mat-drawer-container autosize>
-    <mat-drawer mode="side" #drawer [opened]="sideBarOpen" class="mat-typography">
-        <app-sidebar></app-sidebar> 
+  
+    <mat-drawer [mode]="drawerMode" #drawer [opened]="sideBarOpen" class="mat-typography">
+      <app-sidebar></app-sidebar>
     </mat-drawer>
     <mat-drawer-content>
         <router-outlet></router-outlet>
