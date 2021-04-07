@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
 
   columnDefs = [
     { headerName:'Project ID',field: 'id', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'name', width: 527, resizable: true, sortable: true, filter: true },
+    { headerName:'Project Name',field: 'name', width: 650, resizable: true, sortable: true, filter: true },
     { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
     { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
     { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true}

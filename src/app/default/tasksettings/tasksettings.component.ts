@@ -40,16 +40,21 @@ export class TasksettingsComponent implements OnInit {
   }
 
   columnDefs = [
-    { headerName:'Sl no',field: 'id', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Name',field: 'Name', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Project',field: 'id', width: 527, resizable: true, sortable: true, filter: true },
-    { headerName:'task',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
-    { headerName:'open Task',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
-    { headerName:'skills',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true},
-    { headerName:'select',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true}
+    { headerName:'Sl no',field: 'id', width: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Name',field: 'name', width: 200, resizable: true, sortable: true, filter: true },
+    { headerName:'Project',field: 'id', width: 400, resizable: true, sortable: true, filter: true },
+    { headerName:'Task',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
+    { headerName:'Open Task',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
+    { headerName:'Skills',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true},
+    { headerName:'Select',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true}
 ];
 
-rowData = null;
+rowData = [
+  {id:'1',name:'rishi'},
+  {id:'2',name:'tushar'},
+  {id:'3',name:'chethan'}
+];
+
   OnGridReady(){
 
   }

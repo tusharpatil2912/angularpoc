@@ -1,13 +1,16 @@
 <!--Project Settings-->
 <div>
-    <div>
+    <div class="row">
         <br/>
-        <h3>{{pageTitile}}</h3>
+        <h3 class="col-md-8">{{pageTitile}}</h3>
+        <a class="btn btn-lg btn-link col-md-4" routerLink="/projectlist"><span class="material-icons">
+            reply
+            </span> Back to List</a>
     </div>
     <hr />
     <!--Project Settings Form-->
-    <div class="row">
-        <div class="col-md-5">
+    <div class="row" style="display: flex;justify-content: center;align-items: center;">
+        <div class="col-lg-5 col-md-11">
             <form [formGroup]="projSettingsForm" (ngSubmit)="submitForm()">
                 <div class="input-group form-group" style="display: none;">
                     <div class="input-group-prepend">
@@ -64,8 +67,9 @@
             </div> -->
         </div>
         </div>
+        <br/>
         <!--Important Dates-->
-        <div class="col-md-5">
+        <div class="col-lg-5 col-md-11" style="margin-top: 10px;">
             <div style="text-align:center;">
                 <h5 style="margin-bottom:10px;">Important Dates</h5>
             </div>
@@ -73,33 +77,33 @@
                 <div class="form-group-row form-inline" style="margin-bottom:10px;">
                     <label class="col-md-6 col-form-label">Code Drop Date :</label>
                     <div class="col-md-6">
-                        <input type="date" formControlName="codeDropDate" class="form-control">
+                        <input type="date" formControlName="codeDropDate" class="form-control" style="width: 100%;text-align: center;">
                     </div>
                 </div>
                 <div class="form-group-row form-inline" style="margin-bottom:10px;">
                     <label class="col-md-6 col-form-label">Code Freeze Date :</label>
                     <div class="col-md-6">
-                        <input type="date" formControlName="codeFreezeDate" class="form-control">
+                        <input type="date" formControlName="codeFreezeDate" class="form-control" style="width: 100%;text-align: center;">
                     </div>
                 </div>
                 <div class="form-group-row form-inline" style="margin-bottom:10px;">
                     <label class="col-md-6 col-form-label">Release Date :</label>
                     <div class="col-md-6">
-                        <input type="date" formControlName="codeDropDate" class="form-control">
+                        <input type="date" formControlName="codeDropDate" class="form-control" style="width: 100%;text-align: center;">
                     </div>
                 </div>
                 <div class="form-group-row form-inline">
                     <label class="col-md-6 col-form-label">Created Date :</label>
                     <div class="col-md-6">
-                        <input type="date" formControlName="createdDate" class="form-control" disabled>
+                        <input type="date" formControlName="createdDate" class="form-control" disabled style="width: 100%;text-align: center;">
                     </div>
                 </div>
                 <br />
                 <br />
                 <br />
-                <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
+                <!-- <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
                     reply
-                    </span> Back to List</a>
+                    </span> Back to List</a> -->
             </form>
         </div>
     </div>
