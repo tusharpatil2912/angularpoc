@@ -23,7 +23,7 @@
   transform: scale(1.08);
 }
 
-.sideMenuBtn:focus{
+.sideMenuBtn:focus,.sideMenuBtn:active{
   background-color: orange;
   color: white;
 }
