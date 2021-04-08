@@ -12,10 +12,10 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'RWM', weight: 25, symbol: 'High'},
-  {position: 2, name: 'Bonus', weight: 12, symbol: 'Medium'},
-  {position: 3, name: 'RegBI', weight: 4, symbol: 'Medium'},
-  {position: 4, name: 'InvestCloud', weight: 3, symbol: 'Low'},
+  {position: 1, name: 'Project 1', weight: 25, symbol: 'High'},
+  {position: 2, name: 'Project 2', weight: 12, symbol: 'Medium'},
+  {position: 3, name: 'Project 3', weight: 4, symbol: 'Medium'},
+  {position: 4, name: 'Project 4', weight: 3, symbol: 'Low'},
 
 ];
 
@@ -44,10 +44,10 @@ export class DashboardComponent implements OnInit {
   }
   project_Details = 
   [
-   {id: 1, name: 'RWM', task: "25 tasks", target: '100'},
-   {id: 2, name: 'Bonus', task: "12 tasks", target: '25'},
-   {id: 3, name: 'RegBI', task: "4 tasks", target: '50'},
-   {id: 4, name: 'InvestCloud', task: "3 tasks", target: '75'},
+   {id: 1, name: 'Project 1', task: "25 tasks", target: '100'},
+   {id: 2, name: 'Project 2', task: "12 tasks", target: '25'},
+   {id: 3, name: 'Project 3', task: "4 tasks", target: '50'},
+   {id: 4, name: 'Project 4', task: "3 tasks", target: '75'},
  
  ];
 
