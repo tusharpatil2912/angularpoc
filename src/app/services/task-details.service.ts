@@ -13,6 +13,10 @@ export class TaskDetailsService {
     return this.httpClient.get(`${this.rootURL}/projecttask/${id}`);
   }
 
+  public getTaskById(id){
+    return this.httpClient.get(`${this.rootURL}/projecttask/taskid/${id}`);
+  }
+
   public getTasksList(){
     return this.httpClient.get(`${this.rootURL}/projecttask`);
   }

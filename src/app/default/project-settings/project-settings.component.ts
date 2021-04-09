@@ -75,6 +75,7 @@ export class ProjectSettingsComponent implements OnInit {
     owner: [''],
     projectPhase: [''],
   });
+  this.projSettingsForm.controls['createdDate'].disable();
   }
 
   //Demo purpose only, Data might come from Api calls/service

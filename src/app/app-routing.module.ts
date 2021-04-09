@@ -20,7 +20,8 @@ const routes: Routes = [
       //{path:'swimlanes',component:SwimLanesComponent},
       {path:'swimlanes/:id',component:SwimLanesComponent},
       {path:'projectlist',component:ProjectListComponent},
-      {path:'Tasks', component:TasksettingsComponent},
+      {path:'addTask', component:TasksettingsComponent},
+      {path:'taskdetails/:id', component:TasksettingsComponent},
       {path:'task', component:TasksComponent},
       {path:'reports',component:ReportsComponent}
 
