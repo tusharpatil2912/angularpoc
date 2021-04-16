@@ -41,9 +41,10 @@ export class TasksettingsComponent implements OnInit {
       this.visibility = true;
     this.detailsapi.getTaskById(this.taskId).subscribe((data)=>{
       this.taskDetails = data;
-      this.taskSettingsForm.patchValue({id:this.taskDetails.id,
-                                        name:this.taskDetails.name,
-                                        description : this.taskDetails.description, 
+      this.taskSettingsForm.patchValue({taskId:this.taskDetails.taskId,
+                                        projectId:this.taskDetails.projectId,
+                                        taskName:this.taskDetails.taskName,
+                                        description : this.taskDetails.taskDetails, 
                                         sme : this.taskDetails.sme, 
                                         owner:this.taskDetails.owner,
                                         createdDate:this.taskDetails.createdDate})
@@ -75,9 +76,12 @@ export class TasksettingsComponent implements OnInit {
   //   projectPhase: [''],
   // });
     this.taskSettingsForm = this.fb.group({
-      id: [''],
-      name: [''],
+      taskId: [''],
+      projectId:[''],
+      taskName: [''],
+      name:[''],
       time: [''],
+      description: [''],
     });
   }
 
@@ -99,5 +103,9 @@ rowData = [
 
   OnGridReady(){
 
+  }
+
+  submitForm() {
+    console.warn(this.taskSettingsForm.value);
   }
 }

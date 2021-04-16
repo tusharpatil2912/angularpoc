@@ -5,7 +5,8 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 })
 export class TaskDetailsService {
 
-  readonly rootURL = 'https://localhost:5001/api';
+  //readonly rootURL = 'https://localhost:5001/api';
+  readonly rootURL = 'https://projecttrackerdotnetapi.herokuapp.com/api';
 
   constructor(private httpClient: HttpClient) { }
 
