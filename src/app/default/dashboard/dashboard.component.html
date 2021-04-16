@@ -1,6 +1,11 @@
 <div class="mat-typography">
     <mat-divider></mat-divider>
-    
+    <br/>
+    <div>
+      <button type="button" (click)="printComponent('snapshot1')"
+      style='margin-left: 90%;background-color:#21f3cc' mdbBtn color="primary" mdbWavesEffect>
+         SnapShot</button>
+ </div>
     <div  class="stats-cards row">
       <div class="col-md-6 col-lg-3" *ngFor="let project of project_Details">
       <mat-card style="margin: 2px;">
@@ -77,3 +82,14 @@
         </div>
     </div>
     </div>
+    <div id="snapshot1" style="display:none">
+      <div class="snapshot" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+          <mat-card *ngFor="let project of project_Details" fxFlex="25">
+             <a [routerLink]="['/project',project.id]">{{project.name}}</a>
+              <app-widget-card total="{{project.task}}" percentage="{{project.target}}" [data]='bigChart'></app-widget-card>
+          </mat-card>
+     </div>
+    <div  class="snapshot" fxFlex="40">
+      <app-widget-pie [data]='pieChart'></app-widget-pie>
+  </div>
+  </div>

@@ -42,6 +42,20 @@ export class DashboardComponent implements OnInit {
     this.pieChart=this.dashboardService.pieChart();
     this.dataSource.paginator = this.paginator;
   }
+
+  printComponent(cmpName) {
+    //debugger;
+    let printContents = document.getElementById(cmpName).innerHTML;
+    let originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+    window.location.reload();
+}
+
   project_Details = 
   [
    {id: 1, name: 'Project 1', task: "25 tasks", target: '100'},
