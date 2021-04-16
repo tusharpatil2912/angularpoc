@@ -23,7 +23,8 @@ export class OpenIssuesComponent implements OnInit {
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
       this.openIssuesList = data;
-      this.rowData = data;
+      //this.rowData = data;
+      this.rowData = this.IssuesList;
     },(error)=>{
       this.rowData=this.IssuesList;
       this.notifier.notify("error", "API Error. Showing Mockup Data");
