@@ -35,6 +35,7 @@ import { AgSettingsButtonComponent } from './agCustomCells/ag-settings-button/ag
 import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ReportsComponent } from './reports/reports.component';
+import { OpenIssuesComponent } from './open-issues/open-issues.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ReportsComponent } from './reports/reports.component';
     AgSettingsButtonComponent,
     AgSwimlanesButtonComponent,
     TasksComponent,
-    ReportsComponent
+    ReportsComponent,
+    OpenIssuesComponent
   ],
   imports: [
     CommonModule,
