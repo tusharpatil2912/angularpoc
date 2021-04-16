@@ -47,6 +47,9 @@ export class ProjectSettingsComponent implements OnInit {
                                         description : this.projectDetails.description, 
                                         sme : this.projectDetails.sme, 
                                         owner:this.projectDetails.owner,
+                                        codeDropDate: this.projectDetails.codeDropDate,
+                                        releaseDate: this.projectDetails.releaseDate,
+                                        codeFreezeDate: this.projectDetails.codeFreezeDate,
                                         createdDate:this.projectDetails.createdDate})
     },(error)=>{
       this.notifier.notify("error","API Error. Showing Mockup Data");
@@ -56,6 +59,9 @@ export class ProjectSettingsComponent implements OnInit {
         description : this.projectDetails.description, 
         sme : this.projectDetails.sme, 
         owner:this.projectDetails.owner,
+        releaseDate: this.projectDetails.releaseDate,
+        codeDropDate: this.projectDetails.codeDropDate,
+        codeFreezeDate: this.projectDetails.codeFreezeDate,
         createdDate:this.projectDetails.createdDate})
     });
   }
@@ -66,15 +72,17 @@ export class ProjectSettingsComponent implements OnInit {
   this.projSettingsForm = this.fb.group({
     id: [''],
     name: [''],
-    release: [''],
+    releaseDate: [''],
     codeDropDate: [''],
     codeFreezeDate: [''],
     createdDate:[''],
     description: [''],
     sme: [''],
     owner: [''],
+    skills: [''],
     projectPhase: [''],
   });
+  this.projSettingsForm.controls['createdDate'].disable();
   }
 
   //Demo purpose only, Data might come from Api calls/service
@@ -97,14 +105,22 @@ export class ProjectSettingsComponent implements OnInit {
       name:this.projSettingsForm.get('name').value,
       description:this.projSettingsForm.get('description').value,
       sme:this.projSettingsForm.get('sme').value,
-      owner:this.projSettingsForm.get('owner').value
+      owner:this.projSettingsForm.get('owner').value,
+      skills:this.projSettingsForm.get('skills').value,
+      releaseDate: this.projSettingsForm.get('releaseDate').value,
+      codeDropDate: this.projSettingsForm.get('codeDropDate').value,
+      codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value
     };
     const putjsonForm ={
       id:this.projSettingsForm.get('id').value,
       name:this.projSettingsForm.get('name').value,
       description:this.projSettingsForm.get('description').value,
       sme:this.projSettingsForm.get('sme').value,
-      owner:this.projSettingsForm.get('owner').value
+      owner:this.projSettingsForm.get('owner').value,
+      skills:this.projSettingsForm.get('skills').value,
+      releaseDate: this.projSettingsForm.get('releaseDate').value,
+      codeDropDate: this.projSettingsForm.get('codeDropDate').value,
+      codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value
     };
     this.pId=this.activeRoute.snapshot.params.id;
     if(this.pId){

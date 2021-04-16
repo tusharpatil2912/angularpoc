@@ -5,12 +5,17 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 })
 export class TaskDetailsService {
 
-  readonly rootURL = 'https://localhost:5001/api';
+  //readonly rootURL = 'https://localhost:5001/api';
+  readonly rootURL = 'https://projecttrackerdotnetapi.herokuapp.com/api';
 
   constructor(private httpClient: HttpClient) { }
 
   public getTaskByProjectId(id){
     return this.httpClient.get(`${this.rootURL}/projecttask/${id}`);
+  }
+
+  public getTaskById(id){
+    return this.httpClient.get(`${this.rootURL}/projecttask/taskid/${id}`);
   }
 
   public getTasksList(){

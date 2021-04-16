@@ -9,6 +9,8 @@ import { ProjectListComponent } from "./default/project-list/project-list.compon
 import { TasksettingsComponent } from "./default/tasksettings/tasksettings.component";
 import { TasksComponent } from './default/tasks/tasks.component';
 import { ReportsComponent } from "./default/reports/reports.component";
+import { OpenIssuesComponent } from "./default/open-issues/open-issues.component";
+
 const routes: Routes = [
   {
     path:'',component: DefaultComponent,
@@ -20,9 +22,11 @@ const routes: Routes = [
       //{path:'swimlanes',component:SwimLanesComponent},
       {path:'swimlanes/:id',component:SwimLanesComponent},
       {path:'projectlist',component:ProjectListComponent},
-      {path:'Tasks', component:TasksettingsComponent},
+      {path:'addTask', component:TasksettingsComponent},
+      {path:'taskdetails/:id', component:TasksettingsComponent},
       {path:'task', component:TasksComponent},
-      {path:'reports',component:ReportsComponent}
+      {path:'reports',component:ReportsComponent},
+      {path:'openissues', component:OpenIssuesComponent}
 
     ]
   }
