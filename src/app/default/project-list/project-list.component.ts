@@ -13,6 +13,7 @@ import { NotifierService } from "angular-notifier";
 export class ProjectListComponent implements OnInit {
 
   projectList;
+  private gridApi;
   mockupprojectList=[{"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"},{"id":2,"name":"My Second Project","description":"Desc 2","owner":"Owner 2","sme":"Sme 2","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-27"},{"id":3,"name":"My Third Project","description":"Desc 3","owner":"Owner 3","sme":"Sme 3","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"},{"id":4,"name":"My Fourth Project","description":"Desc 4","owner":"Owner 4","sme":"Sme 4","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"}];
 
   constructor(private detailsapi: ProjectDetailsService,private notifier: NotifierService,) { }
@@ -29,11 +30,11 @@ export class ProjectListComponent implements OnInit {
   }
 
   columnDefs = [
-    { headerName:'Project ID',field: 'id', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'name', width: 650, resizable: true, sortable: true, filter: true },
-    { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
-    { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150, resizable: true, sortable: true, filter: true},
-    { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true}
+    { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, resizable: true, sortable: true, filter: true },
+    { headerName:'Project Name',field: 'name', width: 650,minWidth: 80, resizable: true, sortable: true, filter: true },
+    { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150,minWidth: 135, resizable: true, sortable: true, filter: true},
+    { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150,minWidth: 145, resizable: true, sortable: true, filter: true},
+    { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150,minWidth: 80, resizable: true, sortable: true,  filter: true}
 ];
 
 rowData = null;
@@ -41,8 +42,10 @@ rowData = null;
 //   {id:'1',name:'rishi',details:'3',settings:'5'},
 //   {id:'2',name:'tushar',details:'4',settings:'8'}
 // ];
-OnGridReady(){
 
+onGridReady(params) {
+  this.gridApi = params.api;
+  this.gridApi.sizeColumnsToFit();
 }
 
 

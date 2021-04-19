@@ -1,31 +1,34 @@
 <!--Project Details-->
 <div>
-    <div class="container">
+    <div style="padding: 10px;">
         <div class="row">
-            <div class="col-md-8" style="text-align:left;" *ngIf="projectDetails">
+            <div class="col-md-9" style="text-align:left;" *ngIf="projectDetails">
                 <br />
                 <h2>{{projectDetails.name}}</h2>
                 <h4>Description : {{projectDetails.description}}</h4>
                 <h4>Owner : {{projectDetails.owner}}</h4>
                 <h4>SME : {{projectDetails.sme}}</h4>
             </div>
-            <div class="col-md-4" style="text-align:right;">
+            <div class="col-md-3" style="text-align:right;">
               <br />
-              <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
+              <a class="btn btn-block btn-lg btn-secondary" routerLink="/projectlist"><span class="material-icons">
                 reply
-                </span> Back to List</a>
+                </span> Back</a>
                 <br />
-                <button class="btn btn-lg btn-block btn-outline-primary" type="button" data-toggle="collapse"
+                <button class="btn btn-lg btn-block btn-colors" type="button" data-toggle="collapse"
                     data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">File
-                    Uploader <img src="https://www.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png"
-                        style="height:40px; width:40px"></button>
+                    Uploader 
+                      <mat-icon style="font-size: 25px;transform: translateY(5px);">cloud_upload</mat-icon>
+                    <!-- <img src="https://www.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png"
+                        style="height:40px; width:40px"> -->
+                      </button>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
                         <!-- <input type="file" id="file"> -->
                         <div class="row" style="margin-bottom:15px;">
                             <div class="col-md-3">
                               <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
-                              <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+                              <button type="button" class="btn btn-colors" (click)="file.click()">Upload File</button>
                             </div>
                             <div class="col-md-4">
                               <span class="upload" *ngIf="progress > 0">
@@ -67,7 +70,7 @@
         <br />
         <div>
             <ag-grid-angular style="width: 100%; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
-                [columnDefs]="columnDefs">
+                [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
             </ag-grid-angular>
         </div>
 
@@ -97,48 +100,48 @@
     <table class="table table-striped">
         <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col" style="width: 50px;">#</th>
               <th scope="col">Document Name</th>
-              <th scope="col">Status</th>
-              <th scope="col">View/Download</th>
+              <th scope="col" style="width: 100px; text-align: center;">Status</th>
+              <th scope="col" style="width: 100px;">View/Download</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">1</th>
               <td>AFD</td>
-              <td><span class="badge badge-success">O</span></td>
-              <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+              <td style="text-align: center;"><span class="badge badge-success">O</span></td>
+              <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td>TSD</td>
-                <td><span class="badge badge-success">O</span></td>
-                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+                <td style="text-align: center;"><span class="badge badge-success">O</span></td>
+                <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
               </tr>
               <tr>
                 <th scope="row">3</th>
                 <td>Runbook</td>
-                <td><span class="badge badge-success">O</span></td>
-                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+                <td style="text-align: center;"><span class="badge badge-success">O</span></td>
+                <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
               </tr>
               <tr>
                 <th scope="row">4</th>
                 <td>Unit Test Case Document</td>
-                <td><span class="badge badge-danger">X</span></td>
-                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+                <td style="text-align: center;"><span class="badge badge-danger">X</span></td>
+                <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
               </tr>
               <tr>
                 <th scope="row">5</th>
                 <td>DDL/DML</td>
-                <td><span class="badge badge-danger">X</span></td>
-                <td><a href="#" class="btn btn-primary btn-block">Download</a></td>
+                <td style="text-align: center;"><span class="badge badge-danger">X</span></td>
+                <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
               </tr>
               <tr>
                 <th scope="row">6</th>
                 <td>Github</td>
-                <td><span class="badge badge-danger">X</span></td>
-                <td><a href="#" class="btn btn-primary btn-block">View</a></td>
+                <td style="text-align: center;"><span class="badge badge-danger">X</span></td>
+                <td><a href="#" class="btn btn-colors btn-block">View</a></td>
               </tr>
           </tbody>
     </table>      

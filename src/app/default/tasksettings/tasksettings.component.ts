@@ -12,6 +12,7 @@ import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/a
 })
 export class TasksettingsComponent implements OnInit {
 
+  private gridApi;
   projectDetails;
   taskDetails;
   projectId:number;
@@ -60,7 +61,7 @@ export class TasksettingsComponent implements OnInit {
     });
   }
   else{
-    this.pageTitile = "Add New Task";
+    this.pageTitile = "New Task";
     this.submitbtnTitile = "Submit";
   }
   // this.projSettingsForm = this.fb.group({
@@ -86,13 +87,13 @@ export class TasksettingsComponent implements OnInit {
   }
 
   columnDefs = [
-    { headerName:'Sl no',field: 'id', width: 100, resizable: true, sortable: true, filter: true },
-    { headerName:'Name',field: 'name', width: 200, resizable: true, sortable: true, filter: true },
-    { headerName:'Project',field: 'id', width: 400, resizable: true, sortable: true, filter: true },
-    { headerName:'Task',field: 'id', width: 150, resizable: true, sortable: true, filter: true},
-    { headerName:'Open Task',field: 'id', width: 150, resizable: true, sortable: true, filter: true},
-    { headerName:'Skills',field: 'id', width: 150, resizable: true, sortable: true,  filter: true},
-    { headerName:'Select',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150, resizable: true, sortable: true,  filter: true}
+    { headerName:'Sl no',field: 'id', width: 100,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Name',field: 'name', width: 200,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Project',field: 'id', width: 400,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Task',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
+    { headerName:'Open Task',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
+    { headerName:'Skills',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true},
+    { headerName:'Select',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true}
 ];
 
 rowData = [
@@ -101,9 +102,10 @@ rowData = [
   {id:'3',name:'chethan'}
 ];
 
-  OnGridReady(){
-
-  }
+onGridReady(params) {
+  this.gridApi = params.api;
+  this.gridApi.sizeColumnsToFit();
+}
 
   submitForm() {
     console.warn(this.taskSettingsForm.value);

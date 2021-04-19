@@ -1,4 +1,4 @@
-<br />
+
 <!-- <div class="container">
   <div cdkDropListGroup>
     <div class="example-container" style="border-style:outset; text-align: center; background-color:#3f51b5;">
@@ -24,18 +24,20 @@
   </div>
 </div> -->
 
-<div class="container" style="text-align: center;">
-  <h1 *ngIf="projectDetails">{{projectDetails.name}} Tasks</h1>
-  <a class="btn btn-block btn-lg btn-link text-primary" routerLink="/projectlist"><span class="material-icons">
+<div style="margin: 10px;">
+  <div class="row">
+  <h1 *ngIf="projectDetails" class="col-lg-9">{{projectDetails.name}} Tasks</h1>
+  <a class="btn btn-lg btn-block btn-secondary col-lg-3" routerLink="/projectlist" style="color: white;"><span class="material-icons">
     reply
-    </span> Back to List</a>
+    </span> Back</a>
+  </div>
 </div>
 
 <hr/>
 <!-- <div  style="text-align: center; width: 100%;align-content: center;"> -->
 <div class="row" *ngIf="projectTaskDetails">
   <div class="container col-md-4" style="text-align: center;">
-    <h3 class="laneHeading" style="background-color:#3f51b5;border: solid;border-width: 1px; border-radius: 15px;">To Do</h3>
+    <h3 class="laneHeading" style="background-color:blueviolet;border: solid;border-width: 1px; border-radius: 15px;">To Do</h3>
     <hr style="background-color: #3f51b5;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
       <a [routerLink]="['/taskdetails',item.taskId]">
@@ -45,7 +47,7 @@
     </div>
   </div>
   <div class="container col-md-4" style="text-align: center;">
-    <h3 class="laneHeading" style="background-color:#3f51b5;border: solid;border-width: 1px; border-radius: 15px;">In Progress</h3>
+    <h3 class="laneHeading" style="background-color:blueviolet;border: solid;border-width: 1px; border-radius: 15px;">In Progress</h3>
     <hr style="background-color: #3f51b5;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
       <a [routerLink]="['/taskdetails',item.taskId]">
@@ -55,7 +57,7 @@
     </div>
   </div>
   <div class="container col-md-4" style="text-align: center;">
-    <h3 class="laneHeading" style="background-color:#3f51b5;border: solid;border-width: 1px; border-radius: 15px;">Completed</h3>
+    <h3 class="laneHeading" style="background-color:blueviolet;border: solid;border-width: 1px; border-radius: 15px;">Completed</h3>
     <hr style="background-color: #3f51b5;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
       <a [routerLink]="['/taskdetails',item.taskId]">
