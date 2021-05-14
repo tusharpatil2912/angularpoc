@@ -19,6 +19,7 @@ export class ProjectSettingsComponent implements OnInit {
   visibility = false;
   projSettingsForm: FormGroup;
   projCreatedDate;
+  private gridApi;
   
 
   constructor(
@@ -161,12 +162,12 @@ export class ProjectSettingsComponent implements OnInit {
   ];
 
   columnDefs = [
-    { headerName:'ID',field: 'id', width: 150, sortable: true, filter: true },
-    { headerName:'Resourse Name',field: 'name', width: 350, sortable: true, filter: true },
-    { headerName:'# of Projects',field: 'project', width: 150, sortable: true, filter: true},
-    { headerName:'# of Tasks',field: 'tasks', width: 150, sortable: true, filter: true},
-    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,  sortable: true, filter: true},
-    { headerName:'Remove', field: 'remove', width: 150, sortable: true, filter: true}
+    { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, sortable: true, filter: true },
+    { headerName:'Resourse Name',field: 'name', width: 350,minWidth: 80, sortable: true, filter: true },
+    { headerName:'# of Projects',field: 'project', width: 150,minWidth: 80, sortable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasks', width: 150,minWidth: 80, sortable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,minWidth: 80,  sortable: true, filter: true},
+    { headerName:'Remove', field: 'remove', width: 150,minWidth: 80, sortable: true, filter: true}
 ];
 
 rowData = [
@@ -174,5 +175,10 @@ rowData = [
   {id:'2',name:'tushar',project:'4',tasks:'8',opentasks:'2',remove:'Remove'},
   {id:'3',name:'chethan',project:'2',tasks:'7',opentasks:'3',remove:'Remove'}
 ];
+
+onGridReady(params) {
+  this.gridApi = params.api;
+  this.gridApi.sizeColumnsToFit();
+}
 
 }

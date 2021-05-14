@@ -9,6 +9,7 @@ import { ProjectDetailsService } from "../../services/project-details.service";
 })
 export class OpenIssuesComponent implements OnInit {
   openIssuesList;
+  private gridApi;
   IssuesList=[
   {"id":1,"taskid":"100","projectname":"Project 1","description":"Bug 1","createdDate":"2021-04-15","Detected By":"Sunil"},
   {"id":2,"taskid":"101","projectname":"Project 2","description":"Bug 2","createdDate":"2021-04-15","Detected By":"Tushar"},
@@ -32,14 +33,19 @@ export class OpenIssuesComponent implements OnInit {
   }
 
   columnDefs = [
-    { headerName:'Bug ID',field: 'id', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Task ID',field: 'taskid', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'projectname', width: 150, resizable: true, sortable: true, filter: true },
-    { headerName:'Bug Description',field: 'description', width: 200, resizable: true, sortable: true, filter: true },
-    { headerName:'Created Date',field: 'createdDate', width: 200, resizable: true, sortable: true, filter: true },
-    { headerName:'Detected By',field: 'Detected By', width: 200, resizable: true, sortable: true, filter: true }
+    { headerName:'Bug ID',field: 'id', maxWidth: 100,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Task ID',field: 'taskid', width: 100,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Project Name',field: 'projectname', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Bug Description',field: 'description', width: 200,minWidth: 400, resizable: true, sortable: true, filter: true },
+    { headerName:'Created Date',field: 'createdDate', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Detected By',field: 'Detected By', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true }
    ];
 
    rowData = null;
-
+   
+   
+   onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridApi.sizeColumnsToFit();
+  }
 }

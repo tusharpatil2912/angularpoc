@@ -1,0 +1,7 @@
+.stng-btn-color{
+    transition: transform 0.8s ease-in-out;
+}
+
+.stng-btn-color:hover{
+    transform: rotate(360deg) scale(1.3);
+}

@@ -45,6 +45,13 @@ body{
    max-width:9.375em;
    margin-left:-1em;
   }
+
+  .input-titles{
+    width: 150px;
+  }
+  .btn-colors{
+    background-color: blueviolet;color: white;
+  }
   
   @media only screen and (max-width: 320px){
      body {

@@ -13,6 +13,7 @@ import { NotifierService } from "angular-notifier";
 })
 export class ProjectDetailsComponent implements OnInit {
 
+  private gridApi;
   projectDetails:any;
   projectId:number;
 
@@ -23,14 +24,7 @@ export class ProjectDetailsComponent implements OnInit {
               private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.projectId=this.activeRoute.snapshot.params.id;
-    this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
-      //console.log(data);
-      this.projectDetails = data;
-    },(error)=>{
-      this.notifier.notify("error","API Error. Showing Mockup Data");
-      this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
-    });
+    this.getResourceGridData();
   }
 
   projectName = 'MyApp';
@@ -52,12 +46,12 @@ export class ProjectDetailsComponent implements OnInit {
   ]
 
   columnDefs = [
-    { headerName:'ID',field: 'id', width: 150, sortable: true, resizable: true, filter: true },
-    { headerName:'Resourse Name',field: 'name', width: 500, sortable: true,resizable: true, filter: true },
-    { headerName:'# of Projects',field: 'project', width: 150, sortable: true, resizable: true, filter: true},
-    { headerName:'# of Tasks',field: 'tasks', width: 150, sortable: true, resizable: true, filter: true},
-    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,  sortable: true, resizable: true, filter: true},
-    { headerName:'Remove', field: 'remove', width: 150, sortable: true, resizable: true, filter: true}
+    { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, sortable: true, resizable: true, filter: true },
+    { headerName:'Resourse Name',field: 'name', width: 500,minWidth: 80, sortable: true,resizable: true, filter: true },
+    { headerName:'# of Projects',field: 'project', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasks', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,minWidth: 80,  sortable: true, resizable: true, filter: true},
+    { headerName:'Remove', field: 'remove', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true}
 ];
 
 rowData = [
@@ -88,6 +82,21 @@ public uploadFile = (files) => {
         this.onUploadFinished.emit(event.body);
       }
     });
+}
+onGridReady(params) {
+  this.gridApi = params.api;
+  this.gridApi.sizeColumnsToFit();
+}
+
+getResourceGridData(){
+  this.projectId=this.activeRoute.snapshot.params.id;
+  this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
+    //console.log(data);
+    this.projectDetails = data;
+  },(error)=>{
+    this.notifier.notify("error","API Error. Showing Mockup Data");
+    this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
+  });
 }
 
 }
