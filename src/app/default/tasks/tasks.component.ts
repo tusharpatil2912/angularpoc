@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskbuttonComponent } from '../agCustomCells/taskbutton/taskbutton.component';
+
 
 @Component({
   selector: 'app-tasks',
@@ -18,7 +20,7 @@ export class TasksComponent implements OnInit {
     { headerName:'Task description',field: 'name', width: 520,minWidth: 100, resizable: true, sortable: true, filter: true },
     { headerName:'Created Date',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
     { headerName:'Assigned to',field: 'name', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
-    { headerName:'Status',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true},
+    { headerName:'Status',field: 'id', cellRendererFramework: TaskbuttonComponent, width: 150,minWidth: 80, resizable: true, sortable: true,  filter: true},
     { headerName:'Reason',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true}
 ];
 

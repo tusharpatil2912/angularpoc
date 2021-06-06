@@ -11,14 +11,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatSelectModule } from "@angular/material/select";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTabsModule } from "@angular/material/tabs";
-
 import { RouterModule } from '@angular/router';
 import { SharedModule } from "../shared/shared.module";
 import { AgGridModule } from 'ag-grid-angular';
@@ -36,6 +35,9 @@ import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/
 import { TasksComponent } from './tasks/tasks.component';
 import { ReportsComponent } from './reports/reports.component';
 import { OpenIssuesComponent } from './open-issues/open-issues.component';
+import { IntegralUIModule } from '../../../node_modules/@lidorsystems/integralui-web/bin/integralui/integralui.module';
+import { TaskreadonlyComponent } from './taskreadonly/taskreadonly.component';
+import { TaskbuttonComponent } from './agCustomCells/taskbutton/taskbutton.component';
 
 @NgModule({
   declarations: [
@@ -51,13 +53,16 @@ import { OpenIssuesComponent } from './open-issues/open-issues.component';
     AgSwimlanesButtonComponent,
     TasksComponent,
     ReportsComponent,
-    OpenIssuesComponent
+    OpenIssuesComponent,
+    TaskreadonlyComponent,
+    TaskbuttonComponent
+    
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    AgGridModule.withComponents([AgDetailsButtonComponent,AgSettingsButtonComponent,AgSwimlanesButtonComponent]),
+    AgGridModule.withComponents([AgDetailsButtonComponent,AgSettingsButtonComponent,AgSwimlanesButtonComponent,TaskbuttonComponent]),
     MatSidenavModule,
     MatDividerModule,
     FlexLayoutModule,
@@ -74,7 +79,7 @@ import { OpenIssuesComponent } from './open-issues/open-issues.component';
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
-    HttpClientModule
+    HttpClientModule,IntegralUIModule,FormsModule
   ],
   providers:[
     DashboardService
