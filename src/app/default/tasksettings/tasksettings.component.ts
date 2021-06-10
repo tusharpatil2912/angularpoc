@@ -3,7 +3,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { TaskDetailsService } from "../../services/task-details.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from "angular-notifier";
-import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/ag-settings-button.component";
 
 @Component({
   selector: 'app-tasksettings',
@@ -93,7 +92,7 @@ export class TasksettingsComponent implements OnInit {
     { headerName:'Task',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
     { headerName:'Open Task',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
     { headerName:'Skills',field: 'id', width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true},
-    { headerName:'Select',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true}
+    { headerName:'Select',field:'checkboxSelect', width: 150,minWidth: 100, resizable: true, sortable: true,  filter: true, checkboxSelection: true}
 ];
 
 rowData = [

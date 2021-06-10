@@ -1,0 +1,31 @@
+<div style="background: linear-gradient(to right bottom, orange,blueviolet); height: 100vh;width: 100vw;">
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <br/>
+        <!-- <img src="" id="icon" alt="Project Tracker" /> -->
+        <h1>Project Tracker</h1>
+        <hr/>
+        
+        <h4>Login</h4>
+      </div>
+  
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="Username" formControlName="username" class="form-control">
+        <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password"  formControlName="password" class="form-control">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+      <div class="lds-ellipsis" *ngIf="clicked"><div></div><div></div><div></div><div></div></div>
+        <div class="p-3 mb-2 bg-danger text-white" *ngIf="error">{{error}}</div>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        New to App? <a class="underlineHover" routerLink="/register">  Register Here</a>
+      </div>
+  
+    </div>
+  </div>
+</div>

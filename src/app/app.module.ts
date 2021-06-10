@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule, NotifierOptions } from "angular-notifier";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { JwtInterceptor } from "./services/jwt.interceptor";
+import { ErrorInterceptor } from "./services/error.interceptor";
 
 
 const notifierCustomOptions: NotifierOptions = {
@@ -62,7 +64,10 @@ const notifierCustomOptions: NotifierOptions = {
     NotifierModule.withConfig(notifierCustomOptions),
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
@@ -7,7 +8,8 @@ export class ProjectDetailsService {
 
   //readonly rootURL = 'http://localhost/latestapi/api';
   //readonly rootURL = 'https://localhost:5001/api';
-  readonly rootURL = 'https://projecttrackerdotnetapi.herokuapp.com/api';
+  //readonly rootURL = 'https://projecttrackerdotnetapi.herokuapp.com/api';
+  readonly rootURL = environment.rootURL;
 
   constructor(private httpClient: HttpClient) { }
 
