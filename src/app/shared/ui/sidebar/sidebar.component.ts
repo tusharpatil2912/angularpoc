@@ -11,12 +11,18 @@ import { ProjectDetailsService } from "../../../services/project-details.service
 export class SidebarComponent implements OnInit {
 
   projectList;
+  userName:string;
+  designation:string;
 
   constructor(private routes : Router,public dialog: MatDialog,private detailsapi: ProjectDetailsService) { }
 
   ngOnInit(): void {
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
+      var userData = JSON.parse(localStorage.getItem('currentUser'));
+      console.log(userData);
+      this.userName = userData.user['resourceName'];
+      this.designation = userData.user['designation'];
       this.projectList = data;
       //this.rowData = data;
     });

@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskbuttonComponent implements OnInit {
 
+  data:any;
   constructor() { }
 
   ngOnInit(): void {
+  }
+  agInit(params){
+    this.data=params.value;
   }
   
 }

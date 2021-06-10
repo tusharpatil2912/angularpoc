@@ -5,7 +5,7 @@ import { FooterComponent } from './ui/footer/footer.component';
 import { SidebarComponent } from './ui/sidebar/sidebar.component';
 import { CardComponent } from './widgets/card/card.component';
 import { PieComponent } from './widgets/pie/pie.component';
-
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,6 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { LoginComponent } from './ui/login/login.component';
+import { RegisterComponent } from './ui/register/register.component';
+import { ErrorPageComponent } from './ui/error-page/error-page.component';
 
 
 
@@ -26,7 +29,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     FooterComponent, 
     SidebarComponent, 
     CardComponent, 
-    PieComponent],
+    PieComponent, LoginComponent, RegisterComponent, ErrorPageComponent],
   imports: [
     CommonModule,
     MatDividerModule,
@@ -39,7 +42,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatDialogModule,
     RouterModule,
     HighchartsChartModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     HeaderComponent,
