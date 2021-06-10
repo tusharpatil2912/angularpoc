@@ -52,26 +52,28 @@
             </div>
             <div class="form-group" >
               <div class="input-group-prepend">
-                <span class="input-group-text input-title-stl">Add Milestone</span>
+                <span class="input-group-text input-title-stl">Milestone</span>
               </div>
-             <select class="form-control" id="Milestone"  required readonly> 
+              <input type="text" formControlName="name" class="form-control" placeholder="Milestone" readonly>
+             <!-- <select class="form-control" id="Milestone"  required readonly> 
                <option value="1">Milestone 1</option>
                <option value="2">Milestone 2</option>
                <option value="3">Milestone 3</option>
                <option value="4">Milestone 4</option>
                <option value="5">Milestone 5</option>
                
-             </select>
+             </select> -->
            </div>
+
+           
             <div class="form-group">
-              <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1" rows="3" placeholder="Description" required></textarea>
+              <div class="input-group-prepend">
+                <span class="input-group-text input-title-stl"> Description</span>
+              </div>
+              <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1" rows="3" placeholder="Description" readonly></textarea>
             </div>
   
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-              <label class="custom-file-label" for="validatedCustomFile">Choose file to attach for more info</label>
-              <div class="invalid-feedback">Example invalid custom file feedback</div>
-            </div>
+            
             <!-- <button class="btn btn-block btn-lg btn-success" type="submit" style="margin-top: 30px;" disabled>Submit</button> -->
             <button class="btn btn-block btn-lg btn-colors" type="submit" [disabled]="taskReadonlyForm.invalid" style="margin-top: 30px;">{{submitbtnTitile}}</button>
   
@@ -84,53 +86,35 @@
             <div class="input-group-prepend">
                 <span class="input-group-text input-title-stl">Task Name</span>
             </div>
-            <input type="text" formControlName="taskName" class="form-control" placeholder="Enter Task Name" required>
+            <input type="text" formControlName="taskName" class="form-control" placeholder="Enter Task Name" readonly>
           </div> 
   
           <div class="input-group form-group" >
             <div class="input-group-prepend">
                 <span class="input-group-text input-title-stl">Task Eta</span>
             </div>
-            <input type="datetime-local" formControlName="time" class="form-control" placeholder="Enter Task Eta" required>
+            <input type="datetime-local" formControlName="time" class="form-control" placeholder="Enter Task Eta" readonly >
           </div>
   
           <div class="input-group form-group" >
             <div class="input-group-prepend">
                 <span class="input-group-text input-title-stl">Task Etc</span>
             </div>
-            <input type="datetime-local" formControlName="time" class="form-control" placeholder="Enter Task Etc" required>
+            <input type="datetime-local" formControlName="time" class="form-control" placeholder="Enter Task Etc" readonly>
           </div>
           
           <div class="form-group">
             <div class="input-group-prepend">
               <span class="input-group-text input-title-stl">Task weightage</span>
+              <input type="text" formControlName="name" class="form-control" placeholder="task weightage" readonly>
             </div>
-            <select class="form-control" id="taskWeight" formControlName="Task weightage" required readonly>
-                
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
+            
         </div>
           <div class="form-group" >
             <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Skills Required</span>
+              <span class="input-group-text input-title-stl">Skills </span>
             </div>
-           <select class="form-control" id="SkillsRequired" multiple required> 
-             <option value="dotnet">dotnet</option>
-             <option value="sql">sql</option>
-             <option value="webservice">webservice</option>
-             <option value="angular">angular</option>
-             <option value="typescript">typescript</option>
-             <option value="javascript">javascript</option>
-           </select>
+            <input type="text" formControlName="name" class="form-control" placeholder="skills" readonly>
          </div>
   
         <div class="input-group form-group" >
@@ -143,10 +127,64 @@
             <option value="completed">Completed</option>
           </select>
         </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+          <label class="custom-file-label" for="validatedCustomFile">Choose file to attach for more info</label>
+          <div class="invalid-feedback">Example invalid custom file feedback</div>
+        </div>
         
   
         </form>
-  
+
+        <br>
+        <table class="table table-striped">
+          <thead>
+              <tr>
+                <th scope="col" style="width: 50px;">#</th>
+                <th scope="col">Document Name</th>
+                
+                <th scope="col" style="width: 100px;">View/Download</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>AFD</td>
+                
+                <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
+              </tr>
+              <tr>
+                  <th scope="row">2</th>
+                  <td>TSD</td>
+                 
+                  <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Runbook</td>
+                  
+                  <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Unit Test Case Document</td>
+                  
+                  <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>DDL/DML</td>
+                 
+                  <td><a href="#" class="btn btn-colors btn-block">Download</a></td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>Github</td>
+               
+                  <td><a href="#" class="btn btn-colors btn-block">View</a></td>
+                </tr>
+            </tbody>
+      </table>  
   
       </div>
       <br/>
