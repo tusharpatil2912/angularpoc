@@ -1,4 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserAuthService } from "../services/user-auth.service";
 
 @Component({
   selector: 'app-default',
@@ -11,9 +13,17 @@ export class DefaultComponent implements OnInit {
   drawerMode="side";
   screenWidth: any;
 
-  constructor() { }
+  constructor(
+    private userApi:UserAuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  logoutUser(){
+    this.userApi.logout();
+    this.router.navigate(['/login']);
   }
 
   @HostListener('window:resize', ['$event'])

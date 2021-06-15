@@ -1,1 +1,46 @@
-<p>register works!</p>
+<div style="background: linear-gradient(to right bottom, orange,blueviolet); height: 100vh;width: 100vw;">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <br/>
+            <h2>Project Tracker</h2>
+            <hr/>
+            
+            <h4>Register New User</h4>
+          </div>
+      
+          <!-- Login Form -->
+          <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+            <input type="text" id="firstname" class="fadeIn second" name="login" placeholder="First Name" formControlName="firstname" class="form-control" required>
+            <input type="text" id="lastname" class="fadeIn second" name="login" placeholder="Last Name" formControlName="lastname" class="form-control">
+            <!-- <input type="text" id="login" class="fadeIn second" name="login" placeholder="Role" formControlName="designation" class="form-control"> -->
+            <select class="form-control" id="role" formControlName="role" required> 
+                <option value="" selected disabled hidden>Select Role</option>
+                <option value="developer">Developer</option>
+                <option value="teamlead">Team Leader</option>
+              </select>
+            <select class="form-control" id="managerid" formControlName="managerid"> 
+                <option value="0" selected disabled hidden>Select Team Leader</option>
+                <option *ngFor="let mng of managers" value="{{mng.resourceId}}">{{mng.resourceName}}</option>
+            </select>
+            <input type="text" id="skills" class="fadeIn second" name="skill" placeholder="Primary Skill" formControlName="skills" class="form-control">
+            <input type="text" id="username" class="fadeIn second" name="login" placeholder="Username" formControlName="username" class="form-control" required>
+            <mat-icon style="transform: translateY(10px) translateX(-35px); position: absolute;cursor: pointer;" 
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Check Availability" (click)="checkUsernameAvailability()">{{checkUsername}}</mat-icon>
+            <div *ngIf="usermsg" [class]="myalert" style="margin: 0px;padding: 0px;margin-left: 3rem;margin-right: 3rem;">{{usermsg}}</div>
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password"  formControlName="password" class="form-control" required>
+            <input type="submit" class="fadeIn fourth" value="Register" [disabled]="registerForm.invalid">
+          </form>
+          <div class="lds-ellipsis" *ngIf="clicked"><div></div><div></div><div></div><div></div></div>
+          <div class="p-3 mb-2 bg-danger text-white" *ngIf="error">{{error}}</div>
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            Already Registered? <a class="underlineHover" routerLink="/login">  Login Here</a>
+          </div>
+
+        </div>
+      </div>
+    </div>

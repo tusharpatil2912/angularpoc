@@ -17,9 +17,13 @@
         </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-           <mat-icon>exit_to_app</mat-icon>
-              Sign Out
+           <mat-icon>person_outline</mat-icon>
+              Profile
         </button>
+        <button mat-menu-item (click)="logoutUser()">
+          <mat-icon>exit_to_app</mat-icon>
+             Sign Out
+       </button>
       </mat-menu>
       </div>
       <!--End For Small Devices-->
