@@ -38,6 +38,7 @@ import { OpenIssuesComponent } from './open-issues/open-issues.component';
 import { IntegralUIModule } from '../../../node_modules/@lidorsystems/integralui-web/bin/integralui/integralui.module';
 import { TaskreadonlyComponent } from './taskreadonly/taskreadonly.component';
 import { TaskbuttonComponent } from './agCustomCells/taskbutton/taskbutton.component';
+import { ReleaseSettingsComponent } from './release-settings/release-settings.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { TaskbuttonComponent } from './agCustomCells/taskbutton/taskbutton.compo
     ReportsComponent,
     OpenIssuesComponent,
     TaskreadonlyComponent,
-    TaskbuttonComponent
+    TaskbuttonComponent,
+    ReleaseSettingsComponent
     
   ],
   imports: [

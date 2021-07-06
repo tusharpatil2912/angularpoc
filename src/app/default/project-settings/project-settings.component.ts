@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from "@angular/common";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { Router, ActivatedRoute } from '@angular/router';
@@ -20,6 +21,10 @@ export class ProjectSettingsComponent implements OnInit {
   projSettingsForm: FormGroup;
   projCreatedDate;
   private gridApi;
+  today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  projectphase;
+
+  months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   
 
   constructor(
@@ -30,7 +35,7 @@ export class ProjectSettingsComponent implements OnInit {
     private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    //console.log(this.today);
     this.projectId=this.activeRoute.snapshot.params.id;
     if(this.projectId){
       this.pageTitile = "Project Settings";
@@ -39,6 +44,7 @@ export class ProjectSettingsComponent implements OnInit {
     this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
       //console.log(data);
       this.projectDetails = data;
+      this.projectphase = this.projectDetails.phase;
       //this.projSettingsForm.get('name').setValue(this.projectDetails.name);
       //this.projCreatedDate= formatDate(this.projectDetails.createdDate, 'yyyy-MM-dd', 'en-US');
       //this.projCreatedDate= this.datePipe.transform(this.projectDetails.createdDate, 'yyyy-MM-dd');
@@ -51,7 +57,9 @@ export class ProjectSettingsComponent implements OnInit {
                                         codeDropDate: this.projectDetails.codeDropDate,
                                         releaseDate: this.projectDetails.releaseDate,
                                         codeFreezeDate: this.projectDetails.codeFreezeDate,
-                                        createdDate:this.projectDetails.createdDate})
+                                        createdDate:this.projectDetails.createdDate,
+                                        complexity:this.projectDetails.complexity,
+                                        skills:this.projectDetails.skills})
     },(error)=>{
       this.notifier.notify("error","API Error. Showing Mockup Data");
       this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
@@ -76,12 +84,14 @@ export class ProjectSettingsComponent implements OnInit {
     releaseDate: [''],
     codeDropDate: [''],
     codeFreezeDate: [''],
-    createdDate:[''],
+    createdDate:[this.today],
     description: [''],
     sme: [''],
     owner: [''],
     skills: [''],
-    projectPhase: [''],
+    phasemonth: [''],
+    phaseyear:['2021'],
+    complexity:['']
   });
   this.projSettingsForm.controls['createdDate'].disable();
   }
@@ -110,7 +120,9 @@ export class ProjectSettingsComponent implements OnInit {
       skills:this.projSettingsForm.get('skills').value,
       releaseDate: this.projSettingsForm.get('releaseDate').value,
       codeDropDate: this.projSettingsForm.get('codeDropDate').value,
-      codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value
+      codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value,
+      complexity:this.projSettingsForm.get('complexity').value,
+      phase:this.projSettingsForm.get('phasemonth').value + this.projSettingsForm.get('phaseyear').value
     };
     const putjsonForm ={
       id:this.projSettingsForm.get('id').value,
@@ -121,7 +133,9 @@ export class ProjectSettingsComponent implements OnInit {
       skills:this.projSettingsForm.get('skills').value,
       releaseDate: this.projSettingsForm.get('releaseDate').value,
       codeDropDate: this.projSettingsForm.get('codeDropDate').value,
-      codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value
+      codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value,
+      complexity:this.projSettingsForm.get('complexity').value,
+      phase:this.projSettingsForm.get('phasemonth').value + this.projSettingsForm.get('phaseyear').value
     };
     this.pId=this.activeRoute.snapshot.params.id;
     if(this.pId){

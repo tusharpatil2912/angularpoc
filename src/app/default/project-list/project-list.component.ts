@@ -32,6 +32,7 @@ export class ProjectListComponent implements OnInit {
   columnDefs = [
     { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, resizable: true, sortable: true, filter: true },
     { headerName:'Project Name',field: 'name', width: 650,minWidth: 80, resizable: true, sortable: true, filter: true },
+    { headerName:'Release',field: 'phase', width: 150,minWidth: 135, resizable: true, sortable: true, filter: true },
     { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150,minWidth: 135, resizable: true, sortable: true, filter: true},
     { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150,minWidth: 145, resizable: true, sortable: true, filter: true},
     { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150,minWidth: 80, resizable: true, sortable: true,  filter: true}

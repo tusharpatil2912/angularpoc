@@ -27,10 +27,10 @@
                 <option *ngFor="let mng of managers" value="{{mng.resourceId}}">{{mng.resourceName}}</option>
             </select>
             <input type="text" id="skills" class="fadeIn second" name="skill" placeholder="Primary Skill" formControlName="skills" class="form-control">
-            <input type="text" id="username" class="fadeIn second" name="login" placeholder="Username" formControlName="username" class="form-control" required>
+            <input type="text" id="username" (keyup)="onUsernameEnter($event)" minlength="2" class="fadeIn second" name="login" placeholder="Username" formControlName="username" class="form-control" required>
             <mat-icon style="transform: translateY(10px) translateX(-35px); position: absolute;cursor: pointer;" 
             data-bs-toggle="tooltip" data-bs-placement="top" title="Check Availability" (click)="checkUsernameAvailability()">{{checkUsername}}</mat-icon>
-            <div *ngIf="usermsg" [class]="myalert" style="margin: 0px;padding: 0px;margin-left: 3rem;margin-right: 3rem;">{{usermsg}}</div>
+            <div *ngIf="usermsg && username.valid" [class]="myalert" style="margin: 0px;padding: 0px;margin-left: 3rem;margin-right: 3rem;">{{usermsg}}</div>
             <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password"  formControlName="password" class="form-control" required>
             <input type="submit" class="fadeIn fourth" value="Register" [disabled]="registerForm.invalid">
           </form>

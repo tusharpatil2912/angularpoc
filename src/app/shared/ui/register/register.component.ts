@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       lastname:[''],
       role:[''],
       managerid:['0'],
-      username: [''],
+      username: ['',Validators.minLength(2)],
       password: [''],
       skills:['']
     });
@@ -80,4 +80,10 @@ export class RegisterComponent implements OnInit {
       this.myalert="alert alert-danger";
     })
   }
+
+  onUsernameEnter(event:any){
+    this.checkUsernameAvailability();  
+  }
+
+  get username() { return this.registerForm.get('username'); }
 }
