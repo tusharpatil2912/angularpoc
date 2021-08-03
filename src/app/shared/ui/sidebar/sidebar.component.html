@@ -6,6 +6,7 @@
     <div class="sideMenuBtnList" tabindex="-1">
     <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/">My Dashboard</a>
     <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/projectlist">Projects</a>
+    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/release">Releases</a>
     <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/addTask">Add Task</a>
     <!-- <a mat-list-item routerLinkActive='list-item-active' routerLink="/swimlanes">Swimlanes</a> -->
     <!-- <a mat-list-item routerLinkActive='list-item-active' (click)="openDialog()">Swimlanes</a> -->
@@ -19,7 +20,7 @@
      <div class="UserCard">
        <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="" style="border-radius: 50%;box-sizing: border-box;width: 80%;">
        <h1>{{userName}}</h1>
-       <h4>{{designation}}</h4>
+       <h4>{{designation | uppercase}}</h4>
      </div>
   
   </mat-nav-list>

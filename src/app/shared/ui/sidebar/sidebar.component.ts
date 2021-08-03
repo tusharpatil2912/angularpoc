@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
       var userData = JSON.parse(localStorage.getItem('currentUser'));
-      console.log(userData);
+      //console.log(userData);
       this.userName = userData.user['resourceName'];
       this.designation = userData.user['designation'];
       this.projectList = data;

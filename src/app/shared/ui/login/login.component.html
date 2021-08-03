@@ -15,9 +15,13 @@
   
       <!-- Login Form -->
       <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
-        <input type="text" id="login" class="fadeIn second" name="login" placeholder="Username" formControlName="username" class="form-control">
-        <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password"  formControlName="password" class="form-control">
-        <input type="submit" class="fadeIn fourth" value="Log In">
+        <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username" formControlName="username" class="form-control" required>
+         <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)" class="alert" style="margin: 0px;padding: 0px;">
+          <p *ngIf="f.username.errors?.required" class="alert alert-danger" style="margin: 0px;padding: 0px;margin-left: 3rem;margin-right: 3rem;">Username is required</p></div> 
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"  formControlName="password" class="form-control" required>
+        <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="alert" style="margin: 0px;padding: 0px;">
+          <p *ngIf="f.password.errors?.required" class="alert alert-danger" style="margin: 0px;padding: 0px;margin-left: 3rem;margin-right: 3rem;">Password is required</p></div> 
+        <input type="submit" class="fadeIn fourth" value="Log In" [disabled]="loginForm.invalid">
       </form>
       <div class="lds-ellipsis" *ngIf="clicked"><div></div><div></div><div></div><div></div></div>
         <div class="p-3 mb-2 bg-danger text-white" *ngIf="error">{{error}}</div>

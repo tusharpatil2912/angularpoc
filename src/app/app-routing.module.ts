@@ -15,6 +15,9 @@ import { LoginComponent } from "./shared/ui/login/login.component";
 import { RegisterComponent } from "./shared/ui/register/register.component";
 import { AuthGuardGuard } from "./services/auth-guard.guard";
 import { ErrorPageComponent } from "./shared/ui/error-page/error-page.component";
+import { ReleaseSettingsComponent } from "./default/release-settings/release-settings.component";
+import { ReleaseCreateComponent } from "./default/release-create/release-create.component";
+import { ReleaseBoardComponent } from "./default/release-board/release-board.component";
 
 const routes: Routes = [
   {path:'login',component: LoginComponent},
@@ -34,8 +37,10 @@ const routes: Routes = [
       {path:'task', component:TasksComponent},
       {path:'reports',component:ReportsComponent},
       {path:'openissues', component:OpenIssuesComponent},
-      {path: 'taskreadonly/:id',component:TaskreadonlyComponent}
-
+      {path:'taskreadonly/:id',component:TaskreadonlyComponent},
+      {path:'release',component:ReleaseBoardComponent},
+      {path:'releasesettings/:id',component:ReleaseSettingsComponent},
+      {path:'addrelease', component:ReleaseCreateComponent}
     ]
   },
   {path:'error',component:ErrorPageComponent},

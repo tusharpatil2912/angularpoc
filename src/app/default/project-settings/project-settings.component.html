@@ -11,6 +11,9 @@
     <!--Project Settings Form-->
     <div class="row" style="display: flex;justify-content: center;">
         <div class="col-lg-6 col-md-11">
+            <div style="text-align:center;margin-bottom:25px;margin-top: 5px;">
+                <!-- <h5 style="margin-bottom:10px;">Project Details</h5> -->
+            </div>
             <form [formGroup]="projSettingsForm" (ngSubmit)="submitForm()">
                 <div class="input-group form-group" style="display: none;">
                     <div class="input-group-prepend">
@@ -44,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="skillrequired" formControlName="skills">
-                        <option value="">Skill Required</option>
+                        <option value="">Select Primary Skill</option>
                         <option value="dotnet">.Net</option>
                         <option value="VB">VB</option>
                         <option value="SQL">SQL</option>
@@ -53,28 +56,18 @@
                     </select>
                 </div>
                 <br />
-                <button class="btn btn-block btn-lg btn-colors" type="submit" [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button>
+                <!-- <button class="btn btn-block btn-lg btn-colors" type="submit" [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button> -->
             </form>
-            <div *ngIf="visibility">
-                <br />
-            <!-- <label><h6>Add Milestone</h6></label>
-            <div class="input-group mb-3">
-                <input type="date" class="form-control" placeholder="Add Milestone" aria-label="Add Milestone"
-                    aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
-                </div>
-            </div> -->
-        </div>
+            
         </div>
         <br/>
         <!--Important Dates-->
         <div class="col-lg-6 col-md-11" >
             <div style="text-align:center;margin-bottom:25px;margin-top: 5px;">
-                <h5 style="margin-bottom:10px;">Important Dates</h5>
+                <!-- <h5 style="margin-bottom:10px;">Important Dates</h5> -->
             </div>
             
-            <form [formGroup]="projSettingsForm" style="display:flex;align-items: center;flex-direction: column;">
+            <form [formGroup]="projSettingsForm" style="display:flex;align-items: center;flex-direction: column;" (ngSubmit)="submitForm()">
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Code Drop Date</span>
@@ -99,39 +92,58 @@
                       </div>
                     <input type="date" formControlName="createdDate" class="form-control" style="text-align: center;">
                 </div>
-                <!-- <div class="form-group-row form-inline" style="margin-bottom:10px;">
-                    <label class="col-md-6 input-group-text" style="text-align: left;">Code Drop Date :</label>
-                    <div class="col-md-6">
-                        <input type="date" formControlName="codeDropDate" class="form-control" style="width: 100%;text-align: center;">
-                    </div>
+                <div class="input-group form-group" style="width: 90%;" *ngIf="projectphase==null">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text input-titles">Release</span>
+                      </div>
+                      <select class="form-control" id="phasemonth" style="text-align: center;" formControlName="phasemonth">
+                        <option value="">Month</option>
+                        <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                    </select>
+                    <input type="number" min="2000" max="2099" step="1" id="phaseyear" formControlName="phaseyear"
+                    class="form-control" style="text-align: center;"/>
                 </div>
-                <div class="form-group-row form-inline" style="margin-bottom:10px;">
-                    <label class="col-md-6 col-form-label">Code Freeze Date :</label>
-                    <div class="col-md-6">
-                        <input type="date" formControlName="codeFreezeDate" class="form-control" style="width: 100%;text-align: center;">
-                    </div>
+                <div class="input-group form-group" style="width: 90%;" *ngIf="visibility">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text input-titles">Release</span>
+                      </div>                    
+                        <input disabled type="text" class="form-control" style="text-align: center;" [value]="projectphase" placeholder="MonYYYY">
                 </div>
-                <div class="form-group-row form-inline" style="margin-bottom:10px;">
-                    <label class="col-md-6 col-form-label">Release Date :</label>
-                    <div class="col-md-6">
-                        <input type="date" formControlName="releaseDate" class="form-control" style="width: 100%;text-align: center;">
-                    </div>
+                <div class="input-group form-group" style="width: 90%;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text input-titles">Complexity</span>
+                      </div>
+                      <select class="form-control" id="complexity" formControlName="complexity" style="text-align: center;" >
+                        <option value="">Select Complexity</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
                 </div>
-                <div class="form-group-row form-inline">
-                    <label class="col-md-6 col-form-label">Created Date :</label>
-                    <div class="col-md-6">
-                        <input type="date" formControlName="createdDate" class="form-control"  style="width: 100%;text-align: center;">
-                    </div>
-                </div> -->
+                <!-- <br />
                 <br />
-                <br />
-                <br />
-                <!-- <a class="btn btn-block btn-lg btn-link" routerLink="/projectlist"><span class="material-icons">
-                    reply
-                    </span> Back to List</a> -->
+                <br /> -->
+                <button class="btn btn-block btn-lg btn-colors" type="submit" style="width: 90%;" [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button>
             </form>
         </div>
     </div>
+    <div *ngIf="visibility">
+        <hr  *ngIf="visibility"/>
+    <label><h6>Add Milestone</h6></label>
+    <div class="row">
+    <div class="input-group mb-3 col-md-6">
+        <input type="text" class="form-control" placeholder="Milestone" aria-label="Milestone"
+            aria-describedby="button-addon2">
+    </div>
+    <div class="input-group mb-3 col-md-6">
+        <input type="date" class="form-control" placeholder="Add Milestone" aria-label="Add Milestone"
+            aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
+        </div>
+    </div>
+</div>
+</div>
     <hr  *ngIf="visibility"/>
     <!--progress bar-->
     <div *ngIf="visibility">

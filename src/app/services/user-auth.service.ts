@@ -46,6 +46,12 @@ export class UserAuthService {
   public registerUser(user) {
     return this.httpClient.post<any>(`${this.rootURL}/resource`, user);
   }
+  public checkUsername(username) {
+    return this.httpClient.post<any>(`${this.rootURL}/resource/checkusername?username=${username}`, username);
+  }
+  public getByDesignation(designation) {
+    return this.httpClient.post<any>(`${this.rootURL}/resource/designation?desg=${designation}`,designation);
+  }
   public updateUser(id,user) {
     // console.warn(project);
     return this.httpClient.put<any>(`${this.rootURL}/resource/${id}`, user);
