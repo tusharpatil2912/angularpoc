@@ -1,32 +1,52 @@
 <div class="mainDiv">
     <!--Title-->
     <div class="title row">
-        <h3 class="col-md-9">Release Settings</h3>
+        <h3 class="col-md-9">Create New Release</h3>
         <a class="btn btn-lg btn-secondary btn-block col-md-3" routerLink="/release"><span class="material-icons">
                 reply
             </span> Back</a>
     </div>
 
-    <!--agGrid for Projects included in release-->
-    <div class="projectGrid" style="margin-top: 1.5rem;">
-        <ag-grid-angular style="width: 100%; height: 250px;" class="ag-theme-alpine" [rowData]="rowData"
-            [columnDefs]="columnDefs" [rowHeight]="50" (gridReady)="onGridReady($event)">
-        </ag-grid-angular>
-    </div>
-
     <!--Release Details and Documents-->
     <div class="releaseDetails" style="margin-top: 1.5rem;">
-
-        <div class="input-group form-group" style="width: 49%;">
+        <div class="row" style="margin-top: 1.5rem;">
+        <div class="col-md-6">
+        <div class="input-group form-group" style="width: 100%;">
+            <div class="input-group-prepend">
+                <span class="input-group-text input-titles">Release Name</span>
+            </div>
+            <input type="text" class="form-control" style="text-align: center;" placeholder="Release Name">
+            <!--formControlName="releaseDate"-->
+        </div>
+        <div class="input-group form-group" style="width: 100%;">
+            <div class="input-group-prepend">
+                <span class="input-group-text input-titles">Release Description</span>
+            </div>
+            <input type="text" class="form-control" style="text-align: center;" placeholder="Release Description">
+            <!-- <textarea rows="3" class="form-control" style="text-align: center;" placeholder="Release Description"></textarea> -->
+            <!--formControlName="releaseDate"-->
+        </div>
+        <div class="input-group form-group" style="width: 100%;">
             <div class="input-group-prepend">
                 <span class="input-group-text input-titles">Release Date</span>
             </div>
             <input type="date" class="form-control" style="text-align: center;">
             <!--formControlName="releaseDate"-->
         </div>
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text input-titles">Status</span>
+            </div>
+            <select class="form-control" id="status" style="text-align: center">
+                <option value="new">Select Release Status</option>
+                <option value="completed">Completed</option>
+                <option value="inprogress">In Progress</option>
+                <option value="onhold">On Hold</option>
+                <option value="partial">Partial Release</option>
+            </select>
+        </div>
+        </div>
         <hr />
-        <h4>Documents</h4>
-        <div class="row" style="margin-top: 1.5rem;">
             <div class="col-md-6">
                 <div class="input-group form-group" style="width: 100%;">
                     <div class="input-group-prepend">
@@ -42,8 +62,6 @@
                     <input type="file" class="form-control" style="text-align: center;">
                     <button class="btn btn-primary btn-colors">Download</button>
                 </div>
-            </div>
-            <div class="col-md-6">
                 <div class="input-group form-group" style="width: 100%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Validation Scripts</span>
@@ -62,10 +80,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-9 col-md-9" style="margin-bottom: 10px;">
+        <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">
         </div>
-        <div class="col-lg-3 col-md-3" style="margin-bottom: 10px;">
-            <button class="btn btn-block btn-lg btn-colors" style="margin-top: 30px;">Save</button>
+        <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">
+            <button class="btn btn-block btn-lg btn-colors" style="margin-top: 30px;">Add</button>
         </div>
     </div>
 </div>

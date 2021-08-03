@@ -39,6 +39,9 @@ import { IntegralUIModule } from '../../../node_modules/@lidorsystems/integralui
 import { TaskreadonlyComponent } from './taskreadonly/taskreadonly.component';
 import { TaskbuttonComponent } from './agCustomCells/taskbutton/taskbutton.component';
 import { ReleaseSettingsComponent } from './release-settings/release-settings.component';
+import { ReleaseCreateComponent } from './release-create/release-create.component';
+import { ReleaseBoardComponent } from './release-board/release-board.component';
+import { AgReleasesettingsButtonComponent } from './agCustomCells/ag-releasesettings-button/ag-releasesettings-button.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { ReleaseSettingsComponent } from './release-settings/release-settings.co
     OpenIssuesComponent,
     TaskreadonlyComponent,
     TaskbuttonComponent,
-    ReleaseSettingsComponent
+    ReleaseSettingsComponent,
+    ReleaseCreateComponent,
+    ReleaseBoardComponent,
+    AgReleasesettingsButtonComponent
     
   ],
   imports: [
