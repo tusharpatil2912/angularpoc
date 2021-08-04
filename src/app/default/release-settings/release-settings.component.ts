@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AgDetailsButtonComponent } from "../agCustomCells/ag-details-button/ag-details-button.component";
+import { ProjectDetailsService } from "../../services/project-details.service";
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-release-settings',
@@ -8,29 +13,63 @@ import { Component, OnInit } from '@angular/core';
 export class ReleaseSettingsComponent implements OnInit {
 
   private gridApi;
+  releaseId;
+  releaseDetails;
+  releaseDetailsForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder,
+    private api: ProjectDetailsService,
+    private notifier: NotifierService, 
+    private router: Router,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.releaseDetailsForm = this.fb.group({
+      id: [''],
+      name: [''],
+      details:[''],
+      releaseDate: [''],
+      status:['']
+    });
+
+    this.releaseId=this.activeRoute.snapshot.params.id;
+    this.api.getProjectsByReleaseId(this.releaseId).subscribe((data)=>{
+      this.rowData=data;
+    },(error)=>{
+      this.notifier.notify("error", "Something Went Wrong");
+    });
+    this.api.getReleaseById(this.releaseId).subscribe((data)=>{
+      this.releaseDetails=data;
+      this.releaseDetailsForm.patchValue({
+        id:this.releaseDetails.id,
+        name:this.releaseDetails.name,
+        details : this.releaseDetails.details, 
+        releaseDate: this.releaseDetails.releaseDate,
+        status: this.releaseDetails.status})
+    },(error)=>{
+      this.notifier.notify("error", "Something Went Wrong");
+    });
+    
   }
 
   columnDefs = [
     { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, resizable: true, sortable: true, filter: true },
     { headerName:'Project Name',field: 'name', width: 350,minWidth: 80, resizable: true, sortable: true, filter: true },
-    { headerName:'Tasks',field: 'tasks', width: 150,minWidth: 135, resizable: true, sortable: true, filter: true },
-    { headerName:'Open Tasks',field: 'opentasks', width: 150,minWidth: 135, resizable: true, sortable: true, filter: true},
-    { headerName:'Details',field: 'details', width: 250,minWidth: 145, resizable: true, sortable: true, filter: true},
-    { headerName:'Select',field: 'select', width: 80,minWidth: 80, resizable: true, sortable: true,  filter: true, checkboxSelection: true}
+    { headerName:'Owner',field: 'owner', width: 100,minWidth: 135, resizable: true, sortable: true, filter: true },
+    { headerName:'SME',field: 'sme', width: 100,minWidth: 135, resizable: true, sortable: true, filter: true},
+    { headerName:'Description',field: 'description', width: 250,minWidth: 145, resizable: true, sortable: true, filter: true},
+    { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 130,minWidth: 100, resizable: true, sortable: true,  filter: true}
 ];
 
-rowData = [
-  {id:'1',name:'Project 1',details:'ABC',tasks:'5',opentasks:'4',select:''},
-  {id:'2',name:'Project 2',details:'ABC',tasks:'8',opentasks:'2',select:''},
-  {id:'3',name:'Project 3',details:'ABC',tasks:'7',opentasks:'3',select:''}
-];
+rowData = null;
 
 onGridReady(params) {
   this.gridApi = params.api;
   this.gridApi.sizeColumnsToFit();
 }
+
+onSubmit(){
+
+}
+
 }

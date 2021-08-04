@@ -32,4 +32,21 @@ export class ProjectDetailsService {
     // console.warn(project);
     return this.httpClient.put<any>(`${this.rootURL}/project/${id}`, project);
   }
+
+  public getAllReleases(){
+    return this.httpClient.get(`${this.rootURL}/Release`);
+  }
+  public getReleaseById(id){
+    return this.httpClient.get(`${this.rootURL}/Release/${id}`);
+  }
+  public getProjectsByReleaseId(id){
+    return this.httpClient.get(`${this.rootURL}/Project/byreleaseid/${id}`);
+  }
+  public addNewRelease(release) {
+    // const headers = new HttpHeaders();
+    // headers.set('Content-Type', 'application/json; charset=utf-8');
+    // let formdata = JSON.stringify(project);
+    // console.warn(project);
+    return this.httpClient.post<any>(`${this.rootURL}/Release`, release);
+  }
 }
