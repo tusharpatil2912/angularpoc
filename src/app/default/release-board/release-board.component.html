@@ -20,22 +20,22 @@
 <span id="selectedRows">
 <div class="releaseDetails" *ngIf='rowSelection' style="margin-top: 1.5rem;">
     <div class="row" style="margin-top: 1.5rem;">
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="input-group form-group" style="width: 100%;">
-                <h5>{{Name}}</h5>
+                <h5>Release Name : {{Name}}</h5>
             </div>
             <div class="input-group form-group" style="width: 100%;">
-                <h5>{{Details}}</h5>
+                <h5>Release Details : {{Details}}</h5>
             </div>
             <div class="input-group form-group" style="width: 100%;">
-                <h5>{{ReleaseDate}}</h5>
+                <h5>Release Date : {{ReleaseDate}}</h5>
             </div>
             <div class="input-group form-group">
-                <h5>Status</h5>
+                <h5>Release Status : {{Status | uppercase}}</h5>
             </div>
         </div>
         <hr />
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="input-group form-group" style="width: 100%;">
                 <div class="input-group-prepend">
                     <span class="input-group-text input-titles">Implementation Plan</span>
