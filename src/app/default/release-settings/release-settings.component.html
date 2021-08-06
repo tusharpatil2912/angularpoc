@@ -14,12 +14,18 @@
         </ag-grid-angular>
     </div>
 
-    <form [formGroup]="releaseDetailsForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="releaseDetailsForm">
         <!--Release Details and Documents-->
         <div class="releaseDetails" style="margin-top: 1.5rem;">
 
             <div class="row" style="margin-top: 1.5rem;">
                 <div class="col-md-6">
+                    <div class="input-group form-group" style="display: none;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-titles">Release Id</span>
+                          </div>
+                        <input type="text" formControlName="releaseId" class="form-control" placeholder="Release Id">
+                    </div>
                     <div class="input-group form-group" style="width: 100%;">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Release Name</span>
@@ -64,21 +70,40 @@
                 </div>
             </div>
             <h4>Documents</h4>
-            <div class="row" style="margin-top: 1.5rem;">
+            <div class="row" style="margin-top: 1.5rem;" *ngIf="progress > 0">
+                <div class="col-md-12">
+                <div class="input-group-text" *ngIf="progress > 0" style="margin-bottom: 15px;">
+                    <span *ngIf="progress > 0">Upload Progress :</span>
+                    <span class="upload" *ngIf="progress > 0">
+                        {{progress}}%
+                    </span>
+                    <span class="upload" *ngIf="message">
+                        {{message}}
+                    </span>
+                </div>
+            </div>
+            </div>
+            <div class="row" style="margin-top: 1.5rem;" *ngIf="releaseDetails">
                 <div class="col-md-6">
                     <div class="input-group form-group" style="width: 100%;">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Implementation Plan</span>
                         </div>
-                        <input type="file" class="form-control" style="text-align: center;">
-                        <button class="btn btn-primary btn-colors">Download</button>
+                        <span class="form-control no-file" *ngIf="releaseDetails.implementationPlan === null">No File Uploaded</span>
+                        <span class="form-control file-available" *ngIf="releaseDetails.implementationPlan">{{releaseDetails.implementationPlan}}</span>
+                        <input type="file" #implFile class="form-control" style="text-align: center;" (change)="uploadFile(implFile.files,'implplan')" style="display:none;">
+                        <button class="btn btn-primary btn-colors" (click)="implFile.click()"><mat-icon>file_upload</mat-icon></button>
+                        <button class="btn btn-primary btn-colors" [disabled]="releaseDetails.implementationPlan === null" (click)="downloadFile('implplan')"><mat-icon>file_download</mat-icon></button>
                     </div>
                     <div class="input-group form-group" style="width: 100%;">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Checklist</span>
                         </div>
-                        <input type="file" class="form-control" style="text-align: center;">
-                        <button class="btn btn-primary btn-colors">Download</button>
+                        <span class="form-control no-file" *ngIf="releaseDetails.checklist === null">No File Uploaded</span>
+                        <span class="form-control file-available" *ngIf="releaseDetails.checklist">{{releaseDetails.checklist}}</span>
+                        <input type="file" #chkList class="form-control" style="text-align: center;" (change)="uploadFile(chkList.files,'chklist')" style="display:none;">
+                        <button class="btn btn-primary btn-colors" (click)="chkList.click()"><mat-icon>file_upload</mat-icon></button>
+                        <button class="btn btn-primary btn-colors" [disabled]="releaseDetails.checklist === null" (click)="downloadFile('chklist')"><mat-icon>file_download</mat-icon></button>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -86,15 +111,21 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Validation Scripts</span>
                         </div>
-                        <input type="file" class="form-control" style="text-align: center;">
-                        <button class="btn btn-primary btn-colors">Download</button>
+                        <span class="form-control no-file" *ngIf="releaseDetails.validationTasks === null">No File Uploaded</span>
+                        <span class="form-control file-available" *ngIf="releaseDetails.validationTasks">{{releaseDetails.validationTasks}}</span>
+                        <input type="file" #vldTasks class="form-control" style="text-align: center;" (change)="uploadFile(vldTasks.files,'vldtask')" style="display:none;">
+                        <button class="btn btn-primary btn-colors" (click)="vldTasks.click()"><mat-icon>file_upload</mat-icon></button>
+                        <button class="btn btn-primary btn-colors" [disabled]="releaseDetails.validationTasks === null" (click)="downloadFile('vldtask')"><mat-icon>file_download</mat-icon></button>
                     </div>
                     <div class="input-group form-group" style="width: 100%;">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Change Tickets</span>
                         </div>
-                        <input type="file" class="form-control" style="text-align: center;">
-                        <button class="btn btn-primary btn-colors">Download</button>
+                        <span class="form-control no-file" *ngIf="releaseDetails.changeTicket === null">No File Uploaded</span>
+                        <span class="form-control file-available" *ngIf="releaseDetails.changeTicket">{{releaseDetails.changeTicket}}</span>
+                        <input type="file" #changeTkt class="form-control" style="text-align: center;" (change)="uploadFile(changeTkt.files,'changetkt')" style="display:none;">
+                        <button class="btn btn-primary btn-colors" (click)="changeTkt.click()"><mat-icon>file_upload</mat-icon></button>
+                        <button class="btn btn-primary btn-colors" [disabled]="releaseDetails.changeTicket === null" (click)="downloadFile('changetkt')"><mat-icon>file_download</mat-icon></button>
                     </div>
                 </div>
             </div>
@@ -103,7 +134,7 @@
             <div class="col-lg-9 col-md-9" style="margin-bottom: 10px;">
             </div>
             <div class="col-lg-3 col-md-3" style="margin-bottom: 10px;">
-                <button class="btn btn-block btn-lg btn-colors" style="margin-top: 30px;">Save</button>
+                <button class="btn btn-block btn-lg btn-colors" type="submit" (click)="onSubmit()" style="margin-top: 30px;">Save Changes</button>
             </div>
         </div>
     </form>
