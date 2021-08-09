@@ -22,9 +22,11 @@ export class ProjectSettingsComponent implements OnInit {
   projCreatedDate;
   private gridApi;
   today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-  projectphase;
+  //projectphase;
+  allReleases;
+  selectedRelease;
 
-  months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  //months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   
 
   constructor(
@@ -36,19 +38,22 @@ export class ProjectSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     //console.log(this.today);
+    this.detailsapi.getAllReleases().subscribe((data)=>{
+      this.allReleases=data;   
+    },(error)=>{
+      this.allReleases={
+        releaseId:-1,
+        name:"Please Create Release from Release Menu First"
+      }
+    });
     this.projectId=this.activeRoute.snapshot.params.id;
     if(this.projectId){
       this.pageTitile = "Project Settings";
       this.submitbtnTitile = "Update";
       this.visibility = true;
     this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
-      //console.log(data);
       this.projectDetails = data;
-      this.projectphase = this.projectDetails.phase;
-      //this.projSettingsForm.get('name').setValue(this.projectDetails.name);
-      //this.projCreatedDate= formatDate(this.projectDetails.createdDate, 'yyyy-MM-dd', 'en-US');
-      //this.projCreatedDate= this.datePipe.transform(this.projectDetails.createdDate, 'yyyy-MM-dd');
-      //console.log(this.projCreatedDate);
+      //this.projectphase = this.projectDetails.phase;
       this.projSettingsForm.patchValue({id:this.projectDetails.id,
                                         name:this.projectDetails.name,
                                         description : this.projectDetails.description, 
@@ -59,7 +64,8 @@ export class ProjectSettingsComponent implements OnInit {
                                         codeFreezeDate: this.projectDetails.codeFreezeDate,
                                         createdDate:this.projectDetails.createdDate,
                                         complexity:this.projectDetails.complexity,
-                                        skills:this.projectDetails.skills})
+                                        skills:this.projectDetails.skills,
+                                        releaseId:this.projectDetails.releaseId})                                    
     },(error)=>{
       this.notifier.notify("error","API Error. Showing Mockup Data");
       this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
@@ -73,6 +79,9 @@ export class ProjectSettingsComponent implements OnInit {
         codeFreezeDate: this.projectDetails.codeFreezeDate,
         createdDate:this.projectDetails.createdDate})
     });
+    // setTimeout(() => {
+    //   this.onReleaseSelection(this.projectDetails.releaseId); 
+    // }, 2000);
   }
   else{
     this.pageTitile = "Add New Project";
@@ -89,40 +98,47 @@ export class ProjectSettingsComponent implements OnInit {
     sme: [''],
     owner: [''],
     skills: [''],
-    phasemonth: [''],
-    phaseyear:['2021'],
+    //phasemonth: [''],
+    //phaseyear:['2021'],
+    releaseId:[''],
     complexity:['']
   });
   this.projSettingsForm.controls['createdDate'].disable();
+  this.projSettingsForm.controls['releaseDate'].disable();
   }
+
 
   //Demo purpose only, Data might come from Api calls/service
   public counts = ["Gathering Info","Planning","Design",
   "Development","Testing"];
   public orderStatus = "Planning"
 
-  
+selectedReleaseDetails;
+  onReleaseSelection(param){
+    //this.notifier.notify("success",param);
+    if (param==='0') {
+      this.projSettingsForm.controls['releaseDate'].enable();
+    }else{
+      this.projSettingsForm.controls['releaseDate'].disable();
+      this.selectedReleaseDetails = this.allReleases.filter(d => d.releaseId === parseInt(param));
+      this.projSettingsForm.patchValue({releaseDate:this.selectedReleaseDetails[0].releaseDate});
+  }
+  }
 
   submitForm() {
-    console.warn(this.projSettingsForm.value);
-    var formData: any = new FormData();
-    formData.append('id',this.activeRoute.snapshot.params.id);
-    formData.append('name', this.projSettingsForm.get('name').value);
-    formData.append('description', this.projSettingsForm.get('description').value);
-    formData.append('sme', this.projSettingsForm.get('sme').value);
-    formData.append('owner', this.projSettingsForm.get('owner').value);
-    //console.warn(formData);
+    //console.warn(this.projSettingsForm.value);
     const jsonForm ={
       name:this.projSettingsForm.get('name').value,
       description:this.projSettingsForm.get('description').value,
       sme:this.projSettingsForm.get('sme').value,
       owner:this.projSettingsForm.get('owner').value,
       skills:this.projSettingsForm.get('skills').value,
+      releaseId: parseInt(this.projSettingsForm.get('releaseId').value),
       releaseDate: this.projSettingsForm.get('releaseDate').value,
       codeDropDate: this.projSettingsForm.get('codeDropDate').value,
       codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value,
-      complexity:this.projSettingsForm.get('complexity').value,
-      phase:this.projSettingsForm.get('phasemonth').value + this.projSettingsForm.get('phaseyear').value
+      complexity:this.projSettingsForm.get('complexity').value
+      //,phase:this.selectedReleaseDetails[0].name
     };
     const putjsonForm ={
       id:this.projSettingsForm.get('id').value,
@@ -131,42 +147,43 @@ export class ProjectSettingsComponent implements OnInit {
       sme:this.projSettingsForm.get('sme').value,
       owner:this.projSettingsForm.get('owner').value,
       skills:this.projSettingsForm.get('skills').value,
+      releaseId: parseInt(this.projSettingsForm.get('releaseId').value),
       releaseDate: this.projSettingsForm.get('releaseDate').value,
       codeDropDate: this.projSettingsForm.get('codeDropDate').value,
       codeFreezeDate: this.projSettingsForm.get('codeFreezeDate').value,
-      complexity:this.projSettingsForm.get('complexity').value,
-      phase:this.projSettingsForm.get('phasemonth').value + this.projSettingsForm.get('phaseyear').value
+      complexity:this.projSettingsForm.get('complexity').value
+      //,phase:this.selectedReleaseDetails[0].name
     };
     this.pId=this.activeRoute.snapshot.params.id;
     if(this.pId){
       //this.notifier.notify("error", "add update function");
       this.detailsapi.updateProject(this.pId,putjsonForm).subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
+        (response) => {
+          this.router.navigate(['/projectlist']).then(()=>{
+            // setTimeout(() => {
+            //   window.location.reload();
+            // }, 2000);
+          });
+          this.notifier.notify("success", "Project updated successfully");
+        },
+        (error) => {this.notifier.notify("error", "Something Went Wrong While Updating Project");}
       );
-      this.router.navigate(['/projectlist']).then(()=>{
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      });
-      this.notifier.notify("success", "Project updated successfully");
+      
+      
     }
     else{
     this.detailsapi.addNewProject(jsonForm).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response) => {
+        this.router.navigate(['/projectlist']).then(()=>{
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 2000);
+        });
+        this.notifier.notify("success", "New Project Added Successfully!");
+      },
+      (error) => {this.notifier.notify("error", "Something Went Wrong While Adding New Project");}
     );
-    //console.warn(jsonForm);
-    this.router.navigate(['/projectlist']).then(()=>{
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    });
-    // .then(() => {
-    //   window.location.reload();
-    // });
-    this.notifier.notify("success", "New Project Added Successfully!");
-    //this.notifier.notify("info", "Refreshing the List");
+    
     }
   }
 

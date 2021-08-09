@@ -82,33 +82,32 @@
                 </div>
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
-                        <span class="input-group-text input-titles">Release Date</span>
-                      </div>
-                    <input type="date" formControlName="releaseDate" class="form-control" style="text-align: center;">
-                </div>
-                <div class="input-group form-group" style="width: 90%;">
-                    <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Created Date</span>
                       </div>
                     <input type="date" formControlName="createdDate" class="form-control" style="text-align: center;">
                 </div>
-                <div class="input-group form-group" style="width: 90%;" *ngIf="projectphase==null">
+                <div class="input-group form-group" style="width: 90%;" *ngIf="allReleases">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Release</span>
                       </div>
-                      <select class="form-control" id="phasemonth" style="text-align: center;" formControlName="phasemonth">
-                        <option value="">Month</option>
-                        <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                      <select class="form-control" #release (change)="onReleaseSelection(release.value)" id="releaseId" formControlName="releaseId" style="text-align: center;"> 
+                        <option value="" selected disabled hidden>Select Release</option>
+                        <!-- <option value="0">ADHOC</option> -->
+                        <option *ngFor="let rel of allReleases" value="{{rel.releaseId}}">{{rel.name}}</option>
                     </select>
-                    <input type="number" min="2000" max="2099" step="1" id="phaseyear" formControlName="phaseyear"
-                    class="form-control" style="text-align: center;"/>
                 </div>
-                <div class="input-group form-group" style="width: 90%;" *ngIf="visibility">
+                <div class="input-group form-group" style="width: 90%;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text input-titles">Release Date</span>
+                      </div>
+                    <input type="date" formControlName="releaseDate" class="form-control" style="text-align: center;">
+                </div>
+                <!-- <div class="input-group form-group" style="width: 90%;" *ngIf="visibility">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Release</span>
                       </div>                    
                         <input disabled type="text" class="form-control" style="text-align: center;" [value]="projectphase" placeholder="MonYYYY">
-                </div>
+                </div> -->
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Complexity</span>

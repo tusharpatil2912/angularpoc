@@ -1,30 +1,27 @@
 <!--Project Details-->
 <div>
-    <div style="padding: 10px;">
-        <div class="row">
-            <div class="col-md-9" style="text-align:left;" *ngIf="projectDetails">
-                <br />
-                <h2>{{projectDetails.name}}</h2>
-                <h4>Description : {{projectDetails.description}}</h4>
-                <h4>Owner : {{projectDetails.owner}}</h4>
-                <h4>SME : {{projectDetails.sme}}</h4>
-            </div>
-            <div class="col-md-3" style="text-align:right;">
-              <br />
-              <a class="btn btn-block btn-lg btn-secondary" routerLink="/projectlist"><span class="material-icons">
-                reply
-                </span> Back</a>
-                <br />
-                <button class="btn btn-lg btn-block btn-colors" type="button" data-toggle="collapse"
+  <div style="padding: 10px;">
+    <div class="row">
+      <div class="col-md-9" style="text-align:left;" *ngIf="projectDetails">
+        <br />
+        <h2>{{projectDetails.name}}</h2>
+        <h4>Description : {{projectDetails.description}}</h4>
+        <h4>Owner : {{projectDetails.owner}}</h4>
+        <h4>SME : {{projectDetails.sme}}</h4>
+      </div>
+      <div class="col-md-3" style="text-align:right;">
+        <br />
+        <a class="btn btn-block btn-lg btn-secondary" routerLink="/projectlist"><span class="material-icons">
+            reply
+          </span> Back</a>
+        <br />
+        <!-- <button class="btn btn-lg btn-block btn-colors" type="button" data-toggle="collapse"
                     data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">File
                     Uploader 
                       <mat-icon style="font-size: 25px;transform: translateY(5px);">cloud_upload</mat-icon>
-                    <!-- <img src="https://www.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png"
-                        style="height:40px; width:40px"> -->
                       </button>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-                        <!-- <input type="file" id="file"> -->
                         <div class="row" style="margin-bottom:15px;">
                             <div class="col-md-3">
                               <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
@@ -40,64 +37,163 @@
                             </div>
                           </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div> -->
+      </div>
     </div>
-    <br />
-    <hr />
-    <!--Project Status Bar-->
-    <div class="col-md-12">
-        <div class="container">
-            <span *ngFor="let item of counts;let i = index">
-                <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
-                <span class="circles" [class.active]="orderStatus == item"></span>
-                <span class="bar" *ngIf="(i != counts.length-1)"></span>
-            </span>
-        </div>
+  </div>
+  <br />
+  <hr />
+  <!--Project Status Bar-->
+  <div class="col-md-12">
+    <div class="container">
+      <span *ngFor="let item of counts;let i = index">
+        <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
+        <span class="circles" [class.active]="orderStatus == item"></span>
+        <span class="bar" *ngIf="(i != counts.length-1)"></span>
+      </span>
     </div>
+  </div>
+  <br />
+  <hr />
+  <div class="col-md-12" style="text-align:center;" *ngIf="projectDetails">
+    <h6>Created Date : {{projectDetails.createdDate}} , Code Freeze Date : {{projectDetails.codeFreezeDate}} , Release
+      Date :
+      {{projectDetails.releaseDate}}</h6>
+  </div>
+  <hr />
+  <br />
+  <!--Allocated Resourse-->
+  <div>
+    <h5>Allocated Resourses</h5>
     <br />
-    <hr />
-    <div class="col-md-12" style="text-align:center;" *ngIf="projectDetails">
-        <h6>Created Date : {{projectDetails.createdDate}} , Code Freeze Date : {{projectDetails.codeFreezeDate}} , Release Date :
-            {{projectDetails.releaseDate}}</h6>
-    </div>
-    <hr />
-    <br />
-    <!--Allocated Resourse-->
     <div>
-        <h5>Allocated Resourses</h5>
-        <br />
-        <div>
-            <ag-grid-angular style="width: 100%; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
-                [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
-            </ag-grid-angular>
-        </div>
-
+      <ag-grid-angular style="width: 100%; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
+        [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
+      </ag-grid-angular>
     </div>
-    <hr />
-    <!--Document Checklist-->
-    <!-- <div>
-        <h5>Checklist</h5>
-        <ul>
-            <li>
-                <h6>AFD <span class="badge badge-success">O</span></h6>
-            </li>
-            <li>
-                <h6>TSD <span class="badge badge-danger">X</span></h6>
-            </li>
-            <li>
-                <h6>Runbook <span class="badge badge-success">O</span></h6>
-            </li>
-            <li>
-                <h6>DDL/DML <span class="badge badge-success">O</span></h6>
-            </li>
-            <li>
-                <h6>Github <span class="badge badge-success">O</span></h6>
-            </li>
-        </ul>
-    </div> -->
-    <table class="table table-striped">
+
+  </div>
+  <hr />
+  <!--Document Checklist-->
+  <h5>Documents</h5>
+  <hr />
+  <div class="row" style="margin-top: 1.5rem;" *ngIf="progress > 0">
+    <div class="col-md-12">
+      <div class="input-group-text" *ngIf="progress > 0" style="margin-bottom: 15px;">
+        <span *ngIf="progress > 0">Upload Progress :</span>
+        <span class="upload" *ngIf="progress > 0">
+          {{progress}}%
+        </span>
+        <span class="upload" *ngIf="message">
+          {{message}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 1.5rem;" *ngIf="projectDetails">
+    <div class="col-md-6">
+      <div class="input-group form-group" style="width: 100%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-titles">AFD</span>
+        </div>
+        <span class="form-control no-file" *ngIf="projectDetails.afd === null">No File Uploaded</span>
+        <span class="form-control file-available" *ngIf="projectDetails.afd">{{projectDetails.afd}}</span>
+        <input type="file" #afdFile class="form-control" style="text-align: center;"
+          (change)="uploadFile(afdFile.files,'afd')" style="display:none;">
+        <button class="btn btn-primary btn-colors" (click)="afdFile.click()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
+        <button class="btn btn-primary btn-colors" [disabled]="projectDetails.afd === null"
+          (click)="downloadFile('afd')">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </div>
+      <div class="input-group form-group" style="width: 100%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-titles">TSD</span>
+        </div>
+        <span class="form-control no-file" *ngIf="projectDetails.tsd === null">No File Uploaded</span>
+        <span class="form-control file-available" *ngIf="projectDetails.tsd">{{projectDetails.tsd}}</span>
+        <input type="file" #tsdFile class="form-control" style="text-align: center;"
+          (change)="uploadFile(tsdFile.files,'tsd')" style="display:none;">
+        <button class="btn btn-primary btn-colors" (click)="tsdFile.click()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
+        <button class="btn btn-primary btn-colors" [disabled]="projectDetails.tsd === null"
+          (click)="downloadFile('tsd')">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </div>
+      <div class="input-group form-group" style="width: 100%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-titles">Runbook</span>
+        </div>
+        <span class="form-control no-file" *ngIf="projectDetails.runbook === null">No File Uploaded</span>
+        <span class="form-control file-available" *ngIf="projectDetails.runbook">{{projectDetails.runbook}}</span>
+        <input type="file" #runbookFile class="form-control" style="text-align: center;"
+          (change)="uploadFile(runbookFile.files,'runbook')" style="display:none;">
+        <button class="btn btn-primary btn-colors" (click)="runbookFile.click()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
+        <button class="btn btn-primary btn-colors" [disabled]="projectDetails.runbook === null"
+          (click)="downloadFile('runbook')">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group form-group" style="width: 100%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-titles">UnitTest Cases</span>
+        </div>
+        <span class="form-control no-file" *ngIf="projectDetails.unitTestDoc === null">No File Uploaded</span>
+        <span class="form-control file-available"
+          *ngIf="projectDetails.unitTestDoc">{{projectDetails.unitTestDoc}}</span>
+        <input type="file" #utcFile class="form-control" style="text-align: center;"
+          (change)="uploadFile(utcFile.files,'unittest')" style="display:none;">
+        <button class="btn btn-primary btn-colors" (click)="utcFile.click()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
+        <button class="btn btn-primary btn-colors" [disabled]="projectDetails.unitTestDoc === null"
+          (click)="downloadFile('unittest')">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </div>
+      <div class="input-group form-group" style="width: 100%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-titles">DDL/DML Scripts</span>
+        </div>
+        <span class="form-control no-file" *ngIf="projectDetails.scripts === null">No File Uploaded</span>
+        <span class="form-control file-available" *ngIf="projectDetails.scripts">{{projectDetails.scripts}}</span>
+        <input type="file" #scriptsFile class="form-control" style="text-align: center;"
+          (change)="uploadFile(scriptsFile.files,'scripts')" style="display:none;">
+        <button class="btn btn-primary btn-colors" (click)="scriptsFile.click()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
+        <button class="btn btn-primary btn-colors" [disabled]="projectDetails.scripts === null"
+          (click)="downloadFile('scripts')">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </div>
+      <div class="input-group form-group" style="width: 100%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-titles">Github</span>
+        </div>
+        <span class="form-control no-file" *ngIf="projectDetails.github === null">No Data Available</span>
+        <span class="form-control file-available" *ngIf="projectDetails.github">{{projectDetails.github}}</span>
+        <!-- <input type="file" #changeTkt class="form-control" style="text-align: center;" (change)="uploadFile(changeTkt.files,'changetkt')" style="display:none;">
+            <button class="btn btn-primary btn-colors" (click)="changeTkt.click()"><mat-icon>file_upload</mat-icon></button>
+            <button class="btn btn-primary btn-colors" [disabled]="projectDetails.changeTicket === null" (click)="downloadFile('changetkt')"><mat-icon>file_download</mat-icon></button> -->
+        <a href="https://github.voya.net/" target="_blank" class="btn btn-primary btn-colors"> Github<mat-icon style="font-size: small;">open_in_new</mat-icon></a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- <table class="table table-striped">
         <thead>
             <tr>
               <th scope="col" style="width: 50px;">#</th>
@@ -144,5 +240,5 @@
                 <td><a href="#" class="btn btn-colors btn-block">View</a></td>
               </tr>
           </tbody>
-    </table>      
+    </table>       -->
 </div>

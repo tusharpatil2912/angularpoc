@@ -62,4 +62,9 @@ export class ProjectDetailsService {
   public downloadReleaseFile(filetype,id){
     return this.httpClient.get(`${this.rootURL}/Release/filedownload/${filetype}/${id}`,{responseType:"blob"});
   }
+
+  public downloadProjectFile(filetype,id){
+    return this.httpClient.get(`${this.rootURL}/Project/filedownload/${filetype}/${id}`,{responseType:"blob"});
+  }
+
 }

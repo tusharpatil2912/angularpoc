@@ -4,6 +4,8 @@ import { ProjectDetailsService } from "../../services/project-details.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpEventType, HttpClient } from '@angular/common/http';
 import { NotifierService } from "angular-notifier";
+import { saveAs } from "file-saver";
+import { environment } from "../../../environments/environment";
 
 
 @Component({
@@ -16,6 +18,7 @@ export class ProjectDetailsComponent implements OnInit {
   private gridApi;
   projectDetails:any;
   projectId:number;
+  readonly rootURL = environment.rootURL;
 
   constructor(private detailsapi: ProjectDetailsService, 
               private router: Router,
@@ -24,7 +27,7 @@ export class ProjectDetailsComponent implements OnInit {
               private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getResourceGridData();
+    this.getProjectData();
   }
 
   projectName = 'MyApp';
@@ -62,33 +65,34 @@ rowData = [
 
 //file upload code
 
-public progress: number;
-public message: string;
-@Output() public onUploadFinished = new EventEmitter();
+// public progress: number;
+// public message: string;
+// @Output() public onUploadFinished = new EventEmitter();
 
-public uploadFile = (files) => {
-  if (files.length === 0) {
-    return;
-  }
-  let fileToUpload = <File>files[0];
-  const formData = new FormData();
-  formData.append('files', fileToUpload, fileToUpload.name);
-  this.http.post('http://localhost/latestapi/api/FileUpload', formData, {reportProgress: true, observe: 'events',responseType: 'text'})
-    .subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress)
-        this.progress = Math.round(100 * event.loaded / event.total);
-      else if (event.type === HttpEventType.Response) {
-        this.message = 'Upload success.';
-        this.onUploadFinished.emit(event.body);
-      }
-    });
-}
+// public uploadFile = (files) => {
+//   if (files.length === 0) {
+//     return;
+//   }
+//   let fileToUpload = <File>files[0];
+//   const formData = new FormData();
+//   formData.append('files', fileToUpload, fileToUpload.name);
+//   this.http.post('http://localhost/latestapi/api/FileUpload', formData, {reportProgress: true, observe: 'events',responseType: 'text'})
+//     .subscribe(event => {
+//       if (event.type === HttpEventType.UploadProgress)
+//         this.progress = Math.round(100 * event.loaded / event.total);
+//       else if (event.type === HttpEventType.Response) {
+//         this.message = 'Upload success.';
+//         this.onUploadFinished.emit(event.body);
+//       }
+//     });
+// }
+
 onGridReady(params) {
   this.gridApi = params.api;
   this.gridApi.sizeColumnsToFit();
 }
 
-getResourceGridData(){
+getProjectData(){
   this.projectId=this.activeRoute.snapshot.params.id;
   this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
     //console.log(data);
@@ -98,5 +102,59 @@ getResourceGridData(){
     this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
   });
 }
+
+///file upload and download
+
+public progress: number;
+public message: string;
+fileNameToBeSaved;
+@Output() public onUploadFinished = new EventEmitter();
+
+public uploadFile = (files,filetype) => {
+  if (files.length === 0) {
+    return;
+  }
+  let fileToUpload = <File>files[0];
+  const formData = new FormData();
+  formData.append('files', fileToUpload, fileToUpload.name);
+  this.http.post(`${this.rootURL}/Project/fileupload/${filetype}/${this.projectDetails.id}`, formData, {reportProgress: true, observe: 'events',responseType: 'text'})
+    .subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress)
+        this.progress = Math.round(100 * event.loaded / event.total);
+      else if (event.type === HttpEventType.Response) {
+        this.message = 'Upload success.';
+        this.onUploadFinished.emit(event.body);
+        setTimeout(() => {
+          this.getProjectData();
+          this.message=null;
+          this.progress=null;
+        }, 1000);        
+      }
+    });
+  }
+  public downloadFile=(filetype)=>{
+    if (filetype==='afd') {
+      this.fileNameToBeSaved=this.projectDetails.afd;
+    }else if (filetype==='tsd'){
+      this.fileNameToBeSaved=this.projectDetails.tsd;
+    }
+    else if (filetype==='runbook'){
+      this.fileNameToBeSaved=this.projectDetails.runbook;
+    }
+    else if (filetype==='unittest'){
+      this.fileNameToBeSaved=this.projectDetails.unitTestDoc;
+    }
+    else if (filetype==='scripts'){
+      this.fileNameToBeSaved=this.projectDetails.scripts;
+    }else {
+      this.fileNameToBeSaved="file_not_found.txt";
+    }
+      this.notifier.notify('success',"Downloading File...");
+      this.detailsapi.downloadProjectFile(filetype,this.projectDetails.id).subscribe((data)=>{
+        saveAs(new Blob([data],{type: data.type}), this.fileNameToBeSaved);
+      },(error)=>{
+        this.notifier.notify('error',"Something went wrong while downloading file...");
+      });
+  }
 
 }
