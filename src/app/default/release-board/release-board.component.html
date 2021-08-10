@@ -17,52 +17,73 @@
 <hr />
 
 <!--Release Details and Documents-->
-<span id="selectedRows">
+<span id="selectedRows" *ngIf="selectedRowData">
 <div class="releaseDetails" *ngIf='rowSelection' style="margin-top: 1.5rem;">
     <div class="row" style="margin-top: 1.5rem;">
         <div class="col-md-6">
             <div class="input-group form-group" style="width: 100%;">
-                <h5>Release Name : {{Name}}</h5>
+                <h5>Release Name : {{selectedRowData.name}}</h5>
             </div>
             <div class="input-group form-group" style="width: 100%;">
-                <h5>Release Details : {{Details}}</h5>
+                <h5>Release Details : {{selectedRowData.details}}</h5>
             </div>
             <div class="input-group form-group" style="width: 100%;">
-                <h5>Release Date : {{ReleaseDate}}</h5>
+                <h5>Release Date : {{selectedRowData.releaseDate}}</h5>
             </div>
             <div class="input-group form-group">
-                <h5>Release Status : {{Status | uppercase}}</h5>
+                <h5>Release Status : {{selectedRowData.status | uppercase}}</h5>
             </div>
         </div>
         <hr />
         <div class="col-md-6">
+            <div class="input-group-text" *ngIf="progress > 0" style="margin-bottom: 15px;">
+                <span *ngIf="progress > 0">Upload Progress :</span>
+                <span class="upload" *ngIf="progress > 0">
+                    {{progress}}%
+                </span>
+                <span class="upload" *ngIf="message">
+                    {{message}}
+                </span>
+            </div>
             <div class="input-group form-group" style="width: 100%;">
                 <div class="input-group-prepend">
                     <span class="input-group-text input-titles">Implementation Plan</span>
                 </div>
-                <input type="file" class="form-control" style="text-align: center;">
-                <button class="btn btn-primary btn-colors">Download</button>
+                <span class="form-control no-file" *ngIf="selectedRowData.implementationPlan === null">No File Uploaded</span>
+                <span class="form-control file-available" *ngIf="selectedRowData.implementationPlan">{{selectedRowData.implementationPlan}}</span>
+                <input type="file" #implFile class="form-control" style="text-align: center;" (change)="uploadFile(implFile.files,'implplan')" style="display:none;">
+                <button class="btn btn-primary btn-colors" (click)="implFile.click()"><mat-icon>file_upload</mat-icon></button>
+                <button class="btn btn-primary btn-colors" [disabled]="selectedRowData.implementationPlan === null" (click)="downloadFile('implplan')"><mat-icon>file_download</mat-icon></button>
             </div>
             <div class="input-group form-group" style="width: 100%;">
                 <div class="input-group-prepend">
                     <span class="input-group-text input-titles">Checklist</span>
                 </div>
-                <input type="file" class="form-control" style="text-align: center;">
-                <button class="btn btn-primary btn-colors">Download</button>
+                <span class="form-control no-file" *ngIf="selectedRowData.checklist === null">No File Uploaded</span>
+                <span class="form-control file-available" *ngIf="selectedRowData.checklist">{{selectedRowData.checklist}}</span>
+                <input type="file" #chkList class="form-control" style="text-align: center;" (change)="uploadFile(chkList.files,'chklist')" style="display:none;">
+                <button class="btn btn-primary btn-colors" (click)="chkList.click()"><mat-icon>file_upload</mat-icon></button>
+                <button class="btn btn-primary btn-colors" [disabled]="selectedRowData.checklist === null" (click)="downloadFile('chklist')"><mat-icon>file_download</mat-icon></button>
             </div>
             <div class="input-group form-group" style="width: 100%;">
                 <div class="input-group-prepend">
                     <span class="input-group-text input-titles">Validation Scripts</span>
                 </div>
-                <input type="file" class="form-control" style="text-align: center;">
-                <button class="btn btn-primary btn-colors">Download</button>
+                <span class="form-control no-file" *ngIf="selectedRowData.validationTasks === null">No File Uploaded</span>
+                <span class="form-control file-available" *ngIf="selectedRowData.validationTasks">{{selectedRowData.validationTasks}}</span>
+                <input type="file" #vldTasks class="form-control" style="text-align: center;" (change)="uploadFile(vldTasks.files,'vldtask')" style="display:none;">
+                <button class="btn btn-primary btn-colors" (click)="vldTasks.click()"><mat-icon>file_upload</mat-icon></button>
+                <button class="btn btn-primary btn-colors" [disabled]="selectedRowData.validationTasks === null" (click)="downloadFile('vldtask')"><mat-icon>file_download</mat-icon></button>
             </div>
             <div class="input-group form-group" style="width: 100%;">
                 <div class="input-group-prepend">
                     <span class="input-group-text input-titles">Change Tickets</span>
                 </div>
-                <input type="file" class="form-control" style="text-align: center;">
-                <button class="btn btn-primary btn-colors">Download</button>
+                <span class="form-control no-file" *ngIf="selectedRowData.changeTicket === null">No File Uploaded</span>
+                <span class="form-control file-available" *ngIf="selectedRowData.changeTicket">{{selectedRowData.changeTicket}}</span>
+                <input type="file" #changeTkt class="form-control" style="text-align: center;" (change)="uploadFile(changeTkt.files,'changetkt')" style="display:none;">
+                <button class="btn btn-primary btn-colors" (click)="changeTkt.click()"><mat-icon>file_upload</mat-icon></button>
+                <button class="btn btn-primary btn-colors" [disabled]="selectedRowData.changeTicket === null" (click)="downloadFile('changetkt')"><mat-icon>file_download</mat-icon></button>
             </div>
         </div>
     </div>

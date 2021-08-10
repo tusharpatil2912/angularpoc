@@ -4,6 +4,7 @@ import { AgDetailsButtonComponent } from "../agCustomCells/ag-details-button/ag-
 import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/ag-settings-button.component";
 import { AgSwimlanesButtonComponent } from "../agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component";
 import { NotifierService } from "angular-notifier";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -16,9 +17,19 @@ export class ProjectListComponent implements OnInit {
   private gridApi;
   mockupprojectList=[{"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"},{"id":2,"name":"My Second Project","description":"Desc 2","owner":"Owner 2","sme":"Sme 2","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-27"},{"id":3,"name":"My Third Project","description":"Desc 3","owner":"Owner 3","sme":"Sme 3","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"},{"id":4,"name":"My Fourth Project","description":"Desc 4","owner":"Owner 4","sme":"Sme 4","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"}];
 
-  constructor(private detailsapi: ProjectDetailsService,private notifier: NotifierService,) { }
+  constructor(private detailsapi: ProjectDetailsService,
+    private notifier: NotifierService,
+    private router: Router) { 
+    }
 
   ngOnInit(): void {
+    this.getProjectList();
+    setTimeout(() => {
+      this.getProjectList();
+        }, 2000);
+  }
+
+  getProjectList(){
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
       this.projectList = data;

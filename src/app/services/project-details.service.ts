@@ -49,4 +49,22 @@ export class ProjectDetailsService {
     // console.warn(project);
     return this.httpClient.post<any>(`${this.rootURL}/Release`, release);
   }
+
+  public updateRelease(id,release) {
+    // console.warn(project);
+    return this.httpClient.put<any>(`${this.rootURL}/Release/${id}`, release);
+  }
+
+  // public uploadReleaseFile(formadata, id, filetype){
+  //   return this.httpClient.post<any>(`${this.rootURL}/Release/fileupload/${filetype}/${id}`, formadata, {reportProgress: true, observe: 'events',responseType: 'text'});
+  // }
+
+  public downloadReleaseFile(filetype,id){
+    return this.httpClient.get(`${this.rootURL}/Release/filedownload/${filetype}/${id}`,{responseType:"blob"});
+  }
+
+  public downloadProjectFile(filetype,id){
+    return this.httpClient.get(`${this.rootURL}/Project/filedownload/${filetype}/${id}`,{responseType:"blob"});
+  }
+
 }

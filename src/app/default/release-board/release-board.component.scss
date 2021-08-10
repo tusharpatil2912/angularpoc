@@ -4,3 +4,26 @@
   .btn-colors{
     background-color: blueviolet;color: white;
   }
+
+.no-file{
+  border-left-color: red;
+  border-left-width: 7px;
+  height: min-content;
+  min-height: 45px;
+  overflow: hidden;
+}
+
+.file-available{
+  border-left-color: green;
+  border-left-width: 7px;
+  height: min-content; 
+  min-height: 45px;
+  overflow: hidden;
+}
+
+.upload{
+  font-weight:bold;
+  color:#28a745;
+  margin-left: 15px;
+  line-height: 36px;
+}
