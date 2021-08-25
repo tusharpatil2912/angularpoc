@@ -22,8 +22,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from "../shared/shared.module";
 import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ProgressBarModule } from 'angular-progress-bar';
 
-import { DashboardService } from "../services/dashboard.service";
+
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectSettingsComponent } from './project-settings/project-settings.component';
 import { SwimLanesComponent } from './swim-lanes/swim-lanes.component';
@@ -87,10 +89,10 @@ import { AgReleasesettingsButtonComponent } from './agCustomCells/ag-releasesett
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
-    HttpClientModule,IntegralUIModule,FormsModule
+    HttpClientModule,IntegralUIModule,FormsModule,NgxChartsModule,ProgressBarModule
   ],
   providers:[
-    DashboardService
+   
   ]
 })
 export class DefaultModule { }
