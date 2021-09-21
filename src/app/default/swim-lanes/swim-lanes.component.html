@@ -41,7 +41,7 @@
     <hr style="background-color: #3f51b5;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
       <a [routerLink]="['/taskdetails',item.taskId]">
-        <div *ngIf="item.taskStatus==='To Do'" style="border: solid;border-width: 1px; border-inline-start-color: red; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
+        <div *ngIf="item.taskStatus==='todo'" style="border: solid;border-width: 1px; border-inline-start-color: red; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
         <span style="font-size: larger;"> {{item.taskName}}</span>
     </div></a>
     </div>
@@ -51,7 +51,7 @@
     <hr style="background-color: #3f51b5;"/>
     <div style="background-color: white;" *ngFor="let item of projectTaskDetails">
       <a [routerLink]="['/taskdetails',item.taskId]">
-      <div *ngIf="item.taskStatus==='in progress'" style="border: solid;border-width: 1px; border-inline-start-color: blue; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
+      <div *ngIf="item.taskStatus==='inprogress'" style="border: solid;border-width: 1px; border-inline-start-color: blue; border-inline-start-width: 8px;margin-bottom: 10px;border-radius: 5px;">
         <span style="font-size: larger;text-align: start;"> {{item.taskName}}</span>
     </div></a>
     </div>

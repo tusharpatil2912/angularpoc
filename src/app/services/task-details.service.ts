@@ -35,4 +35,7 @@ export class TaskDetailsService {
     // console.warn(project);
     return this.httpClient.put<any>(`${this.rootURL}/projecttask/${id}`, task);
   }
+  public downloadTaskFile(id){
+    return this.httpClient.get(`${this.rootURL}/projecttask/filedownload/${id}`,{responseType:"blob"});
+  }
 }
