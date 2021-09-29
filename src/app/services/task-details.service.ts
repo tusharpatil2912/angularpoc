@@ -20,6 +20,10 @@ export class TaskDetailsService {
     return this.httpClient.get(`${this.rootURL}/projecttask/taskid/${id}`);
   }
 
+  public getTaskByResourceId(id){
+    return this.httpClient.get(`${this.rootURL}/projecttask/resourceid/${id}`);
+  }
+
   public getTasksList(){
     return this.httpClient.get(`${this.rootURL}/projecttask`);
   }

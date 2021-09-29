@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { TaskDetailsService } from "../../services/task-details.service";
 import { ProjectDetailsService } from "../../services/project-details.service";
+import { UserAuthService } from "../../services/user-auth.service";
 import { MilestoneService } from "../../services/milestone.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpEventType, HttpClient } from '@angular/common/http';
@@ -30,6 +31,7 @@ export class TasksettingsComponent implements OnInit {
   taskId: number;
   tId: number;
   reviewNeeded=false;
+  resourceList;
 
 
   constructor(
@@ -40,7 +42,8 @@ export class TasksettingsComponent implements OnInit {
     private notifier: NotifierService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private userApi: UserAuthService) { }
     
   ngOnInit(): void {
 
@@ -64,7 +67,8 @@ export class TasksettingsComponent implements OnInit {
       taskETC: [''],
       documentName: [''],
       reviewFlag:[''],
-      reviewComments:['']
+      reviewComments:[''],
+      resourceName:['']
     });
     this.refreshAllData();
   }
@@ -80,9 +84,9 @@ export class TasksettingsComponent implements OnInit {
   ];
 
   rowData = [
-    { resourceId: '1', name: 'rishi' },
-    { resourceId: '2', name: 'tushar' },
-    { resourceId: '3', name: 'chethan' }
+    { resourceId: '1', name: 'Tushar Patil' },
+    { resourceId: '2', name: 'Rishi PJ' },
+    { resourceId: '6', name: 'Sunil B' }
   ];
 
   onGridReady(params) {
@@ -116,6 +120,11 @@ export class TasksettingsComponent implements OnInit {
       console.log("failed to load projects list");
     });
 
+    this.userApi.getUserstList().subscribe((data) => {
+      this.resourceList = data;
+    }, (error) => {
+      console.log("failed to load resource list");
+    });
     this.taskId = this.activeRoute.snapshot.params.id;
     if (this.taskId) {
       this.pageTitile = "Task Settings";
@@ -124,6 +133,7 @@ export class TasksettingsComponent implements OnInit {
       this.detailsapi.getTaskById(this.taskId).subscribe((data) => {
         this.taskDetail = data;
         this.taskSettingsForm.patchValue({
+          taskId: this.taskId,
           projectId: this.taskDetail.projectId,
           resourceId: this.taskDetail.resourceId,
           taskName: this.taskDetail.taskName,
@@ -140,8 +150,9 @@ export class TasksettingsComponent implements OnInit {
           taskWeightage: this.taskDetail.taskWeightage,
           taskETA: this.taskDetail.taskETA,
           taskETC: this.taskDetail.taskETC,
-          reviewFlag: this.taskDetail.reviewFlag,
-          reviewComments: this.taskDetail.reviewComments
+          reviewFlag: Boolean(this.taskDetail.reviewFlag=="true"),
+          reviewComments: this.taskDetail.reviewComments,
+          resourceName:this.taskDetail.resourceName
         })
         this.getMilestoneList();
         this.reviewCheck();
@@ -226,20 +237,41 @@ public uploadFile = (files,filetype) => {
       taskWeightage: this.taskSettingsForm.get('taskWeightage').value,
       taskETA: this.taskSettingsForm.get('taskETA').value,
       taskETC: this.taskSettingsForm.get('taskETC').value,
-      reviewFlag: this.taskSettingsForm.get('reviewFlag').value,
+      reviewFlag: this.taskSettingsForm.get('reviewFlag').value+"",
+      reviewComments: this.taskSettingsForm.get('reviewComments').value
+    };
+    const updateJsonForm ={
+      taskId : parseInt(this.activeRoute.snapshot.params.id),
+      projectId : parseInt(this.taskSettingsForm.get('projectId').value),
+      resourceId : parseInt(this.taskSettingsForm.get('resourceId').value),
+      taskName: this.taskSettingsForm.get('taskName').value,
+      subTaskName: this.taskSettingsForm.get('subTaskName').value,
+      taskSME: this.taskSettingsForm.get('taskSME').value,
+      taskOwner: this.taskSettingsForm.get('taskOwner').value,
+      taskSkills: this.taskSettingsForm.get('taskSkills').value,
+      taskStatus: this.taskSettingsForm.get('taskStatus').value,
+      taskDetails: this.taskSettingsForm.get('taskDetails').value,
+      empId: this.taskSettingsForm.get('empId').value,
+      //taskCreatedDate: this.taskSettingsForm.get('taskCreatedDate').value,
+      //taskCompletedDate: this.taskSettingsForm.get('taskCompletedDate').value,
+      milestoneId: this.taskSettingsForm.get('milestoneId').value,
+      taskWeightage: this.taskSettingsForm.get('taskWeightage').value,
+      taskETA: this.taskSettingsForm.get('taskETA').value,
+      taskETC: this.taskSettingsForm.get('taskETC').value,
+      reviewFlag: this.taskSettingsForm.get('reviewFlag').value+"",
       reviewComments: this.taskSettingsForm.get('reviewComments').value
     };
     this.tId = this.activeRoute.snapshot.params.id;
     if(this.tId){
-      // this.detailsapi.updateProject(this.pId,putjsonForm).subscribe(
-      //   (response) => {
-      //     this.router.navigate(['/projectlist']).then(()=>{
-      //     });
-      //     this.notifier.notify("success", "Project updated successfully");
-      //   },
-      //   (error) => {this.notifier.notify("error", "Something Went Wrong While Updating Project");}
-      // );  
-      console.warn(this.taskSettingsForm.value);   
+      this.detailsapi.updateTask(this.tId,updateJsonForm).subscribe(
+        (response) => {
+          this.router.navigate(['/task']).then(()=>{
+          });
+          this.notifier.notify("success", "Task updated successfully");
+        },
+        (error) => {this.notifier.notify("error", "Something Went Wrong While Updating the Task");}
+      );  
+      //console.warn(this.taskSettingsForm.value);   
     }
     else{
     this.detailsapi.addNewTask(jsonForm).subscribe(

@@ -49,20 +49,21 @@ export class ProjectDetailsComponent implements OnInit {
   ]
 
   columnDefs = [
-    { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, sortable: true, resizable: true, filter: true },
-    { headerName:'Resourse Name',field: 'name', width: 500,minWidth: 80, sortable: true,resizable: true, filter: true },
-    { headerName:'# of Projects',field: 'project', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
-    { headerName:'# of Tasks',field: 'tasks', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
-    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,minWidth: 80,  sortable: true, resizable: true, filter: true},
-    { headerName:'Remove', field: 'remove', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true}
+    { headerName:'ID',field: 'resourceId', maxWidth: 80,minWidth: 80, sortable: true, resizable: true, filter: true },
+    { headerName:'Resourse Name',field: 'resourceName', width: 450,minWidth: 80, sortable: true,resizable: true, filter: true },
+    { headerName:'Designation',field: 'designation',valueFormatter: this.stringFormatter, width: 200,minWidth: 100, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Projects',field: 'noOfProjects', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasksAssigned', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'noOfTasksOpen',width: 150,minWidth: 80,  sortable: true, resizable: true, filter: true}
 ];
 
-rowData = [
-  {id:'1',name:'rishi',project:'3',tasks:'5',opentasks:'4',remove:'Remove'},
-  {id:'2',name:'tushar',project:'4',tasks:'8',opentasks:'2',remove:'Remove'},
-  {id:'3',name:'chethan',project:'2',tasks:'7',opentasks:'3',remove:'Remove'}
-];
+rowData;
 
+stringFormatter(params) {
+  var fruit = params.value;
+  var firstChar = fruit.slice(0, 1).toUpperCase();
+  return firstChar + fruit.slice(1);
+}
 //file upload code
 
 // public progress: number;
@@ -100,6 +101,18 @@ getProjectData(){
   },(error)=>{
     this.notifier.notify("error","API Error. Showing Mockup Data");
     this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
+  });
+
+  this.detailsapi.getallocatedResourceList(this.projectId).subscribe((data)=>{
+    //console.log(data);
+    this.rowData = data;
+  },(error)=>{
+    this.notifier.notify("error","API Error. Showing Mockup Data");
+    this.rowData=[
+      {resourceId:'1',resourceName:'rishi',noOfProjects:'3',tasksAssigned:'5',noOfTasksOpen:'4'},
+      {resourceId:'2',resourceName:'tushar',noOfProjects:'4',tasksAssigned:'8',noOfTasksOpen:'2'},
+      {resourceId:'3',resourceName:'chethan',noOfProjects:'2',tasksAssigned:'7',noOfTasksOpen:'3'}
+    ];;
   });
 }
 

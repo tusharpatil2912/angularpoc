@@ -44,14 +44,17 @@
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">SME name</span>
           </div>
-          <input type="text" formControlName="taskSME" class="form-control" placeholder="Enter SME name" required>
+          <input list="usersList" type="text" formControlName="taskSME" class="form-control" placeholder="Enter SME name" required>
+          <datalist id="usersList" *ngIf="resourceList">
+            <option *ngFor="let rcs of resourceList" value="{{rcs.resourceName}}">
+          </datalist>
         </div>
 
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Owner Name</span>
           </div>
-          <input type="text" formControlName="taskOwner" class="form-control" placeholder="Enter Owner Name" required>
+          <input list="usersList" type="text" formControlName="taskOwner" class="form-control" placeholder="Enter Owner Name" required>
         </div>
 
 
@@ -72,7 +75,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Add Description</span>
           </div>
-          <textarea class="form-control" formControlName="taskDetails" id="exampleFormControlTextarea1" rows="3"
+          <textarea class="form-control" formControlName="taskDetails" rows="3"
             placeholder="Enter Description" required></textarea>
         </div>
         <!-- <div class="form-group">
@@ -172,7 +175,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Add Comment</span>
           </div>
-          <textarea class="form-control" formControlName="reviewComments" id="exampleFormControlTextarea1" rows="3"
+          <textarea class="form-control" formControlName="reviewComments" rows="3"
             placeholder="Add Review Comments"></textarea>
         </div>
 
@@ -218,14 +221,15 @@
         <div class="input-group-prepend">
           <span class="input-group-text input-title">Assigned Resource Name</span>
         </div>
-        <input type="text" formControlName="resourceId" class="form-control" placeholder="Assigned Resource Name"
+        <input type="text" formControlName="resourceName" class="form-control" placeholder="Assigned Resource Name"
           required>
       </div>
     </form>
     <h4>Assign Different Resource:</h4>
+    <br />
   </div>
   <div>
-    <ag-grid-angular style="width: 100%; height: 550px;" class="ag-theme-alpine" [rowData]="rowData"
+    <ag-grid-angular style="width: 100%; height: 300px;" class="ag-theme-alpine" [rowData]="rowData"
       [columnDefs]="columnDefs" [rowHeight]="55" (gridReady)="onGridReady($event)" rowSelection="single"
       (selectionChanged)="onResourceSelection($event)">
     </ag-grid-angular>
