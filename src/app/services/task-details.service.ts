@@ -20,6 +20,10 @@ export class TaskDetailsService {
     return this.httpClient.get(`${this.rootURL}/projecttask/taskid/${id}`);
   }
 
+  public getTaskByResourceId(id){
+    return this.httpClient.get(`${this.rootURL}/projecttask/resourceid/${id}`);
+  }
+
   public getTasksList(){
     return this.httpClient.get(`${this.rootURL}/projecttask`);
   }
@@ -34,5 +38,8 @@ export class TaskDetailsService {
   public updateTask(id,task) {
     // console.warn(project);
     return this.httpClient.put<any>(`${this.rootURL}/projecttask/${id}`, task);
+  }
+  public downloadTaskFile(id){
+    return this.httpClient.get(`${this.rootURL}/projecttask/filedownload/${id}`,{responseType:"blob"});
   }
 }

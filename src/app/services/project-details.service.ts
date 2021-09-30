@@ -21,6 +21,10 @@ export class ProjectDetailsService {
     return this.httpClient.get(`${this.rootURL}/project`);
   }
 
+  public getallocatedResourceList(projId){
+    return this.httpClient.get(`${this.rootURL}/Resource/byProjectId/${projId}`);
+  }
+
   public addNewProject(project) {
     // const headers = new HttpHeaders();
     // headers.set('Content-Type', 'application/json; charset=utf-8');

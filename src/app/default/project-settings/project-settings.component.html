@@ -3,7 +3,7 @@
     <div class="row">
         <br/>
         <h3 class="col-md-9">{{pageTitile}}</h3>
-        <a class="btn btn-lg btn-secondary btn-block col-md-3" routerLink="/projectlist"><span class="material-icons">
+        <a class="btn btn-lg btn-secondary btn-block col-md-3" (click)="goBack()"><span class="material-icons">
             reply
             </span> Back</a>
     </div>
@@ -37,13 +37,16 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Owner Name</span>
                       </div>
-                    <input type="text" formControlName="owner" class="form-control" placeholder="Owner Name" required>
+                    <input list="usersList" type="text" formControlName="owner" class="form-control" placeholder="Owner Name" required>
+                    <datalist id="usersList" *ngIf="resourceList">
+                        <option *ngFor="let rcs of resourceList" value="{{rcs.resourceName}}">
+                      </datalist>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">SME Name</span>
                       </div>
-                    <input type="text" formControlName="sme" class="form-control" placeholder="SME Name" required>
+                    <input list="usersList" type="text" formControlName="sme" class="form-control" placeholder="SME Name" required>
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="skillrequired" formControlName="skills">

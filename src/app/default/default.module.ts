@@ -44,6 +44,7 @@ import { ReleaseSettingsComponent } from './release-settings/release-settings.co
 import { ReleaseCreateComponent } from './release-create/release-create.component';
 import { ReleaseBoardComponent } from './release-board/release-board.component';
 import { AgReleasesettingsButtonComponent } from './agCustomCells/ag-releasesettings-button/ag-releasesettings-button.component';
+import { AgAddTaskButtonComponent } from './agCustomCells/ag-add-task-button/ag-add-task-button.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AgReleasesettingsButtonComponent } from './agCustomCells/ag-releasesett
     ReleaseSettingsComponent,
     ReleaseCreateComponent,
     ReleaseBoardComponent,
-    AgReleasesettingsButtonComponent
+    AgReleasesettingsButtonComponent,
+    AgAddTaskButtonComponent
     
   ],
   imports: [

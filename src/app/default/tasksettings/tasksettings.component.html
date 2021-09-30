@@ -1,84 +1,84 @@
 <div>
   <div class="row">
-      <div class="col-lg-9 col-md-9">
+    <div class="col-lg-9 col-md-9">
       <h3>{{pageTitile}}</h3>
     </div>
     <div class="col-lg-3 col-md-3">
-      <a class="btn btn-block btn-lg btn-secondary" routerLink="/"><span class="material-icons">
-        reply
+      <a class="btn btn-block btn-lg btn-secondary" (click)="goBack()"><span class="material-icons">
+          reply
         </span> Back</a>
-      </div>
-      
+    </div>
+
   </div>
-  <br/>
-  
+  <br />
+
   <div class="row">
-    <div class="col-lg-6 col-md-12" style="margin-bottom: 10px;">
+    <div class="col-lg-6 col-md-12" style="margin-bottom: 10px;margin-top: 10px;">
       <form [formGroup]="taskSettingsForm" (ngSubmit)="submitForm()">
 
 
-          <div class="input-group form-group" style="display: none;">
+        <div class="input-group form-group" style="display: none;">
           <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Task Id</span>
-            </div>
+            <span class="input-group-text input-title-stl">Task Id</span>
+          </div>
           <input type="text" formControlName="taskId" class="form-control" placeholder="Task Id">
-          </div>
+        </div>
 
-          <div class="form-group">
-            <select class="form-control" id="selectproject" formControlName="projectId" required> 
-                <option selected value="">Select Project</option>
-                <option value="1">Project 1</option>
-                <option value="2">Project 2</option>
-                <option value="3">Project 3</option>
-                <option value="4">Project 4</option>
-            </select>
-          </div>
+        <div class="form-group">
+          <select class="form-control" id="selectproject" formControlName="projectId" (change)="getMilestoneList()"
+            required>
+            <option value="" selected disabled hidden>Select Project</option>
+            <option *ngFor="let prj of projectsList" value="{{prj.id}}">{{prj.name}}</option>
+          </select>
+        </div>
 
-          <div class="input-group form-group" >
-            <div class="input-group-prepend">
-                <span class="input-group-text input-title-stl">Sub Task Name</span>
-            </div>
-            <input type="text" formControlName="name" class="form-control" placeholder="Enter Sub Task Name" required>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Sub Task Name</span>
           </div>
+          <input type="text" formControlName="subTaskName" class="form-control" placeholder="Enter Sub Task Name"
+            required>
+        </div>
 
-          <div class="input-group form-group" >
-            <div class="input-group-prepend">
-                <span class="input-group-text input-title-stl">SME name</span>
-            </div>
-            <input type="text" formControlName="name" class="form-control" placeholder="Enter SME name" required>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">SME name</span>
           </div>
+          <input list="usersList" type="text" formControlName="taskSME" class="form-control" placeholder="Enter SME name" required>
+          <datalist id="usersList" *ngIf="resourceList">
+            <option *ngFor="let rcs of resourceList" value="{{rcs.resourceName}}">
+          </datalist>
+        </div>
 
-          <div class="input-group form-group" >
-            <div class="input-group-prepend">
-                <span class="input-group-text input-title-stl">Owner Name</span>
-            </div>
-            <input type="text" formControlName="name" class="form-control" placeholder="Enter Owner Name" required>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Owner Name</span>
           </div>
+          <input list="usersList" type="text" formControlName="taskOwner" class="form-control" placeholder="Enter Owner Name" required>
+        </div>
 
-          
-          <div class="form-group" >
-            <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Add Milestone</span>
-            </div>
-           <select class="form-control" id="Milestone"  required> 
-             <option value="1">Milestone 1</option>
-             <option value="2">Milestone 2</option>
-             <option value="3">Milestone 3</option>
-             <option value="4">Milestone 4</option>
-             <option value="5">Milestone 5</option>
-             
-           </select>
-         </div>
-         
-          <!-- <button class="btn btn-block btn-lg btn-success" type="submit" style="margin-top: 30px;" disabled>Submit</button> -->
-          
-          <div class="form-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Add Description</span>
-            </div>
-            <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Description" required></textarea>
+
+        <div class="form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Milestone</span>
           </div>
-          <div class="form-group">
+          <select class="form-control" id="Milestone" formControlName="milestoneId">
+            <option value="" selected disabled hidden>Select Milestone</option>
+            <option *ngFor="let mlt of milestoneList" value="{{mlt.milestoneId}}">{{mlt.name}}</option>
+
+          </select>
+        </div>
+
+        <!-- <button class="btn btn-block btn-lg btn-success" type="submit" style="margin-top: 30px;" disabled>Submit</button> -->
+
+        <div class="form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Add Description</span>
+          </div>
+          <textarea class="form-control" formControlName="taskDetails" rows="3"
+            placeholder="Enter Description" required></textarea>
+        </div>
+        <!-- <div class="form-group">
             <div class="input-group-prepend">
               <span class="input-group-text input-title-stl">Add File</span>
             </div>
@@ -88,98 +88,162 @@
             <label class="custom-file-label" for="validatedCustomFile">Choose file to attach for more info</label>
             <div class="invalid-feedback">Example invalid custom file feedback</div>
           </div>
-          </div>
+          </div> -->
 
       </form>
     </div>
-    
+
     <div class="col-lg-6 col-md-12" style="margin-top: 10px;">
-      <form [formGroup]="taskSettingsForm" >
-        <div class="input-group form-group" >
+      <form [formGroup]="taskSettingsForm">
+        <div class="input-group form-group">
           <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Task Name</span>
+            <span class="input-group-text input-title-stl">Task Name</span>
           </div>
           <input type="text" formControlName="taskName" class="form-control" placeholder="Enter Task Name" required>
-        </div> 
-
-        <div class="input-group form-group" >
-          <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Task Eta</span>
-          </div>
-          <input type="datetime-local" formControlName="time" class="form-control" placeholder="Enter Task Eta" required>
         </div>
 
-        <div class="input-group form-group" >
+        <div class="input-group form-group">
           <div class="input-group-prepend">
-              <span class="input-group-text input-title-stl">Task Etc</span>
+            <span class="input-group-text input-title-stl">Task Eta</span>
           </div>
-          <input type="datetime-local" formControlName="time" class="form-control" placeholder="Enter Task Etc" required>
+          <input type="datetime-local" formControlName="taskETA" class="form-control" placeholder="Enter Task Eta"
+            required>
+        </div>
+
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Task Etc</span>
+          </div>
+          <input type="datetime-local" formControlName="taskETC" class="form-control" placeholder="Enter Task Etc"
+            required>
         </div>
         <div class="form-group">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Task weightage</span>
           </div>
-          <select class="form-control" id="taskWeight" required>
-              
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
+          <select class="form-control" id="taskWeight" formControlName="taskWeightage" required>
+            <option value="" selected disabled hidden>Select Task weightage</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
           </select>
-      </div>
-        <div class="form-group" >
-          <div class="input-group-prepend">
-            <span class="input-group-text input-title-stl">Skills Required</span>
-          </div>
-         <select class="form-control" id="SkillsRequired" multiple required> 
-           <option value="dotnet">dotnet</option>
-           <option value="sql">sql</option>
-           <option value="webservice">webservice</option>
-           <option value="angular">angular</option>
-           <option value="typescript">typescript</option>
-           <option value="javascript">javascript</option>
-         </select>
-       </div>
-
-      <div class="input-group form-group" >
-        <div class="input-group-prepend">
-            <span class="input-group-text input-title-stl">Status</span>
         </div>
-        <select class="form-control" id="status" required> 
-          <option value="todo">To Do</option>
-          <option value="inprogress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div>
-      
+        <div class="form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Primary Skill</span>
+          </div>
+          <select class="form-control" id="SkillsRequired" formControlName="taskSkills" required>
+            <option value="" selected disabled hidden>Select Primary Skill</option>
+            <option value="dotnet">dotnet</option>
+            <option value="sql">sql</option>
+            <option value="webservice">webservice</option>
+            <option value="angular">angular</option>
+            <option value="typescript">typescript</option>
+            <option value="javascript">javascript</option>
+          </select>
+        </div>
 
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Status</span>
+          </div>
+          <select class="form-control" id="status" formControlName="taskStatus" required>
+            <option value="" selected disabled hidden>Select Task Status</option>
+            <option value="todo" selected>To Do</option>
+            <option value="inprogress">In Progress</option>
+            <option value="review">Under Peer Review</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Review Needed</span>
+          </div>
+          <input type="checkbox" formControlName="reviewFlag" (change)="reviewCheck()" id="rCheckbox" style="margin-right: 10px; margin-left: 10px; margin-top: 8px; height: 20px;width: 20px;">
+          <label style="margin-top: 8px;font-size: small; color: blue;" >*Check if review is needed</label>
+        </div>
+
+        <div class="form-group" *ngIf="reviewNeeded">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Add Comment</span>
+          </div>
+          <textarea class="form-control" formControlName="reviewComments" rows="3"
+            placeholder="Add Review Comments"></textarea>
+        </div>
+
+        <div *ngIf="taskDetail">
+          <div class="input-group form-group" style="width: 100%;">
+            <div class="input-group-prepend">
+              <span class="input-group-text input-title-stl">Documents</span>
+            </div>
+            <span class="form-control no-file"
+              *ngIf="taskDetail.documentName === null || taskDetail.documentName === ''">No File Uploaded</span>
+            <span class="form-control file-available" *ngIf="taskDetail.documentName">{{taskDetail.documentName}}</span>
+            <input type="file" #utcFile class="form-control" style="text-align: center;"
+              (change)="uploadFile(utcFile.files,'doc')" style="display:none;">
+            <button class="btn btn-primary btn-colors" (click)="utcFile.click()">
+              <mat-icon>file_upload</mat-icon>
+            </button>
+            <button class="btn btn-primary btn-colors"
+              [disabled]="taskDetail.documentName === null || taskDetail.documentName === ''"
+              (click)="downloadFile('doc')">
+              <mat-icon>file_download</mat-icon>
+            </button>
+          </div>
+          <div class="input-group-text" *ngIf="progress > 0" style="margin-bottom: 15px;">
+            <span *ngIf="progress > 0">Upload Progress :</span>
+            <span class="upload" *ngIf="progress > 0">
+              {{progress}}%
+            </span>
+            <span class="upload" *ngIf="message">
+              {{message}}
+            </span>
+          </div>
+        </div>
       </form>
 
 
     </div>
-    <br/>
+    <br />
   </div>
-  <br/>
+  <br />
+  <div *ngIf="taskId">
+    <form [formGroup]="taskSettingsForm">
+      <div class="input-group form-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text input-title">Assigned Resource Name</span>
+        </div>
+        <input type="text" formControlName="resourceName" class="form-control" placeholder="Assigned Resource Name"
+          required>
+      </div>
+    </form>
+    <h4>Assign Different Resource:</h4>
+    <br />
+  </div>
   <div>
-    <ag-grid-angular style="width: 100%; height: 550px;" class="ag-theme-alpine" [rowData]="rowData"
-        [columnDefs]="columnDefs" [rowHeight]="55" (gridReady)="onGridReady($event)"  rowSelection="multiple">
+    <ag-grid-angular style="width: 100%; height: 300px;" class="ag-theme-alpine" [rowData]="rowData"
+      [columnDefs]="columnDefs" [rowHeight]="55" (gridReady)="onGridReady($event)" rowSelection="single"
+      (selectionChanged)="onResourceSelection($event)">
     </ag-grid-angular>
-</div> 
+  </div>
 
-<div class="row">
-  <div class="col-lg-9 col-md-9" style="margin-bottom: 10px;">
+  <div class="row">
+    <div class="col-lg-9 col-md-9" style="margin-bottom: 10px;">
     </div>
     <div class="col-lg-3 col-md-3" style="margin-bottom: 10px;">
-      <button class="btn btn-block btn-lg btn-colors" type="submit" [disabled]="taskSettingsForm.invalid" style="margin-top: 30px;">{{submitbtnTitile}}</button>
+      <button class="btn btn-block btn-lg btn-colors" type="submit" (click)="submitForm()"
+        [disabled]="taskSettingsForm.invalid" style="margin-top: 30px;">{{submitbtnTitile}}</button>
     </div>
 
-    </div>
+  </div>
 
 
 </div>

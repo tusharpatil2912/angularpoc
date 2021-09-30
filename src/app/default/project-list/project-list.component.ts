@@ -3,6 +3,7 @@ import { ProjectDetailsService } from "../../services/project-details.service";
 import { AgDetailsButtonComponent } from "../agCustomCells/ag-details-button/ag-details-button.component";
 import { AgSettingsButtonComponent } from "../agCustomCells/ag-settings-button/ag-settings-button.component";
 import { AgSwimlanesButtonComponent } from "../agCustomCells/ag-swimlanes-button/ag-swimlanes-button.component";
+import { AgAddTaskButtonComponent } from "../agCustomCells/ag-add-task-button/ag-add-task-button.component";
 import { NotifierService } from "angular-notifier";
 import { Router } from '@angular/router';
 
@@ -42,10 +43,11 @@ export class ProjectListComponent implements OnInit {
 
   columnDefs = [
     { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, resizable: true, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'name', width: 650,minWidth: 80, resizable: true, sortable: true, filter: true },
+    { headerName:'Project Name',field: 'name', width: 400,minWidth: 80, resizable: true, sortable: true, filter: true },
     { headerName:'Release',field: 'phase', width: 150,minWidth: 135, resizable: true, sortable: true, filter: true },
     { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150,minWidth: 135, resizable: true, sortable: true, filter: true},
     { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150,minWidth: 145, resizable: true, sortable: true, filter: true},
+    { headerName:'Add Task',field: 'id',cellRendererFramework: AgAddTaskButtonComponent, width: 155,minWidth: 150, resizable: true, sortable: true, filter: true},
     { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150,minWidth: 80, resizable: true, sortable: true,  filter: true}
 ];
 
