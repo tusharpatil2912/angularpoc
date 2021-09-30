@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { formatDate } from "@angular/common";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectDetailsService } from "../../services/project-details.service";
+import { UserAuthService } from "../../services/user-auth.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from "angular-notifier";
 
@@ -25,6 +26,7 @@ export class ProjectSettingsComponent implements OnInit {
   //projectphase;
   allReleases;
   selectedRelease;
+  resourceList;
 
   //months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   
@@ -32,12 +34,20 @@ export class ProjectSettingsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private detailsapi: ProjectDetailsService,
+    private userapi : UserAuthService,
     private notifier: NotifierService, 
     private router: Router,
     private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    //console.log(this.today);
+    this.projectId=this.activeRoute.snapshot.params.id;
+    
+    this.userapi.getUserstList().subscribe((data)=>{
+      this.resourceList=data;   
+    },(error)=>{
+      console.log("failed to load users list");
+    });
+    
     this.detailsapi.getAllReleases().subscribe((data)=>{
       this.allReleases=data;   
     },(error)=>{
@@ -46,11 +56,17 @@ export class ProjectSettingsComponent implements OnInit {
         name:"Please Create Release from Release Menu First"
       }
     });
-    this.projectId=this.activeRoute.snapshot.params.id;
+    
     if(this.projectId){
       this.pageTitile = "Project Settings";
       this.submitbtnTitile = "Update";
       this.visibility = true;
+      this.detailsapi.getallocatedResourceList(this.projectId).subscribe((data)=>{
+        //console.log(data);
+        this.rowData = data;
+      },(error)=>{
+        this.notifier.notify("error","API Error. Showing Mockup Data");
+      });
     this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
       this.projectDetails = data;
       //this.projectphase = this.projectDetails.phase;
@@ -124,7 +140,9 @@ selectedReleaseDetails;
       this.projSettingsForm.patchValue({releaseDate:this.selectedReleaseDetails[0].releaseDate});
   }
   }
-
+  goBack(){
+    window.history.back();
+  }
   submitForm() {
     //console.warn(this.projSettingsForm.value);
     const jsonForm ={
@@ -193,19 +211,14 @@ selectedReleaseDetails;
   ];
 
   columnDefs = [
-    { headerName:'ID',field: 'id', maxWidth: 80,minWidth: 80, sortable: true, filter: true },
-    { headerName:'Resourse Name',field: 'name', width: 350,minWidth: 80, sortable: true, filter: true },
-    { headerName:'# of Projects',field: 'project', width: 150,minWidth: 80, sortable: true, filter: true},
-    { headerName:'# of Tasks',field: 'tasks', width: 150,minWidth: 80, sortable: true, filter: true},
-    { headerName:'# of Open Tasks', field: 'opentasks',width: 150,minWidth: 80,  sortable: true, filter: true},
-    { headerName:'Remove', field: 'remove', width: 150,minWidth: 80, sortable: true, filter: true}
+    { headerName:'ID',field: 'resourceId', maxWidth: 80,minWidth: 80, sortable: true, resizable: true, filter: true },
+    { headerName:'Resourse Name',field: 'resourceName', width: 450,minWidth: 80, sortable: true,resizable: true, filter: true },
+    { headerName:'# of Projects',field: 'noOfProjects', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasksAssigned', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'noOfTasksOpen',width: 150,minWidth: 80,  sortable: true, resizable: true, filter: true}
 ];
 
-rowData = [
-  {id:'1',name:'rishi',project:'3',tasks:'5',opentasks:'4',remove:'Remove'},
-  {id:'2',name:'tushar',project:'4',tasks:'8',opentasks:'2',remove:'Remove'},
-  {id:'3',name:'chethan',project:'2',tasks:'7',opentasks:'3',remove:'Remove'}
-];
+rowData;
 
 onGridReady(params) {
   this.gridApi = params.api;

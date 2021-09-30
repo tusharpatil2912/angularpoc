@@ -32,6 +32,7 @@ export class TasksettingsComponent implements OnInit {
   tId: number;
   reviewNeeded=false;
   resourceList;
+  qpProjectId;
 
 
   constructor(
@@ -46,7 +47,11 @@ export class TasksettingsComponent implements OnInit {
     private userApi: UserAuthService) { }
     
   ngOnInit(): void {
-
+    this.activeRoute.queryParams
+    .subscribe(params => {
+      this.qpProjectId = params.projectId;
+    }
+  );
     this.taskSettingsForm = this.fb.group({
       taskId: [''],
       projectId: [''],
@@ -74,26 +79,35 @@ export class TasksettingsComponent implements OnInit {
   }
 
   columnDefs = [
-    { headerName: 'Sl no', field: 'resourceId', width: 100, minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName: 'Name', field: 'name', width: 200, minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName: 'Project', field: 'resourceId', width: 400, minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName: 'Task', field: 'resourceId', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName: 'Open Task', field: 'resourceId', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName: 'Skills', field: 'resourceId', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'ID',field: 'resourceId', maxWidth: 80,minWidth: 80, sortable: true, resizable: true, filter: true },
+    { headerName:'Name',field: 'resourceName', width: 450,minWidth: 80, sortable: true,resizable: true, filter: true },
+    { headerName:'Resource Skills',field: 'resourceSkills', width: 200,minWidth: 100, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Projects',field: 'noOfProjects', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Tasks',field: 'tasksAssigned', width: 150,minWidth: 80, sortable: true, resizable: true, filter: true},
+    { headerName:'# of Open Tasks', field: 'noOfTasksOpen',width: 150,minWidth: 80,  sortable: true, resizable: true, filter: true},
     { headerName: 'Select', field: 'checkboxSelect', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true, checkboxSelection: true }
-  ];
+];
 
-  rowData = [
-    { resourceId: '1', name: 'Tushar Patil' },
-    { resourceId: '2', name: 'Rishi PJ' },
-    { resourceId: '6', name: 'Sunil B' }
-  ];
+// [
+//   { headerName: 'Sl no', field: 'resourceId', width: 100, minWidth: 100, resizable: true, sortable: true, filter: true },
+//   { headerName: 'Name', field: 'name', width: 200, minWidth: 100, resizable: true, sortable: true, filter: true },
+//   { headerName: 'Project', field: 'resourceId', width: 400, minWidth: 100, resizable: true, sortable: true, filter: true },
+//   { headerName: 'Task', field: 'resourceId', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true },
+//   { headerName: 'Open Task', field: 'resourceId', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true },
+//   { headerName: 'Skills', field: 'resourceId', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true },
+//   { headerName: 'Select', field: 'checkboxSelect', width: 150, minWidth: 100, resizable: true, sortable: true, filter: true, checkboxSelection: true }
+// ]
+
+  rowData;
 
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
   }
 
+  goBack(){
+    window.history.back();
+  }
   onResourceSelection(params){
     this.gridApi = params.api;
     var selectedRows = this.gridApi.getSelectedRows();
@@ -122,6 +136,7 @@ export class TasksettingsComponent implements OnInit {
 
     this.userApi.getUserstList().subscribe((data) => {
       this.resourceList = data;
+      this.rowData = data;
     }, (error) => {
       console.log("failed to load resource list");
     });
@@ -172,6 +187,12 @@ export class TasksettingsComponent implements OnInit {
     else {
       this.pageTitile = "New Task";
       this.submitbtnTitile = "Submit";
+      if(this.qpProjectId!=null){
+        this.taskSettingsForm.patchValue({
+          projectId: this.qpProjectId
+        })
+        this.getMilestoneList();
+      }
     }
   }
 

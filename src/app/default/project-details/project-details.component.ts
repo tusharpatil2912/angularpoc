@@ -93,6 +93,10 @@ onGridReady(params) {
   this.gridApi.sizeColumnsToFit();
 }
 
+goBack(){
+  window.history.back();
+}
+
 getProjectData(){
   this.projectId=this.activeRoute.snapshot.params.id;
   this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
