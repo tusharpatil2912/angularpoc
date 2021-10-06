@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotifierService } from "angular-notifier";
 import { ProjectDetailsService } from "../../services/project-details.service";
+import { TaskDetailsService } from "../../services/task-details.service";
+import { TaskbuttonComponent } from "../agCustomCells/taskbutton/taskbutton.component";
 
 @Component({
   selector: 'app-open-issues',
@@ -10,6 +12,7 @@ import { ProjectDetailsService } from "../../services/project-details.service";
 export class OpenIssuesComponent implements OnInit {
   openIssuesList;
   private gridApi;
+  reviewerId;
   IssuesList=[
   {"id":1,"taskid":"100","projectname":"Project 1","description":"Bug 1","createdDate":"2021-04-15","Detected By":"Sunil"},
   {"id":2,"taskid":"101","projectname":"Project 2","description":"Bug 2","createdDate":"2021-04-15","Detected By":"Tushar"},
@@ -18,27 +21,29 @@ export class OpenIssuesComponent implements OnInit {
   {"id":5,"taskid":"104","projectname":"Project 5","description":"Bug 5","createdDate":"2021-04-15","Detected By":"Chethan"}
 ];
 
-  constructor(private detailsapi: ProjectDetailsService,private notifier: NotifierService,) { }
+  constructor(
+    private detailsapi: ProjectDetailsService,
+    private notifier: NotifierService,
+    private taskapi: TaskDetailsService) { }
 
   ngOnInit(): void {
-    this.detailsapi.getProjecttList().subscribe((data)=>{
+    var userData = JSON.parse(localStorage.getItem('currentUser'));
+    this.reviewerId = userData.user['resourceId'];
+    this.taskapi.GetPeerReviewTasksById(this.reviewerId).subscribe((data)=>{
       //console.log(data);
-      this.openIssuesList = data;
-      //this.rowData = data;
-      this.rowData = this.IssuesList;
+      this.rowData = data;
     },(error)=>{
-      this.rowData=this.IssuesList;
       this.notifier.notify("error", "API Error. Showing Mockup Data");
     });
   }
 
   columnDefs = [
-    { headerName:'Bug ID',field: 'id', maxWidth: 100,minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName:'Task ID',field: 'taskid', width: 100,minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName:'Project Name',field: 'projectname', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName:'Bug Description',field: 'description', width: 200,minWidth: 400, resizable: true, sortable: true, filter: true },
-    { headerName:'Created Date',field: 'createdDate', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true },
-    { headerName:'Detected By',field: 'Detected By', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true }
+    { headerName:'Task ID',field: 'taskId', width: 100,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Task Name',field: 'taskName', width: 200,minWidth: 300, resizable: true, sortable: true, filter: true },
+    { headerName:'Sub Task Name',field: 'subTaskName', width: 200,minWidth: 300, resizable: true, sortable: true, filter: true },
+    { headerName:'Task ETC',field: 'taskETC', width: 200,minWidth: 200, resizable: true, sortable: true, filter: true },
+    { headerName:'Created Date',field: 'taskCreatedDate', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true },
+    { headerName:'Status',field: 'taskId', cellRendererFramework: TaskbuttonComponent, width: 100,minWidth: 80, resizable: true, sortable: true,  filter: true}
    ];
 
    rowData = null;

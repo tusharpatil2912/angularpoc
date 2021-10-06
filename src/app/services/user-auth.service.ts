@@ -71,4 +71,7 @@ class UserDetails{
   resourceSkills: string;
   userName: string;
   resourceCreatedDate: string;
+  profilePicture: string;
+  profilePictureFile: string;
+  profilePictureFilebase64: string;
 }

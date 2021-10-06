@@ -34,7 +34,8 @@ export class TasksComponent implements OnInit {
     { headerName:'Task Status',field: 'taskStatus',valueFormatter: this.stringFormatter, width: 110,minWidth: 100, resizable: true, sortable: true, filter: true },
     { headerName:'Created Date',field: 'taskCreatedDate', width: 110,minWidth: 100, resizable: true, sortable: true, filter: true},
     { headerName:'Project Name',field: 'projectName', width: 200,minWidth: 100, resizable: true, sortable: true,  filter: true},
-    { headerName:'Assigned to',field: 'resourceName', width: 150,minWidth: 100, resizable: true, sortable: true, filter: true},
+    { headerName:'Assigned to',field: 'resourceName', width: 130,minWidth: 100, resizable: true, sortable: true, filter: true},
+    { headerName:'Weightage',field: 'taskWeightage', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true},
     { headerName:'Status',field: 'taskId', cellRendererFramework: TaskbuttonComponent, width: 100,minWidth: 80, resizable: true, sortable: true,  filter: true}
 
     

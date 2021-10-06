@@ -170,15 +170,25 @@
           <input type="checkbox" formControlName="reviewFlag" (change)="reviewCheck()" id="rCheckbox" style="margin-right: 10px; margin-left: 10px; margin-top: 8px; height: 20px;width: 20px;">
           <label style="margin-top: 8px;font-size: small; color: blue;" >*Check if review is needed</label>
         </div>
-
-        <div class="form-group" *ngIf="reviewNeeded">
+      <div *ngIf="reviewNeeded">
+        <div class="form-group">
           <div class="input-group-prepend">
-            <span class="input-group-text input-title-stl">Add Comment</span>
+            <span class="input-group-text input-title-stl">Reviewer</span>
+          </div>
+          <select class="form-control" formControlName="reviewerId">
+            <option value="" selected disabled hidden>Select Reviwer</option>
+            <option value="0" disabled hidden>Select Reviwer</option>
+            <option *ngFor="let rsc of resourceList" value="{{rsc.resourceId}}">{{rsc.resourceName}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text input-title-stl">Review Comments</span>
           </div>
           <textarea class="form-control" formControlName="reviewComments" rows="3"
             placeholder="Add Review Comments"></textarea>
         </div>
-
+      </div>
         <div *ngIf="taskDetail">
           <div class="input-group form-group" style="width: 100%;">
             <div class="input-group-prepend">
