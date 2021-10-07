@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
       var userData = JSON.parse(localStorage.getItem('currentUser'));
       this.userName = userData.user['resourceName'];
       this.designation = userData.user['designation'];
-      if(userData.user['profilePictureFilebase64']!=""){
+      if(userData.user['profilePictureFilebase64']!="" && userData.user['profilePictureFilebase64'] != null){
         this.imageSrc = "data:"+userData.user['profilePicture']+";base64,"+userData.user['profilePictureFilebase64'];
       }
   }

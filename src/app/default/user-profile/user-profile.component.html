@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-lg-9 col-md-9">
+        <h3>Profile Settings</h3>
+    </div>
+</div>
+<div class="container main-div bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3"><img class="rounded-circle mt-5"
+                    width="150px" height="150px" [src]="imageSrc">
+                <span class="font-weight-bold" style="margin-top: 1rem;">{{name}}</span>
+                <input type="file" #dpFile class="form-control" style="text-align: center;"
+                    (change)="uploadFile(dpFile.files)" style="display:none;">
+                <button class="btn btn-primary btn-colors" style="margin-top: 1rem;" (click)="dpFile.click()">
+                    Change Profile Picture
+                </button>
+                <span *ngIf="savechangesmsg" class="alert alert-info" style="margin-top: 1rem;">{{savechangesmsg}}</span>
+                <div class="alert alert-warning" *ngIf="progress > 0" style="margin-bottom: 15px; margin-top: 1rem;">
+                    <span *ngIf="progress > 0">Upload Progress :</span>
+                    <span class="upload" *ngIf="progress > 0">
+                        {{progress}}%
+                    </span>
+                    <span class="upload" *ngIf="message">
+                        {{message}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                <form [formGroup]="userForm">
+                    <div class="input-group form-group" style="display: none;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-titles">ID</span>
+                        </div>
+                        <input type="text" formControlName="resourceId" class="form-control" placeholder="Id">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-title-stl">Name</span>
+                        </div>
+                        <input type="text" formControlName="resourceName" class="form-control" placeholder="Name"
+                            required>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-title-stl">Role</span>
+                        </div>
+                        <select class="form-control" id="role" formControlName="designation" required>
+                            <option value="" selected disabled hidden>Select Role</option>
+                            <option value="developer">Developer</option>
+                            <option value="teamlead">Team Leader</option>
+                        </select>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-title-stl">Team Lead</span>
+                        </div>
+                        <select class="form-control" id="managerId" formControlName="managerId">
+                            <option value="" selected disabled hidden>Select Team Lead</option>
+                            <option value="0" disabled hidden>Select Team Lead</option>
+                            <option *ngFor="let mng of managers" value="{{mng.resourceId}}">{{mng.resourceName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-title-stl">Skills</span>
+                        </div>
+                        <input type="text" formControlName="resourceSkills" class="form-control" placeholder="Skills"
+                            required>
+                    </div>
+                </form>
+                <div class="mt-5 text-center"><button class="btn btn-primary btn-colors" type="button" (click)="updateProfile()">
+                    Save Changes</button></div>
+            </div>
+        </div>
+    </div>
+</div>

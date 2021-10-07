@@ -33,6 +33,11 @@ export class UserAuthService {
   }));
   }
 
+  public updatelocalstorageuser(user){
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
