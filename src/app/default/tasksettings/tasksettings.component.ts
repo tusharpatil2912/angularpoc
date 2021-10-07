@@ -73,7 +73,8 @@ export class TasksettingsComponent implements OnInit {
       documentName: [''],
       reviewFlag:[''],
       reviewComments:[''],
-      resourceName:['']
+      resourceName:[''],
+      reviewerId:['0']
     });
     this.refreshAllData();
   }
@@ -167,21 +168,13 @@ export class TasksettingsComponent implements OnInit {
           taskETC: this.taskDetail.taskETC,
           reviewFlag: Boolean(this.taskDetail.reviewFlag=="true"),
           reviewComments: this.taskDetail.reviewComments,
-          resourceName:this.taskDetail.resourceName
+          resourceName:this.taskDetail.resourceName,
+          reviewerId:this.taskDetail.reviewerId
         })
         this.getMilestoneList();
         this.reviewCheck();
       }, (error) => {
-        this.notifier.notify("error", "API Error. Showing Mockup Data");
-        this.taskDetail = { "id": 1, "name": "My First Project", "description": "Desc 1", "owner": "Owner 1", "sme": "Sme 1", "phase": null, "codeDropDate": null, "codeFreezeDate": null, "releaseDate": null, "createdDate": "2020-11-26" };
-        this.taskSettingsForm.patchValue({
-          id: this.taskDetail.id,
-          name: this.taskDetail.name,
-          description: this.taskDetail.description,
-          sme: this.taskDetail.sme,
-          owner: this.taskDetail.owner,
-          createdDate: this.taskDetail.createdDate
-        })
+        this.notifier.notify("error", "Internal Server error occured");
       });
     }
     else {
@@ -259,7 +252,8 @@ public uploadFile = (files,filetype) => {
       taskETA: this.taskSettingsForm.get('taskETA').value,
       taskETC: this.taskSettingsForm.get('taskETC').value,
       reviewFlag: this.taskSettingsForm.get('reviewFlag').value+"",
-      reviewComments: this.taskSettingsForm.get('reviewComments').value
+      reviewComments: this.taskSettingsForm.get('reviewComments').value,
+      reviewerId: parseInt(this.taskSettingsForm.get('reviewerId').value)
     };
     const updateJsonForm ={
       taskId : parseInt(this.activeRoute.snapshot.params.id),
@@ -280,7 +274,8 @@ public uploadFile = (files,filetype) => {
       taskETA: this.taskSettingsForm.get('taskETA').value,
       taskETC: this.taskSettingsForm.get('taskETC').value,
       reviewFlag: this.taskSettingsForm.get('reviewFlag').value+"",
-      reviewComments: this.taskSettingsForm.get('reviewComments').value
+      reviewComments: this.taskSettingsForm.get('reviewComments').value,
+      reviewerId: parseInt(this.taskSettingsForm.get('reviewerId').value)
     };
     this.tId = this.activeRoute.snapshot.params.id;
     if(this.tId){

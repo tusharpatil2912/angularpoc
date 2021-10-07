@@ -18,6 +18,7 @@ import { ErrorPageComponent } from "./shared/ui/error-page/error-page.component"
 import { ReleaseSettingsComponent } from "./default/release-settings/release-settings.component";
 import { ReleaseCreateComponent } from "./default/release-create/release-create.component";
 import { ReleaseBoardComponent } from "./default/release-board/release-board.component";
+import { UserProfileComponent } from "./default/user-profile/user-profile.component";
 
 const routes: Routes = [
   {path:'login',component: LoginComponent},
@@ -40,7 +41,8 @@ const routes: Routes = [
       {path:'taskreadonly/:id',component:TaskreadonlyComponent},
       {path:'release',component:ReleaseBoardComponent},
       {path:'releasesettings/:id',component:ReleaseSettingsComponent},
-      {path:'addrelease', component:ReleaseCreateComponent}
+      {path:'addrelease', component:ReleaseCreateComponent},
+      {path:'profile', component:UserProfileComponent}
     ]
   },
   {path:'error',component:ErrorPageComponent},

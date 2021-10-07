@@ -1,10 +1,10 @@
 <!--Project Settings-->
 <div>
     <div class="row">
-        <br/>
+        <br />
         <h3 class="col-md-9">{{pageTitile}}</h3>
         <a class="btn btn-lg btn-secondary btn-block col-md-3" (click)="goBack()"><span class="material-icons">
-            reply
+                reply
             </span> Back</a>
     </div>
     <hr />
@@ -18,35 +18,38 @@
                 <div class="input-group form-group" style="display: none;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Project Id</span>
-                      </div>
+                    </div>
                     <input type="text" formControlName="id" class="form-control" placeholder="Project Id">
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Project Name</span>
-                      </div>
+                    </div>
                     <input type="text" formControlName="name" class="form-control" placeholder="Project Name" required>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Description</span>
-                      </div>
-                    <textarea rows="3" formControlName="description" class="form-control" placeholder="Project Description" required></textarea>
+                    </div>
+                    <textarea rows="3" formControlName="description" class="form-control"
+                        placeholder="Project Description" required></textarea>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Owner Name</span>
-                      </div>
-                    <input list="usersList" type="text" formControlName="owner" class="form-control" placeholder="Owner Name" required>
+                    </div>
+                    <input list="usersList" type="text" formControlName="owner" class="form-control"
+                        placeholder="Owner Name" required>
                     <datalist id="usersList" *ngIf="resourceList">
                         <option *ngFor="let rcs of resourceList" value="{{rcs.resourceName}}">
-                      </datalist>
+                    </datalist>
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">SME Name</span>
-                      </div>
-                    <input list="usersList" type="text" formControlName="sme" class="form-control" placeholder="SME Name" required>
+                    </div>
+                    <input list="usersList" type="text" formControlName="sme" class="form-control"
+                        placeholder="SME Name" required>
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="skillrequired" formControlName="skills">
@@ -61,39 +64,42 @@
                 <br />
                 <!-- <button class="btn btn-block btn-lg btn-colors" type="submit" [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button> -->
             </form>
-            
+
         </div>
-        <br/>
+        <br />
         <!--Important Dates-->
-        <div class="col-lg-6 col-md-11" >
+        <div class="col-lg-6 col-md-11">
             <div style="text-align:center;margin-bottom:25px;margin-top: 5px;">
                 <!-- <h5 style="margin-bottom:10px;">Important Dates</h5> -->
             </div>
-            
-            <form [formGroup]="projSettingsForm" style="display:flex;align-items: center;flex-direction: column;" (ngSubmit)="submitForm()">
+
+            <form [formGroup]="projSettingsForm" style="display:flex;align-items: center;flex-direction: column;"
+                (ngSubmit)="submitForm()">
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Code Drop Date</span>
-                      </div>
+                    </div>
                     <input type="date" formControlName="codeDropDate" class="form-control" style="text-align: center;">
                 </div>
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Code Freeze Date</span>
-                      </div>
-                    <input type="date" formControlName="codeFreezeDate" class="form-control" style="text-align: center;">
+                    </div>
+                    <input type="date" formControlName="codeFreezeDate" class="form-control"
+                        style="text-align: center;">
                 </div>
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Created Date</span>
-                      </div>
+                    </div>
                     <input type="date" formControlName="createdDate" class="form-control" style="text-align: center;">
                 </div>
                 <div class="input-group form-group" style="width: 90%;" *ngIf="allReleases">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Release</span>
-                      </div>
-                      <select class="form-control" #release (change)="onReleaseSelection(release.value)" id="releaseId" formControlName="releaseId" style="text-align: center;"> 
+                    </div>
+                    <select class="form-control" #release (change)="onReleaseSelection(release.value)" id="releaseId"
+                        formControlName="releaseId" style="text-align: center;">
                         <option value="" selected disabled hidden>Select Release</option>
                         <!-- <option value="0">ADHOC</option> -->
                         <option *ngFor="let rel of allReleases" value="{{rel.releaseId}}">{{rel.name}}</option>
@@ -102,7 +108,7 @@
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Release Date</span>
-                      </div>
+                    </div>
                     <input type="date" formControlName="releaseDate" class="form-control" style="text-align: center;">
                 </div>
                 <!-- <div class="input-group form-group" style="width: 90%;" *ngIf="visibility">
@@ -114,8 +120,9 @@
                 <div class="input-group form-group" style="width: 90%;">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Complexity</span>
-                      </div>
-                      <select class="form-control" id="complexity" formControlName="complexity" style="text-align: center;" >
+                    </div>
+                    <select class="form-control" id="complexity" formControlName="complexity"
+                        style="text-align: center;">
                         <option value="">Select Complexity</option>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
@@ -125,28 +132,37 @@
                 <!-- <br />
                 <br />
                 <br /> -->
-                <button class="btn btn-block btn-lg btn-colors" type="submit" style="width: 90%;" [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button>
+                <button class="btn btn-block btn-lg btn-colors" type="submit" style="width: 90%;"
+                    [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button>
             </form>
         </div>
     </div>
     <div *ngIf="visibility">
-        <hr  *ngIf="visibility"/>
-    <label><h6>Add Milestone</h6></label>
-    <div class="row">
-    <div class="input-group mb-3 col-md-6">
-        <input type="text" class="form-control" placeholder="Milestone" aria-label="Milestone"
-            aria-describedby="button-addon2">
+        <hr *ngIf="visibility" />
+        <label>
+            <h6>Add Milestone</h6>
+        </label>
+        <form [formGroup]="milestoneForm" (ngSubmit)="addMilestone()">
+            <div class="row">
+                <div style="display: none;">
+                    <input type="text" class="form-control" placeholder="Milestone Id" formControlName="milestoneId">
+                    <input type="text" class="form-control" placeholder="Project Id" formControlName="projectId">
+                </div>
+                <div class="input-group mb-3 col-md-6">
+                    <input type="text" class="form-control" placeholder="Milestone Name" formControlName="name" required>
+                    <input type="date" class="form-control" placeholder="Add Milestone" formControlName="milestoneDate" required>
+                </div>
+                <div class="input-group mb-3 col-md-6">
+                    <input type="text" class="form-control" placeholder="Milestone Details" formControlName="description"
+                        aria-label="Milestone Details" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-colors" type="submit" id="button-addon2" [disabled]="milestoneForm.invalid">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="input-group mb-3 col-md-6">
-        <input type="date" class="form-control" placeholder="Add Milestone" aria-label="Add Milestone"
-            aria-describedby="button-addon2">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
-        </div>
-    </div>
-</div>
-</div>
-    <hr  *ngIf="visibility"/>
+    <hr *ngIf="visibility" />
     <!--progress bar-->
     <div *ngIf="visibility">
         <h5>Project Status</h5>
@@ -160,14 +176,14 @@
         </div>
     </div>
     <br />
-    <hr  *ngIf="visibility"/>
+    <hr *ngIf="visibility" />
     <!--Resourse Status-->
     <div *ngIf="visibility">
         <h5>Resourse Status</h5>
         <br />
         <div>
             <ag-grid-angular style="width: 100%; height: 200px;" class="ag-theme-alpine" [rowData]="rowData"
-                [columnDefs]="columnDefs"  (gridReady)="onGridReady($event)">
+                [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
             </ag-grid-angular>
         </div>
     </div>
