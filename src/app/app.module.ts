@@ -13,7 +13,8 @@ import { ErrorInterceptor } from "./services/error.interceptor";
 const notifierCustomOptions: NotifierOptions = {
   position: {
       horizontal: {
-          position: "middle"
+          position: "left",
+          distance: 700
       },
       vertical: {
           position: "top",

@@ -42,7 +42,4 @@ export class TaskDetailsService {
   public downloadTaskFile(id){
     return this.httpClient.get(`${this.rootURL}/projecttask/filedownload/${id}`,{responseType:"blob"});
   }
-  public GetPeerReviewTasksById(id){
-    return this.httpClient.get(`${this.rootURL}/projecttask/GetPeerReviewTasksById/${id}`);
-  }
 }

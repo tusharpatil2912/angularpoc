@@ -13,22 +13,19 @@ export class SidebarComponent implements OnInit {
   projectList;
   userName:string;
   designation:string;
-  imageSrc = "https://www.w3schools.com/w3css/img_avatar3.png";
 
   constructor(private routes : Router,public dialog: MatDialog,private detailsapi: ProjectDetailsService) { }
 
   ngOnInit(): void {
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
-      this.projectList = data;
-    });
-
       var userData = JSON.parse(localStorage.getItem('currentUser'));
+      //console.log(userData);
       this.userName = userData.user['resourceName'];
       this.designation = userData.user['designation'];
-      if(userData.user['profilePictureFilebase64']!="" && userData.user['profilePictureFilebase64'] != null){
-        this.imageSrc = "data:"+userData.user['profilePicture']+";base64,"+userData.user['profilePictureFilebase64'];
-      }
+      this.projectList = data;
+      //this.rowData = data;
+    });
   }
 
   OnHomePageLoad()

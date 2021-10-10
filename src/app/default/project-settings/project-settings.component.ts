@@ -3,7 +3,6 @@ import { formatDate } from "@angular/common";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { UserAuthService } from "../../services/user-auth.service";
-import { MilestoneService } from "../../services/milestone.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from "angular-notifier";
 
@@ -21,7 +20,6 @@ export class ProjectSettingsComponent implements OnInit {
   submitbtnTitile:string;
   visibility = false;
   projSettingsForm: FormGroup;
-  milestoneForm: FormGroup;
   projCreatedDate;
   private gridApi;
   today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -37,7 +35,6 @@ export class ProjectSettingsComponent implements OnInit {
     private fb: FormBuilder,
     private detailsapi: ProjectDetailsService,
     private userapi : UserAuthService,
-    private milestoneapi:MilestoneService,
     private notifier: NotifierService, 
     private router: Router,
     private activeRoute: ActivatedRoute) { }
@@ -124,37 +121,8 @@ export class ProjectSettingsComponent implements OnInit {
   });
   this.projSettingsForm.controls['createdDate'].disable();
   this.projSettingsForm.controls['releaseDate'].disable();
-
-  this.milestoneForm = this.fb.group({
-    milestoneId: [''],
-    projectId: [''],
-    name: [''],
-    milestoneDate: [''],
-    description: [''],
-    status: [''],
-    createdDate:['']
-  });
-
   }
 
-  addMilestone(){
-    const addMileForm = {
-      projectId: parseInt(this.activeRoute.snapshot.params.id),
-      name: this.milestoneForm.get('name').value,
-      description: this.milestoneForm.get('description').value,
-      milestoneDate: this.milestoneForm.get('milestoneDate').value
-    }
-    this.milestoneapi.addNewMilestone(addMileForm).subscribe(
-      (data)=>{
-        this.notifier.notify("success","Milestone Added Successfully");
-        //console.log(data);
-        this.milestoneForm.reset();
-      },(error)=>{
-        this.notifier.notify("error","Something Went Wrong while adding Milestone");
-        console.log(error);
-      }
-    );
-  }
 
   //Demo purpose only, Data might come from Api calls/service
   public counts = ["Gathering Info","Planning","Design",
