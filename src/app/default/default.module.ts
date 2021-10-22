@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,7 +24,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ProgressBarModule } from 'angular-progress-bar';
-
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {NgStepperModule} from 'angular-ng-stepper';
 
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectSettingsComponent } from './project-settings/project-settings.component';
@@ -93,9 +94,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
-    HttpClientModule,IntegralUIModule,FormsModule,NgxChartsModule,ProgressBarModule
+    HttpClientModule,IntegralUIModule,FormsModule,NgxChartsModule,ProgressBarModule,NgStepperModule,CdkStepperModule
   ],
-  providers:[
+  providers:[DatePipe
    
   ]
 })

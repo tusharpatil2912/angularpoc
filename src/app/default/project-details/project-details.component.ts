@@ -6,6 +6,8 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
 import { NotifierService } from "angular-notifier";
 import { saveAs } from "file-saver";
 import { environment } from "../../../environments/environment";
+import { MilestoneService } from "../../services/milestone.service";
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -17,17 +19,23 @@ export class ProjectDetailsComponent implements OnInit {
 
   private gridApi;
   projectDetails:any;
+  milestones;
   projectId:number;
+  newDate = new Date;
+  currentDate;
   readonly rootURL = environment.rootURL;
 
   constructor(private detailsapi: ProjectDetailsService, 
+              private milestoneapi:MilestoneService,
               private router: Router,
               private notifier:NotifierService,
               private activeRoute: ActivatedRoute,
+              private datePipe : DatePipe,
               private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getProjectData();
+    this.currentDate = this.datePipe.transform(this.newDate,"yyyy-MM-dd");
   }
 
   projectName = 'MyApp';
@@ -39,12 +47,19 @@ export class ProjectDetailsComponent implements OnInit {
   releaseDate = '19 Sep 2020';
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = ["Gathering Info","Planning","Design",
+  public counts = ["Planning","Planning","Design",
   "Development","Testing"];
   public orderStatus = "Planning"
 
   resources = [
+    {'id':'1','name':'rishi','project':'3','tasks':'5','opentasks':'1'},
+    {'id':'1','name':'sunil','project':'3','tasks':'5','opentasks':'3'},
+    {'id':'1','name':'rishi','project':'3','tasks':'5','opentasks':'2'},
+    {'id':'1','name':'sunil','project':'3','tasks':'5','opentasks':'3'},
     {'id':'1','name':'rishi','project':'3','tasks':'5','opentasks':'4'},
+    {'id':'1','name':'sunil','project':'3','tasks':'5','opentasks':'1'},
+    {'id':'1','name':'rishi','project':'3','tasks':'5','opentasks':'2'},
+    {'id':'1','name':'sunil','project':'3','tasks':'5','opentasks':'3'},
     {'id':'2','name':'tushar','project':'4','tasks':'8','opentasks':'2'}
   ]
 
@@ -118,6 +133,11 @@ getProjectData(){
       {resourceId:'3',resourceName:'chethan',noOfProjects:'2',tasksAssigned:'7',noOfTasksOpen:'3'}
     ];;
   });
+  this.milestoneapi.getMilestonesByProjectId(this.projectId).subscribe((data)=>{
+    this.milestones = data;
+  },(error)=>{
+    console.log(error);
+  })
 }
 
 ///file upload and download

@@ -55,7 +55,7 @@ export class TasksettingsComponent implements OnInit {
     this.taskSettingsForm = this.fb.group({
       taskId: [''],
       projectId: [''],
-      resourceId: [''],
+      resourceId: ['',Validators.required],
       taskName: [''],
       subTaskName: [''],
       taskSME: [''],
@@ -234,6 +234,12 @@ public uploadFile = (files,filetype) => {
   }
 
   submitForm() {
+    if(this.taskSettingsForm.invalid){
+      Object.keys(this.taskSettingsForm.controls).forEach(field=>{
+        const control = this.taskSettingsForm.get(field);
+        control.markAsTouched({ onlySelf : true});
+      })
+    }else{
     const jsonForm ={
       projectId : parseInt(this.taskSettingsForm.get('projectId').value),
       resourceId : parseInt(this.taskSettingsForm.get('resourceId').value),
@@ -302,6 +308,6 @@ public uploadFile = (files,filetype) => {
       (error) => {this.notifier.notify("error", "Something Went Wrong While Adding New Task");}
     );
   }
-
+    }
 }
 }
