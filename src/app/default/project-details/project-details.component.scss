@@ -117,3 +117,118 @@ body{
     .input-titles{
       width: 170px;
     }
+
+
+
+
+
+    .horiscroll{
+      width: 100%;
+      overflow-x: auto;
+      //overflow-y: hidden;
+      white-space: nowrap;
+    }
+
+
+
+    @media (max-width: 576px) {
+      .multi-steps-wrap {
+        margin: 0;
+      }
+    }
+    .multi-steps-wrap .multi-steps {
+      display: table;
+      table-layout: auto;
+      width: 100%;
+    }
+    .multi-steps-wrap .multi-steps > li {
+      counter-increment: stepNum;
+      text-align: center;
+      display: table-cell;
+      position: relative;
+      //color: #3cba9f;
+      padding-left: 8px;
+      padding-right: 8px;
+      font-size: 19px;
+      z-index: 1;
+    }
+    .negative {
+      border-color: red;
+    }
+    .multi-steps-wrap .multi-steps > li:before {
+      content: "-";
+      display: block;
+      margin: 0 auto 4px;
+      background-color: #fff;
+      width: 46px;
+      height: 46px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 18px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: #3cba9f;
+      border-radius: 50%;
+    }
+    .multi-steps-wrap .multi-steps > li:after {
+      content: "";
+      height: 2px;
+      width: 100%;
+      background-color: #3cba9f;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      z-index: -1;
+    }
+    .multi-steps-wrap .multi-steps > li:last-child:after {
+      display: none;
+    }
+    .multi-steps-wrap .multi-steps > li:last-child.is-active:before {
+      content: "o";
+    }
+    .multi-steps-wrap .multi-steps > li:first-child.is-active:before {
+      content: "o";
+    }
+    .multi-steps-wrap .multi-steps > li.is-active:before {
+      background-color: #fff;
+      border-color: #3cba9f;
+    }
+    .multi-steps-wrap .multi-steps > li.negative:before {
+      content: "✓";
+      background-color: green;
+      border-color: green;
+    
+      color: white;
+    }
+    // .multi-steps-wrap .multi-steps > li.is-active ~ li {
+    //   color: #808080;
+    // }
+    // .multi-steps-wrap .multi-steps > li.is-active ~ li:before {
+    //   background-color: #eee;
+    //   border-color: #fff;
+    // }
+
+    .multi-steps-wrap .multi-steps > li.inProgress:before {
+      content: "o";
+      background-color: blue;
+      border-color: blue;
+    
+      color: white;
+    }
+
+    .multi-steps-wrap .multi-steps > li.inDanger:before {
+      content: "!";
+      background-color: red;
+      border-color: red;
+    
+      color: white;
+    }
+
+    .mileDate{
+      font-size: 14px; 
+      white-space: normal;
+      float: left;
+      width: 100%;
+      height: auto;
+      word-wrap: break-word;
+    }

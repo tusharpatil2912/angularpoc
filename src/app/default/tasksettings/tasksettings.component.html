@@ -24,7 +24,7 @@
           <input type="text" formControlName="taskId" class="form-control" placeholder="Task Id">
         </div>
 
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': taskSettingsForm.get('projectId').errors && (taskSettingsForm.get('projectId').touched || taskSettingsForm.get('projectId').dirty)}">
           <select class="form-control" id="selectproject" formControlName="projectId" (change)="getMilestoneList()"
             required>
             <option value="" selected disabled hidden>Select Project</option>
@@ -32,7 +32,7 @@
           </select>
         </div>
 
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('subTaskName').errors && (taskSettingsForm.get('subTaskName').touched || taskSettingsForm.get('subTaskName').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Sub Task Name</span>
           </div>
@@ -40,7 +40,7 @@
             required>
         </div>
 
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskSME').errors && (taskSettingsForm.get('taskSME').touched || taskSettingsForm.get('taskSME').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">SME name</span>
           </div>
@@ -50,7 +50,7 @@
           </datalist>
         </div>
 
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskOwner').errors && (taskSettingsForm.get('taskOwner').touched || taskSettingsForm.get('taskOwner').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Owner Name</span>
           </div>
@@ -58,11 +58,11 @@
         </div>
 
 
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': taskSettingsForm.get('milestoneId').errors && (taskSettingsForm.get('milestoneId').touched || taskSettingsForm.get('milestoneId').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Milestone</span>
           </div>
-          <select class="form-control" id="Milestone" formControlName="milestoneId">
+          <select class="form-control" id="Milestone" formControlName="milestoneId" required>
             <option value="" selected disabled hidden>Select Milestone</option>
             <option *ngFor="let mlt of milestoneList" value="{{mlt.milestoneId}}">{{mlt.name}}</option>
 
@@ -71,7 +71,7 @@
 
         <!-- <button class="btn btn-block btn-lg btn-success" type="submit" style="margin-top: 30px;" disabled>Submit</button> -->
 
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskDetails').errors && (taskSettingsForm.get('taskDetails').touched || taskSettingsForm.get('taskDetails').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Add Description</span>
           </div>
@@ -95,14 +95,14 @@
 
     <div class="col-lg-6 col-md-12" style="margin-top: 10px;">
       <form [formGroup]="taskSettingsForm">
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskName').errors && (taskSettingsForm.get('taskName').touched || taskSettingsForm.get('taskName').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Task Name</span>
           </div>
           <input type="text" formControlName="taskName" class="form-control" placeholder="Enter Task Name" required>
         </div>
 
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskETA').errors && (taskSettingsForm.get('taskETA').touched || taskSettingsForm.get('taskETA').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Task Eta</span>
           </div>
@@ -110,14 +110,14 @@
             required>
         </div>
 
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskETC').errors && (taskSettingsForm.get('taskETC').touched || taskSettingsForm.get('taskETC').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Task Etc</span>
           </div>
           <input type="datetime-local" formControlName="taskETC" class="form-control" placeholder="Enter Task Etc"
             required>
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskWeightage').errors && (taskSettingsForm.get('taskWeightage').touched || taskSettingsForm.get('taskWeightage').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Task weightage</span>
           </div>
@@ -135,7 +135,7 @@
             <option value="10">10</option>
           </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskSkills').errors && (taskSettingsForm.get('taskSkills').touched || taskSettingsForm.get('taskSkills').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Primary Skill</span>
           </div>
@@ -150,7 +150,7 @@
           </select>
         </div>
 
-        <div class="input-group form-group">
+        <div class="input-group form-group" [ngClass]="{'has-error': taskSettingsForm.get('taskStatus').errors && (taskSettingsForm.get('taskStatus').touched || taskSettingsForm.get('taskStatus').dirty)}">
           <div class="input-group-prepend">
             <span class="input-group-text input-title-stl">Status</span>
           </div>
@@ -238,6 +238,8 @@
     <h4>Assign Different Resource:</h4>
     <br />
   </div>
+  <div *ngIf="taskSettingsForm.get('resourceId').errors && (taskSettingsForm.get('resourceId').touched || taskSettingsForm.get('resourceId').dirty)" 
+  class="alert alert-danger" style="margin: 1rem;">Assign a Resource</div>
   <div>
     <ag-grid-angular style="width: 100%; height: 300px;" class="ag-theme-alpine" [rowData]="rowData"
       [columnDefs]="columnDefs" [rowHeight]="55" (gridReady)="onGridReady($event)" rowSelection="single"
@@ -250,7 +252,7 @@
     </div>
     <div class="col-lg-3 col-md-3" style="margin-bottom: 10px;">
       <button class="btn btn-block btn-lg btn-colors" type="submit" (click)="submitForm()"
-        [disabled]="taskSettingsForm.invalid" style="margin-top: 30px;">{{submitbtnTitile}}</button>
+        style="margin-top: 30px;">{{submitbtnTitile}}</button>
     </div>
 
   </div>

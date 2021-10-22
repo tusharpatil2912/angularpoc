@@ -45,14 +45,80 @@
   <hr />
   <!--Project Status Bar-->
   <div class="col-md-12">
-    <div class="container">
+    <!-- <div class="container">
       <span *ngFor="let item of counts;let i = index">
         <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
         <span class="circles" [class.active]="orderStatus == item"></span>
         <span class="bar" *ngIf="(i != counts.length-1)"></span>
       </span>
+    </div> -->
+    <div class="horiscroll" *ngIf="milestones">
+    <div class="row multi-steps-wrap">
+      <ul class="list-unstyled multi-steps">
+        <li *ngFor="let item of milestones;let i = index" class="job-status" [ngClass]="{'job-inprogress is-active negative': item.totalNoOfTasks !=0 && item.totalNoOfTasks == item.totalNoOfTasksCompleted,
+         'job-inprogress is-active inProgress': item.totalNoOfTasks !=0 && item.totalNoOfTasks > item.totalNoOfTasksCompleted,
+         'job-inprogress is-active inDanger': item.totalNoOfTasks !=0 && currentDate >= item.milestoneDate && item.totalNoOfTasks != item.totalNoOfTasksCompleted}">
+         {{ item.name }} <span class="mileDate">{{item.milestoneDate}}</span></li>
+      </ul>
     </div>
   </div>
+  </div>
+  <!-- <br/>
+  <ng-stepper #cdkStepper [linear]="false" orientation="vertical">
+ 
+    <cdk-step  [optional]="true" *ngFor="let item of counts;let i = index">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet"></div>
+        <div class="step-title">{{ item }}</div>
+      </ng-template>
+    </cdk-step>
+    
+    <cdk-step [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">2</div>
+        <div class="step-title">Address</div>
+      </ng-template>
+    </cdk-step>
+    <cdk-step  [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">1</div>
+        <div class="step-title">Personal Details</div>
+      </ng-template>
+    </cdk-step>
+    
+    <cdk-step [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">2</div>
+        <div class="step-title">Address</div>
+      </ng-template>
+    </cdk-step>
+    <cdk-step  [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">1</div>
+        <div class="step-title">Personal Details</div>
+      </ng-template>
+    </cdk-step>
+    
+    <cdk-step [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">2</div>
+        <div class="step-title">Address</div>
+      </ng-template>
+    </cdk-step>
+    <cdk-step  [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">1</div>
+        <div class="step-title">Personal Details</div>
+      </ng-template>
+    </cdk-step>
+    
+    <cdk-step [optional]="true">
+      <ng-template cdkStepLabel>
+        <div class="step-bullet">2</div>
+        <div class="step-title">Address</div>
+      </ng-template>
+    </cdk-step>
+ </ng-stepper> -->
   <br />
   <hr />
   <div class="col-md-12" style="text-align:center;" *ngIf="projectDetails">
