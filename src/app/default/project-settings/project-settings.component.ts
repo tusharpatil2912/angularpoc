@@ -22,6 +22,7 @@ export class ProjectSettingsComponent implements OnInit {
   visibility = false;
   projSettingsForm: FormGroup;
   milestoneForm: FormGroup;
+  milestones;
   projCreatedDate;
   private gridApi;
   today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -64,11 +65,12 @@ export class ProjectSettingsComponent implements OnInit {
       this.pageTitile = "Project Settings";
       this.submitbtnTitile = "Update";
       this.visibility = true;
+      this.refeshMilestones();
       this.detailsapi.getallocatedResourceList(this.projectId).subscribe((data)=>{
         //console.log(data);
         this.rowData = data;
       },(error)=>{
-        this.notifier.notify("error","API Error. Showing Mockup Data");
+        this.notifier.notify("error","Something went wrong!");
       });
     this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
       this.projectDetails = data;
@@ -137,7 +139,43 @@ export class ProjectSettingsComponent implements OnInit {
 
   }
 
+  refeshMilestones(){
+    this.milestoneapi.getMilestonesByProjectId(this.projectId).subscribe((data)=>{
+      this.milestones = data;
+    },(error)=>{
+      this.notifier.notify("error","Something went wrong!");
+    });
+  }
+
   addMilestone(){
+    if(this.milestoneForm.invalid){
+      this.notifier.notify("error", "Please fill all required fields");
+      Object.keys(this.milestoneForm.controls).forEach(field=>{
+        const control = this.milestoneForm.get(field);
+        control.markAsTouched({ onlySelf : true});
+      })
+    }else{
+      if(this.milestoneForm.get('milestoneId').value){
+        //console.log('update method');
+        const putMileForm = {
+          milestoneId:parseInt(this.milestoneForm.get('milestoneId').value),
+          projectId: parseInt(this.milestoneForm.get('projectId').value),
+          name: this.milestoneForm.get('name').value,
+          description: this.milestoneForm.get('description').value,
+          milestoneDate: this.milestoneForm.get('milestoneDate').value
+        }
+        //console.log(putMileForm);
+        this.milestoneapi.updateMilestone(this.milestoneForm.get('milestoneId').value,putMileForm).subscribe((data)=>{
+          this.notifier.notify("success","Milestone Updated Successfully");
+        //console.log(data);
+        this.clearMileForm();
+        this.refeshMilestones();
+        },(error)=>{
+          this.notifier.notify("error","Something Went Wrong while adding Milestone");
+          console.log(error);
+        });
+
+      }else{
     const addMileForm = {
       projectId: parseInt(this.activeRoute.snapshot.params.id),
       name: this.milestoneForm.get('name').value,
@@ -148,12 +186,31 @@ export class ProjectSettingsComponent implements OnInit {
       (data)=>{
         this.notifier.notify("success","Milestone Added Successfully");
         //console.log(data);
-        this.milestoneForm.reset();
+        this.clearMileForm();
+        this.refeshMilestones();
       },(error)=>{
         this.notifier.notify("error","Something Went Wrong while adding Milestone");
         console.log(error);
       }
     );
+  }
+}
+}
+
+clearMileForm(){
+  this.milestoneForm.reset();
+}
+
+  editMilestone(selectedMilestone){
+    //console.log(selectedMilestone);
+    this.milestoneForm.patchValue({id:this.projectDetails.id,
+      milestoneId: selectedMilestone.milestoneId,
+      projectId: selectedMilestone.projectId,
+      name: selectedMilestone.name,
+      milestoneDate: selectedMilestone.milestoneDate,
+      description: selectedMilestone.description,
+      status: selectedMilestone.status,
+      createdDate:selectedMilestone.createdDate}) 
   }
 
   //Demo purpose only, Data might come from Api calls/service

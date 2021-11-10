@@ -139,7 +139,7 @@
             </form>
         </div>
     </div>
-    <div *ngIf="visibility">
+    <!-- <div *ngIf="visibility">
         <hr *ngIf="visibility" />
         <label>
             <h6>Add Milestone</h6>
@@ -164,9 +164,9 @@
             </div>
         </form>
     </div>
-    <hr *ngIf="visibility" />
+    <hr *ngIf="visibility" /> -->
     <!--progress bar-->
-    <div *ngIf="visibility">
+    <!-- <div *ngIf="visibility">
         <h5>Project Status</h5>
         <hr />
         <div class="container">
@@ -176,7 +176,69 @@
                 <span class="bar" *ngIf="(i != counts.length-1)"></span>
             </span>
         </div>
+    </div> -->
+    <div *ngIf="visibility">
+        <hr *ngIf="visibility" />
+        <label>
+            <h5>Add Milestone</h5>
+        </label>
+        <form [formGroup]="milestoneForm" (ngSubmit)="addMilestone()">
+            <div class="row">   
+                <div class="input-group mb-3 col-md-6">
+                    <div class="row">
+                        <div class="input-group mb-3 col-md-12">
+                <div style="display: none;">
+                    <input type="text" class="form-control" placeholder="Milestone Id" formControlName="milestoneId">
+                    <input type="text" class="form-control" placeholder="Project Id" formControlName="projectId">
+                </div>
+                <div class="input-group mb-3 col-md-12" [ngClass]="{'has-error': milestoneForm.get('name').errors && (milestoneForm.get('name').touched || milestoneForm.get('name').dirty)}">
+                    <input type="text" class="form-control" placeholder="Milestone Name" formControlName="name" required>
+                </div>
+                <div class="input-group mb-3 col-md-12" [ngClass]="{'has-error': milestoneForm.get('milestoneDate').errors && (milestoneForm.get('milestoneDate').touched || milestoneForm.get('milestoneDate').dirty)}">
+                    <input type="date" class="form-control" placeholder="Add Milestone" formControlName="milestoneDate" required>
+                </div> 
+                <div class="input-group mb-3 col-md-12" [ngClass]="{'has-error': milestoneForm.get('description').errors && (milestoneForm.get('description').touched || milestoneForm.get('description').dirty)}">
+                    <textarea type="text" class="form-control" placeholder="Milestone Details" formControlName="description"
+                        aria-label="Milestone Details" rows="3" required></textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-block btn-secondary btn-savemile" style="margin-top: 5px;" type="reset" (click)="clearMileForm()">Reset Form</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-block btn-colors btn-savemile" style="margin-top: 5px;" type="submit">Save Milestone</button>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3 col-md-12"></div>
+            </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                            <table class="table table-striped" style="max-width: 100%;">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Milestone Name</th>
+                                      <th scope="col" style="text-align: center;">Milestone Date</th>
+                                      <th scope="col">Edit</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody *ngIf="milestones">
+                                    <tr *ngFor="let milestone of milestones">
+                                      <th scope="row">{{milestone.milestoneId}}</th>
+                                      <td>{{milestone.name}}</td>
+                                      <td style="text-align: center;">{{milestone.milestoneDate}}</td>
+                                      <td><a (click)="editMilestone(milestone)" class="btn btn-colors btn-block">Edit</a></td>
+                                    </tr>
+                                  </tbody>
+                            </table> 
+                </div>
+            </div>
+            </div>
+        </form>
     </div>
+
     <br />
     <hr *ngIf="visibility" />
     <!--Resourse Status-->
