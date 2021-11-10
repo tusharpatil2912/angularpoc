@@ -29,6 +29,13 @@ export class ReleaseCreateComponent implements OnInit {
   }
 
   onSubmit(){
+    if(this.releaseDetailsForm.invalid){
+      this.notifier.notify("error", "Please fill all required fields");
+      Object.keys(this.releaseDetailsForm.controls).forEach(field=>{
+        const control = this.releaseDetailsForm.get(field);
+        control.markAsTouched({ onlySelf : true});
+      })
+    }else{
     const jsonForm ={
       name:this.releaseDetailsForm.get('name').value,
       details: this.releaseDetailsForm.get('details').value,
@@ -48,5 +55,5 @@ export class ReleaseCreateComponent implements OnInit {
 
     this.notifier.notify("success", "New Release Added Successfully!");
   }
-
+  }
 }

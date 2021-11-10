@@ -235,6 +235,7 @@ public uploadFile = (files,filetype) => {
 
   submitForm() {
     if(this.taskSettingsForm.invalid){
+      this.notifier.notify("error", "Please fill all required fields");
       Object.keys(this.taskSettingsForm.controls).forEach(field=>{
         const control = this.taskSettingsForm.get(field);
         control.markAsTouched({ onlySelf : true});

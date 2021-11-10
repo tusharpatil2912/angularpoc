@@ -176,6 +176,13 @@ selectedReleaseDetails;
     window.history.back();
   }
   submitForm() {
+    if(this.projSettingsForm.invalid){
+      this.notifier.notify("error", "Please fill all required fields");
+      Object.keys(this.projSettingsForm.controls).forEach(field=>{
+        const control = this.projSettingsForm.get(field);
+        control.markAsTouched({ onlySelf : true});
+      })
+    }else{
     //console.warn(this.projSettingsForm.value);
     const jsonForm ={
       name:this.projSettingsForm.get('name').value,
@@ -233,7 +240,7 @@ selectedReleaseDetails;
       },
       (error) => {this.notifier.notify("error", "Something Went Wrong While Adding New Project");}
     );
-    
+     }
     }
   }
 

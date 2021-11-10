@@ -3,6 +3,11 @@ body{
      height: 100%;
   }
     
+  .has-error span,.has-error input, .has-error select, .has-error textarea{
+    color: red;
+    border-color: red;
+  }
+  
   .circles{
     height: 0.938em;
     width: 0.938em;

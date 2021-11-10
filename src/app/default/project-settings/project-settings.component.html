@@ -21,20 +21,20 @@
                     </div>
                     <input type="text" formControlName="id" class="form-control" placeholder="Project Id">
                 </div>
-                <div class="input-group form-group">
+                <div class="input-group form-group" [ngClass]="{'has-error': projSettingsForm.get('name').errors && (projSettingsForm.get('name').touched || projSettingsForm.get('name').dirty)}">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Project Name</span>
                     </div>
                     <input type="text" formControlName="name" class="form-control" placeholder="Project Name" required>
                 </div>
-                <div class="input-group form-group">
+                <div class="input-group form-group" [ngClass]="{'has-error': projSettingsForm.get('description').errors && (projSettingsForm.get('description').touched || projSettingsForm.get('description').dirty)}">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Description</span>
                     </div>
                     <textarea rows="3" formControlName="description" class="form-control"
                         placeholder="Project Description" required></textarea>
                 </div>
-                <div class="input-group form-group">
+                <div class="input-group form-group" [ngClass]="{'has-error': projSettingsForm.get('owner').errors && (projSettingsForm.get('owner').touched || projSettingsForm.get('owner').dirty)}">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Owner Name</span>
                     </div>
@@ -44,15 +44,15 @@
                         <option *ngFor="let rcs of resourceList" value="{{rcs.resourceName}}">
                     </datalist>
                 </div>
-                <div class="input-group form-group">
+                <div class="input-group form-group" [ngClass]="{'has-error': projSettingsForm.get('sme').errors && (projSettingsForm.get('sme').touched || projSettingsForm.get('sme').dirty)}">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">SME Name</span>
                     </div>
                     <input list="usersList" type="text" formControlName="sme" class="form-control"
                         placeholder="SME Name" required>
                 </div>
-                <div class="form-group">
-                    <select class="form-control" id="skillrequired" formControlName="skills">
+                <div class="form-group" [ngClass]="{'has-error': projSettingsForm.get('skills').errors && (projSettingsForm.get('skills').touched || projSettingsForm.get('skills').dirty)}">
+                    <select class="form-control" id="skillrequired" formControlName="skills" required>
                         <option value="">Select Primary Skill</option>
                         <option value="dotnet">.Net</option>
                         <option value="VB">VB</option>
@@ -94,12 +94,13 @@
                     </div>
                     <input type="date" formControlName="createdDate" class="form-control" style="text-align: center;">
                 </div>
-                <div class="input-group form-group" style="width: 90%;" *ngIf="allReleases">
+                <div class="input-group form-group" style="width: 90%;" *ngIf="allReleases" 
+                [ngClass]="{'has-error': projSettingsForm.get('releaseId').errors && (projSettingsForm.get('releaseId').touched || projSettingsForm.get('releaseId').dirty)}">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Release</span>
                     </div>
                     <select class="form-control" #release (change)="onReleaseSelection(release.value)" id="releaseId"
-                        formControlName="releaseId" style="text-align: center;">
+                        formControlName="releaseId" style="text-align: center;" required>
                         <option value="" selected disabled hidden>Select Release</option>
                         <!-- <option value="0">ADHOC</option> -->
                         <option *ngFor="let rel of allReleases" value="{{rel.releaseId}}">{{rel.name}}</option>
@@ -117,12 +118,13 @@
                       </div>                    
                         <input disabled type="text" class="form-control" style="text-align: center;" [value]="projectphase" placeholder="MonYYYY">
                 </div> -->
-                <div class="input-group form-group" style="width: 90%;">
+                <div class="input-group form-group" style="width: 90%;"
+                [ngClass]="{'has-error': projSettingsForm.get('complexity').errors && (projSettingsForm.get('complexity').touched || projSettingsForm.get('complexity').dirty)}">
                     <div class="input-group-prepend">
                         <span class="input-group-text input-titles">Complexity</span>
                     </div>
                     <select class="form-control" id="complexity" formControlName="complexity"
-                        style="text-align: center;">
+                        style="text-align: center;" required>
                         <option value="">Select Complexity</option>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
@@ -133,7 +135,7 @@
                 <br />
                 <br /> -->
                 <button class="btn btn-block btn-lg btn-colors" type="submit" style="width: 90%;"
-                    [disabled]="projSettingsForm.invalid">{{submitbtnTitile}}</button>
+                    >{{submitbtnTitile}}</button>
             </form>
         </div>
     </div>

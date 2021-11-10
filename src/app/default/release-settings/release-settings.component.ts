@@ -79,7 +79,13 @@ onGridReady(params) {
 }
 
 onSubmit(){
-  
+  if(this.releaseDetailsForm.invalid){
+    this.notifier.notify("error", "Please fill all required fields");
+    Object.keys(this.releaseDetailsForm.controls).forEach(field=>{
+      const control = this.releaseDetailsForm.get(field);
+      control.markAsTouched({ onlySelf : true});
+    })
+  }else{
   const jsonForm ={
     releaseId:this.releaseDetailsForm.get('releaseId').value,
     name:this.releaseDetailsForm.get('name').value,
@@ -93,7 +99,7 @@ onSubmit(){
     },(error) => {console.log(error)}
   );
 }
-
+}
 public progress: number;
 public message: string;
 fileNameToBeSaved;

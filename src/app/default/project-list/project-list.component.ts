@@ -46,7 +46,7 @@ export class ProjectListComponent implements OnInit {
     { headerName:'Project Name',field: 'name', width: 400,minWidth: 80, resizable: true, sortable: true, filter: true },
     { headerName:'Release',field: 'phase', width: 150,minWidth: 135, resizable: true, sortable: true, filter: true },
     { headerName:'Details',field: 'id',cellRendererFramework: AgDetailsButtonComponent, width: 150,minWidth: 135, resizable: true, sortable: true, filter: true},
-    { headerName:'Task Swimlanes',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150,minWidth: 145, resizable: true, sortable: true, filter: true},
+    { headerName:'Project Board',field: 'id',cellRendererFramework: AgSwimlanesButtonComponent, width: 150,minWidth: 145, resizable: true, sortable: true, filter: true},
     { headerName:'Add Task',field: 'id',cellRendererFramework: AgAddTaskButtonComponent, width: 155,minWidth: 150, resizable: true, sortable: true, filter: true},
     { headerName:'Settings',field: 'id',cellRendererFramework: AgSettingsButtonComponent, width: 150,minWidth: 80, resizable: true, sortable: true,  filter: true}
 ];

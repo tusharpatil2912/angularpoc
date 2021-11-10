@@ -26,20 +26,22 @@
                           </div>
                         <input type="text" formControlName="releaseId" class="form-control" placeholder="Release Id">
                     </div>
-                    <div class="input-group form-group" style="width: 100%;">
+                    <div class="input-group form-group" style="width: 100%;"
+                    [ngClass]="{'has-error': releaseDetailsForm.get('name').errors && (releaseDetailsForm.get('name').touched || releaseDetailsForm.get('name').dirty)}">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Release Name</span>
                         </div>
                         <input type="text" class="form-control" formControlName="name" style="text-align: center;"
-                            placeholder="Release Name">
+                            placeholder="Release Name" required>
                         <!--formControlName="releaseDate"-->
                     </div>
-                    <div class="input-group form-group" style="width: 100%;">
+                    <div class="input-group form-group" style="width: 100%;"
+                    [ngClass]="{'has-error': releaseDetailsForm.get('releaseDate').errors && (releaseDetailsForm.get('releaseDate').touched || releaseDetailsForm.get('releaseDate').dirty)}">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Release Date</span>
                         </div>
                         <input type="date" class="form-control" formControlName="releaseDate"
-                            style="text-align: center;">
+                            style="text-align: center;" required>
                         <!--formControlName="releaseDate"-->
                     </div>
                     <div class="input-group form-group">
@@ -58,13 +60,14 @@
                 </div>
                 <hr />
                 <div class="col-md-6">
-                    <div class="input-group form-group" style="width: 100%;">
+                    <div class="input-group form-group" style="width: 100%;"
+                    [ngClass]="{'has-error': releaseDetailsForm.get('details').errors && (releaseDetailsForm.get('details').touched || releaseDetailsForm.get('details').dirty)}">
                         <div class="input-group-prepend">
                             <span class="input-group-text input-titles">Release Description</span>
                         </div>
                         <!-- <input type="text" class="form-control" style="text-align: center;" placeholder="Release Description"> -->
                         <textarea rows="5" class="form-control" formControlName="details" style="text-align: center;"
-                            placeholder="Release Description"></textarea>
+                            placeholder="Release Description" required></textarea>
                         <!--formControlName="releaseDate"-->
                     </div>
                 </div>

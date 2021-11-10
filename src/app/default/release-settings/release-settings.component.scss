@@ -4,7 +4,10 @@
 .btn-colors{
   background-color: blueviolet;color: white;
 }
-
+.has-error span,.has-error input, .has-error select, .has-error textarea{
+  color: red;
+  border-color: red;
+}
 .no-file{
 border-left-color: red;
 border-left-width: 7px;
