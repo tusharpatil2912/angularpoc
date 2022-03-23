@@ -4,12 +4,12 @@
   
     <!-- <h2 matSubheader>Menu</h2> -->
     <div class="sideMenuBtnList" tabindex="-1">
-    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/">My Dashboard</a>
-    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/release">Releases</a>
-    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/projectlist">Projects</a>
-    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/task">Tasks</a>
-    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/openissues">Peer Review</a>
-    <a mat-list-item routerLinkActive='list-item-active' class="sideMenuBtn" routerLink="/reports">Reports</a>
+    <a mat-list-item routerLinkActive='sideMenuBtnActive' [routerLinkActiveOptions]="{ exact : true }" class="sideMenuBtn" routerLink="/">My Dashboard</a>
+    <a mat-list-item routerLinkActive='sideMenuBtnActive' class="sideMenuBtn" routerLink="/release">Releases</a>
+    <a mat-list-item routerLinkActive='sideMenuBtnActive' class="sideMenuBtn" routerLink="/projectlist">Projects</a>
+    <a mat-list-item routerLinkActive='sideMenuBtnActive' class="sideMenuBtn" routerLink="/task">Tasks</a>
+    <a mat-list-item routerLinkActive='sideMenuBtnActive' class="sideMenuBtn" routerLink="/openissues">Peer Review</a>
+    <a mat-list-item routerLinkActive='sideMenuBtnActive' class="sideMenuBtn" routerLink="/reports">Reports</a>
   </div>
     <mat-divider></mat-divider>
     
