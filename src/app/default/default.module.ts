@@ -47,6 +47,9 @@ import { ReleaseBoardComponent } from './release-board/release-board.component';
 import { AgReleasesettingsButtonComponent } from './agCustomCells/ag-releasesettings-button/ag-releasesettings-button.component';
 import { AgAddTaskButtonComponent } from './agCustomCells/ag-add-task-button/ag-add-task-button.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SiteTourComponent } from './site-tour/site-tour.component';
+import {GuidedTourModule, GuidedTourService} from 'ngx-guided-tour';
+
 
 @NgModule({
   declarations: [
@@ -70,7 +73,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ReleaseBoardComponent,
     AgReleasesettingsButtonComponent,
     AgAddTaskButtonComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SiteTourComponent
     
   ],
   imports: [
@@ -95,8 +99,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatMenuModule,
     MatTabsModule,
     HttpClientModule,IntegralUIModule,FormsModule,NgxChartsModule,ProgressBarModule,NgStepperModule,CdkStepperModule
+    ,GuidedTourModule
   ],
-  providers:[DatePipe
+  providers:[DatePipe,GuidedTourService
    
   ]
 })

@@ -20,7 +20,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { ErrorPageComponent } from './ui/error-page/error-page.component';
-
+import {DashboardComponent} from './../default/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -63,6 +63,9 @@ import { ErrorPageComponent } from './ui/error-page/error-page.component';
     HighchartsChartModule,
     MatDividerModule,
     MatSidenavModule
+  ],
+  providers:[
+    DashboardComponent
   ]
 })
 export class SharedModule { }

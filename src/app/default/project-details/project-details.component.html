@@ -3,11 +3,10 @@
   <div style="padding: 10px;">
     <div class="row">
       <div class="col-md-9" style="text-align:left;" *ngIf="projectDetails">
-        <br />
-        <h2>{{projectDetails.name}}</h2>
-        <h4>Description : {{projectDetails.description}}</h4>
-        <h4>Owner : {{projectDetails.owner}}</h4>
-        <h4>SME : {{projectDetails.sme}}</h4>
+          <h2>{{projectDetails.name | uppercase}}</h2>
+          <p> <b>Description : </b>{{projectDetails.description}}</p>
+          <p> <b>Owner : </b> {{projectDetails.owner}}</p>
+          <p> <b>SME :  </b> {{projectDetails.sme}}</p>
       </div>
       <div class="col-md-3" style="text-align:right;">
         <br />
@@ -53,15 +52,16 @@
       </span>
     </div> -->
     <div class="horiscroll" *ngIf="milestones">
-    <div class="row multi-steps-wrap">
-      <ul class="list-unstyled multi-steps">
-        <li *ngFor="let item of milestones;let i = index" class="job-status" [ngClass]="{'job-inprogress is-active negative': item.totalNoOfTasks !=0 && item.totalNoOfTasks == item.totalNoOfTasksCompleted,
+      <div class="row multi-steps-wrap">
+        <ul class="list-unstyled multi-steps">
+          <li *ngFor="let item of milestones;let i = index" class="job-status"
+            [ngClass]="{'job-inprogress is-active negative': item.totalNoOfTasks !=0 && item.totalNoOfTasks == item.totalNoOfTasksCompleted,
          'job-inprogress is-active inProgress': item.totalNoOfTasks !=0 && item.totalNoOfTasks > item.totalNoOfTasksCompleted,
          'job-inprogress is-active inDanger': item.totalNoOfTasks !=0 && currentDate >= item.milestoneDate && item.totalNoOfTasks != item.totalNoOfTasksCompleted}">
-         {{ item.name }} <span class="mileDate">{{item.milestoneDate}}</span></li>
-      </ul>
+            {{ item.name }} <span class="mileDate">{{item.milestoneDate}}</span></li>
+        </ul>
+      </div>
     </div>
-  </div>
   </div>
   <!-- <br/>
   <ng-stepper #cdkStepper [linear]="false" orientation="vertical">
@@ -250,7 +250,8 @@
         <!-- <input type="file" #changeTkt class="form-control" style="text-align: center;" (change)="uploadFile(changeTkt.files,'changetkt')" style="display:none;">
             <button class="btn btn-primary btn-colors" (click)="changeTkt.click()"><mat-icon>file_upload</mat-icon></button>
             <button class="btn btn-primary btn-colors" [disabled]="projectDetails.changeTicket === null" (click)="downloadFile('changetkt')"><mat-icon>file_download</mat-icon></button> -->
-        <a href="https://github.voya.net/" target="_blank" class="btn btn-primary btn-colors"> Github<mat-icon style="font-size: small;">open_in_new</mat-icon></a>
+        <a href="https://github.voya.net/" target="_blank" class="btn btn-primary btn-colors"> Github<mat-icon
+            style="font-size: small;">open_in_new</mat-icon></a>
       </div>
     </div>
   </div>

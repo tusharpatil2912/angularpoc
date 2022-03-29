@@ -19,6 +19,7 @@ import { ReleaseSettingsComponent } from "./default/release-settings/release-set
 import { ReleaseCreateComponent } from "./default/release-create/release-create.component";
 import { ReleaseBoardComponent } from "./default/release-board/release-board.component";
 import { UserProfileComponent } from "./default/user-profile/user-profile.component";
+import { SiteTourComponent } from "./default/site-tour/site-tour.component";
 
 const routes: Routes = [
   {path:'login',component: LoginComponent},
@@ -42,7 +43,8 @@ const routes: Routes = [
       {path:'release',component:ReleaseBoardComponent},
       {path:'releasesettings/:id',component:ReleaseSettingsComponent},
       {path:'addrelease', component:ReleaseCreateComponent},
-      {path:'profile', component:UserProfileComponent}
+      {path:'profile', component:UserProfileComponent},
+      {path:'sitetour', component:SiteTourComponent}
     ]
   },
   {path:'error',component:ErrorPageComponent},

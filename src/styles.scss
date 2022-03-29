@@ -7,3 +7,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
 @import "./assets/css/bootstrap.min.css";
 @import "../node_modules//angular-notifier/styles.css";
+$tour-next-button-color: blueviolet;
+$tour-next-button-hover: orange;
+$tour-back-button-color: blueviolet;
+$tour-orb-color: orange;
+$tour-step-color: #000000;
+$tour-text-color: #ffffff;
+$tour-skip-link-color: #c2c2c2;
+$tour-zindex: 99999;
+@import '../node_modules/ngx-guided-tour/scss/guided-tour-base-theme.scss';

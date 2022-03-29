@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
 
 import { Component, OnInit } from '@angular/core';
 import { projectComplexeity,ResourceAllocated,ProjectDataMulti,EstimatedTime,TasksCompleted,ProjectStatus,CodeRelease,TasksInProgress } from '../../services/dashboard.service';
+import { GuidedTourService, GuidedTour, Orientation } from 'ngx-guided-tour';
 
 
 
@@ -143,10 +144,78 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor() { Object.assign(this, {projectComplexeity,ResourceAllocated,ProjectDataMulti,EstimatedTime,TasksCompleted,ProjectStatus,CodeRelease,TasksInProgress})}
+  constructor(private guidedTourService: GuidedTourService) { Object.assign(this, {projectComplexeity,ResourceAllocated,ProjectDataMulti,EstimatedTime,TasksCompleted,ProjectStatus,CodeRelease,TasksInProgress})
 
+    // setTimeout(() => {
+    //     this.guidedTourService.startTour(this.dashboardTour);
+    // }, 1000);
+}
+
+public restartTour(): void {
+    this.guidedTourService.startTour(this.dashboardTour);
+}
   ngOnInit(): void {
   }
+  public dashboardTour: GuidedTour = {
+    tourId: 'project-tracker-tour',
+    useOrb: true,
+    steps: [
+        {
+            title: 'Welcome to Project-Tracker site tour',
+            selector: '#step1',
+            content: 'Lets see what all we have here!',
+            orientation: Orientation.Bottom
+        },
+        {
+          title: 'Profile Menu',
+          selector: '#step2',
+          content: 'Manage your profile details and signout',
+          orientation: Orientation.Left
+        },
+        {
+          title: 'Dashboard',
+          selector: '#step3',
+          content: 'Get all the details at a glance with your dashboard. Track projects, releases and much more.',
+          orientation: Orientation.Right
+        },
+        {
+          title: 'Releases',
+          selector: '#step4',
+          content: 'Create, Manage or Edit the releases to track the progress',
+          orientation: Orientation.Right
+        },
+        {
+          title: 'Projects',
+          selector: '#step5',
+          content: 'Manage all the projects at one place. Check the status of all project tasks with Projet board',
+          orientation: Orientation.Right
+        },
+        {
+          title: 'Tasks',
+          selector: '#step6',
+          content: 'Create, Manage and Track all the Tasks. Check the assigned tasks, update the status and do more.',
+          orientation: Orientation.Right
+        },
+        {
+          title: 'Peer Review',
+          selector: '#step7',
+          content: 'Review the tasks assigned to you as a peer reviewer.',
+          orientation: Orientation.Right
+        },
+        {
+          title: 'Reports',
+          selector: '#step8',
+          content: 'Get the reports and extracts in different formats for the auditing',
+          orientation: Orientation.Right
+        },
+        {
+          title: 'User Profile',
+          selector: '#step9',
+          content: 'User details like name, profile picture & designation',
+          orientation: Orientation.Right
+        }
+    ]
+};
 
 }
 
