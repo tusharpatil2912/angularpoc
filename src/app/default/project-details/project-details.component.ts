@@ -38,6 +38,11 @@ export class ProjectDetailsComponent implements OnInit {
     this.currentDate = this.datePipe.transform(this.newDate,"yyyy-MM-dd");
   }
 
+  goToBoard(){
+    this.projectId=this.activeRoute.snapshot.params.id;
+    this.router.navigate(['/swimlanes',this.projectId]);
+  }
+
   projectName = 'MyApp';
   ownerName = 'Pallavi';
   smeName ='Arpan';

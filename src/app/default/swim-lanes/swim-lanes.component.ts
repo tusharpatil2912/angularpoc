@@ -75,5 +75,8 @@ export class SwimLanesComponent implements OnInit {
                         event.currentIndex);
     }
   }
+  goToBack(){
+    window.history.back();
+  }
 
 }

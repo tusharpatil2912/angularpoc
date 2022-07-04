@@ -27,7 +27,7 @@
 <div style="margin: 10px;">
   <div class="row">
   <h1 *ngIf="projectDetails" class="col-lg-9">{{projectDetails.name}} Tasks</h1>
-  <a class="btn btn-lg btn-block btn-secondary col-lg-3" routerLink="/projectlist" style="color: white;"><span class="material-icons">
+  <a class="btn btn-lg btn-block btn-secondary col-lg-3" (click)="goToBack()" style="color: white;"><span class="material-icons">
     reply
     </span> Back</a>
   </div>

@@ -3,16 +3,17 @@
   <div style="padding: 10px;">
     <div class="row">
       <div class="col-md-9" style="text-align:left;" *ngIf="projectDetails">
-          <h2>{{projectDetails.name | uppercase}}</h2>
-          <p> <b>Description : </b>{{projectDetails.description}}</p>
-          <p> <b>Owner : </b> {{projectDetails.owner}}</p>
-          <p> <b>SME :  </b> {{projectDetails.sme}}</p>
+        <h2>{{projectDetails.name | uppercase}}</h2>
+        <p> <b>Description : </b>{{projectDetails.description}}</p>
+        <p> <b>Owner : </b> {{projectDetails.owner}}</p>
+        <p> <b>SME : </b> {{projectDetails.sme}}</p>
       </div>
       <div class="col-md-3" style="text-align:right;">
         <br />
         <a class="btn btn-block btn-lg btn-secondary" (click)="goBack()"><span class="material-icons">
             reply
           </span> Back</a>
+        <a class="btn btn-block btn-lg btn-colors" (click)="goToBoard()">Go to Board</a>
         <br />
         <!-- <button class="btn btn-lg btn-block btn-colors" type="button" data-toggle="collapse"
                     data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">File
