@@ -49,6 +49,7 @@ import { AgAddTaskButtonComponent } from './agCustomCells/ag-add-task-button/ag-
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SiteTourComponent } from './site-tour/site-tour.component';
 import {GuidedTourModule, GuidedTourService} from 'ngx-guided-tour';
+import { SwimLaneItemComponent } from './swim-lanes/swim-lane-item/swim-lane-item.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import {GuidedTourModule, GuidedTourService} from 'ngx-guided-tour';
     AgReleasesettingsButtonComponent,
     AgAddTaskButtonComponent,
     UserProfileComponent,
-    SiteTourComponent
+    SiteTourComponent,
+    SwimLaneItemComponent
     
   ],
   imports: [

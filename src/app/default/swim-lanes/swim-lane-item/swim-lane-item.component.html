@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-4" style="text-align: left; padding: 0px;">
+            # {{ItemDetails.taskId}}
+        </div>
+        <div class="col-8" style="text-align: right; font-size: smaller;">
+            <mat-icon style="transform: translateY(3px); font-size: medium;">today</mat-icon> ETA: {{taskETA}}
+        </div>
+    </div>
+    <div class="row">
+        <h6>{{ItemDetails.taskName}}</h6>
+    </div>   
+    <div class="row">
+        <div class="col-10" style="text-align: left; padding: 0px;">
+            <mat-icon style="transform: translateY(6px)">account_circle</mat-icon> {{ItemDetails.taskOwner}}
+        </div>
+        <div class="col-2" style="text-align: right; padding: 0px;">
+            <button mat-button [routerLink]="['/taskdetails',ItemDetails.taskId]">
+                <mat-icon>border_color</mat-icon>
+            </button>
+        </div>      
+    </div>
+</div>
