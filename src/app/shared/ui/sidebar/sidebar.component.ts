@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   projectList;
   userName:string;
   designation:string;
-  imageSrc = "https://www.w3schools.com/w3css/img_avatar3.png";
+  imageSrc = "assets/img/img_avatar3.png";
 
   constructor(private routes : Router,public dialog: MatDialog,private detailsapi: ProjectDetailsService) { }
 

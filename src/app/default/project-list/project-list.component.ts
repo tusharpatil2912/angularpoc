@@ -6,6 +6,7 @@ import { AgSwimlanesButtonComponent } from "../agCustomCells/ag-swimlanes-button
 import { AgAddTaskButtonComponent } from "../agCustomCells/ag-add-task-button/ag-add-task-button.component";
 import { NotifierService } from "angular-notifier";
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-project-list',
@@ -20,24 +21,29 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private detailsapi: ProjectDetailsService,
     private notifier: NotifierService,
-    private router: Router) { 
+    private router: Router,
+    private spinner: NgxSpinnerService) { 
     }
 
   ngOnInit(): void {
-    this.getProjectList();
+    //this.getProjectList();
+    this.spinner.show();
     setTimeout(() => {
       this.getProjectList();
-        }, 2000);
+        }, 800);
   }
 
   getProjectList(){
+    
     this.detailsapi.getProjecttList().subscribe((data)=>{
       //console.log(data);
       this.projectList = data;
       this.rowData = data;
+      this.spinner.hide();
     },(error)=>{
       this.rowData=this.mockupprojectList;
       this.notifier.notify("error", "API Error. Showing Mockup Data");
+      this.spinner.hide();
     });
   }
 

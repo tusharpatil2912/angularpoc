@@ -99,7 +99,7 @@
   </div>
 </div>-->
 
-<div class="row">
+<!-- <div class="row">
   <div class="card col p-3 m-3">
       <div class="ui statistic">
           <div class="label" style="font-size:xx-large;">
@@ -342,5 +342,155 @@
               </table>
           </div>
       </div>
-</div>
+</div> -->
 <ngx-guided-tour></ngx-guided-tour>
+
+<div class="row">
+  <div class="col-8">
+    <div class="row mb-3">
+      <div class="card ml-3 mr-3" style="width: 100%;">
+        <div class="card-header">Projects</div>
+        <div class="card-body">
+        <div class="row">
+          <div class="card col-3 p-3 m-3">
+            <div class="ui statistic">
+                <div class="label" style="font-size:xx-large;">
+                    Project 1
+                </div>
+                <div class="value" style="color:#008000;font-size:x-large;">
+                    <b><i>25 tasks</i></b>
+                </div>
+                <div class="value" style="color:#800000;font-size:small;">
+                 <b>Code Freeze Date: 20 Aug, 2021</b>
+             </div>
+             <div class="value" style="color:#34282c;font-size:small;">
+                 <b>Release Date: 20 Nov, 2021</b><br>
+                 <b>Progress:</b>
+                 <progress-bar [progress]="70" [color]="'#41A317'">
+                 </progress-bar>
+             </div>
+            </div>
+          </div>
+          <div class="card col-3 p-3 m-3">
+            <div class="ui statistic">
+                <div class="label" style="font-size:xx-large;">
+                    Project 2
+                </div>
+                <div class="value" style="color:#008000;font-size:x-large;">
+                    <b><i>10 tasks</i></b>
+                </div>
+                <div class="value" style="color:#800000;font-size:small;">
+                 <b>Code Freeze Date: 20 Aug, 2021</b>
+             </div>
+             <div class="value" style="color:#34282c;font-size:small;">
+                 <b>Release Date: 20 Nov, 2021</b><br>
+                 <b>Progress:</b>
+                 <progress-bar [progress]="40" [color]="'#800000'">
+                 </progress-bar>
+             </div>
+            </div>
+          </div>
+          <div class="card col-3 p-3 m-3">
+            <div class="ui statistic">
+                <div class="label" style="font-size:xx-large;">
+                    Project 3
+                </div>
+                <div class="value" style="color:#008000;font-size:x-large;">
+                    <b><i>16 tasks</i></b>
+                </div>
+                <div class="value" style="color:#800000;font-size:small;">
+                 <b>Code Freeze Date: 20 Aug, 2021</b>
+             </div>
+             <div class="value" style="color:#34282c;font-size:small;">
+                 <b>Release Date: 20 Nov, 2021</b><br>
+                 <b>Progress:</b>
+                 <progress-bar [progress]="65" [color]="'#41A317'">
+                 </progress-bar>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6" >
+        <div class="card">
+          <div class="card-header">
+            Progress
+          </div>
+          <div class="card-body">
+            <ngx-charts-pie-chart [results]='ProjectStatus' 
+              [view]="viewPie"
+              [scheme]="colorSchemePieChartProjectStatus"
+              [gradient]="gradient"
+              [legendPosition]="legendPositionLineChart"
+              [doughnut]="false"
+              [legend]="legend"                  
+              [legendTitle]="legendTitlePieChartProjectStatus"
+              [schemeType]="schemeType">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">Milestone Calender</div>
+          <div class="card-body">
+            <mwl-calendar-month-view
+              [viewDate]="viewDate"
+              [events]="events">
+            </mwl-calendar-month-view>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col" >
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">My Tasks</div>
+            <div class="card-body">
+              <div class="row">
+              <div class="col-4">
+                <div class="card" style="background-color: orange; color: white; height: 6rem;">
+                    <div class="card-block" style="padding: 5px;">
+                        <h6 class="m-b-20">To Do</h6>
+                        <h2><mat-icon>checklist</mat-icon><span class="text-right">12</span></h2>
+                    </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="card" style="background-color: blueviolet; color: white; height: 6rem;">
+                    <div class="card-block"  style="padding: 5px;">
+                        <h6 class="m-b-20">In Progress</h6>
+                        <h2><mat-icon>cached</mat-icon><span class="text-right">4</span></h2>
+                    </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="card" style="background-color: green; color: white; height: 6rem;">
+                    <div class="card-block"  style="padding: 5px;">
+                        <h6 class="m-b-20">Completed</h6>
+                        <h2><mat-icon>check_circle</mat-icon><span class="text-right">19</span></h2>
+                    </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">Notifications</div>
+            <div class="card-body" style="text-align: center;">
+              <p>No New Notifications</p>
+            </div>
+          </div>
+        </div>        
+      </div>      
+  </div>
+</div>

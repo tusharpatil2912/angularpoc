@@ -8,7 +8,8 @@ import { NotifierModule, NotifierOptions } from "angular-notifier";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { JwtInterceptor } from "./services/jwt.interceptor";
 import { ErrorInterceptor } from "./services/error.interceptor";
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const notifierCustomOptions: NotifierOptions = {
   position: {
@@ -61,7 +62,11 @@ const notifierCustomOptions: NotifierOptions = {
     BrowserAnimationsModule,
     DefaultModule,
     NotifierModule.withConfig(notifierCustomOptions),
-    HttpClientModule
+    HttpClientModule,
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // })
   ],
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

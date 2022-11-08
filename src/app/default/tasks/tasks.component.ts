@@ -3,7 +3,7 @@ import { TaskbuttonComponent } from '../agCustomCells/taskbutton/taskbutton.comp
 import { TaskDetailsService } from "../../services/task-details.service";
 import { NotifierService } from "angular-notifier";
 import { UserAuthService } from '../../services/user-auth.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-tasks',
@@ -18,7 +18,11 @@ export class TasksComponent implements OnInit {
   mockupprojectList=[{"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"},{"id":2,"name":"My Second Project","description":"Desc 2","owner":"Owner 2","sme":"Sme 2","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-27"},{"id":3,"name":"My Third Project","description":"Desc 3","owner":"Owner 3","sme":"Sme 3","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"},{"id":4,"name":"My Fourth Project","description":"Desc 4","owner":"Owner 4","sme":"Sme 4","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-12-01"}];
   currentUser;
 
-  constructor(private detailsapi: TaskDetailsService,private notifier: NotifierService,private authService:UserAuthService) { }
+  constructor(
+    private detailsapi: TaskDetailsService,
+    private notifier: NotifierService,
+    private authService:UserAuthService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUserValue;
@@ -55,25 +59,31 @@ stringFormatter(params) {
 }
 
 getAllTasks(){
+  this.spinner.show();
   this.detailsapi.getTasksList().subscribe((data)=>{
     //console.log(data);
     this.taskList = data;
     this.rowData = data;
+    this.spinner.hide();
   },(error)=>{
     this.rowData=this.mockupprojectList;
     this.notifier.notify("error", "API Error. Showing Mockup Data");
+    this.spinner.hide();
   });
 }
 
 getAllTasksByResourceId(){
   //console.log(currentUser['user'].resourceId);
+  this.spinner.show();
   this.detailsapi.getTaskByResourceId(this.currentUser['user'].resourceId).subscribe((data)=>{
     //console.log(data);
     this.taskList = data;
     this.rowData = data;
+    this.spinner.hide();
   },(error)=>{
     this.rowData=this.mockupprojectList;
     this.notifier.notify("error", "API Error. Showing Mockup Data");
+    this.spinner.hide();
   });
 }
 

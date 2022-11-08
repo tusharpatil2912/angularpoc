@@ -72,8 +72,25 @@ import { projectComplexeity, ResourceAllocated, ProjectDataMulti, EstimatedTime,
 import { GuidedTourService, GuidedTour, Orientation } from 'ngx-guided-tour';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 import { Router } from '@angular/router';
+import { addDays } from 'date-fns';
 
+import { EventColor } from 'calendar-utils';
+import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 
+const colors: Record<string, EventColor> = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3',
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF',
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA',
+  },
+};
 
 
 @Component({
@@ -82,7 +99,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  viewDate: Date = new Date();
+  
+  actions: CalendarEventAction[] = [
+    {
+      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      a11yLabel: 'Edit',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        //this.handleEvent('Edited', event);
+      },
+    },
+    {
+      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      a11yLabel: 'Delete',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.events = this.events.filter((iEvent) => iEvent !== event);
+       // this.handleEvent('Deleted', event);
+      },
+    },
+  ];
 
+  events = [
+    {
+      start: (new Date()),
+      title: 'Project 1 Code Drop',
+      color: { ...colors.yellow },
+      actions: this.actions,
+    },
+    {
+      start: addDays(new Date(), 5),
+      title: 'Project 2 Code Drop',
+      //color: { ...colors.yellow },
+      actions: this.actions,
+    },
+  ];
 
   projectComplexeity: any[];
   ResourceAllocated: any[];

@@ -28,8 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@lidorsystems/integralui-web/bin/integralui/css/integralui.module.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },

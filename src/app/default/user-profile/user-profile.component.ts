@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
   userData;
   name;
   managers;
-  imageSrc = "https://www.w3schools.com/w3css/img_avatar3.png";
+  imageSrc = "assets/img/img_avatar3.png";
   base64string;
   savechangesmsg;
 

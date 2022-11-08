@@ -3,6 +3,7 @@ import { NotifierService } from "angular-notifier";
 import { ProjectDetailsService } from "../../services/project-details.service";
 import { TaskDetailsService } from "../../services/task-details.service";
 import { TaskbuttonComponent } from "../agCustomCells/taskbutton/taskbutton.component";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-open-issues',
@@ -24,16 +25,20 @@ export class OpenIssuesComponent implements OnInit {
   constructor(
     private detailsapi: ProjectDetailsService,
     private notifier: NotifierService,
-    private taskapi: TaskDetailsService) { }
+    private taskapi: TaskDetailsService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     var userData = JSON.parse(localStorage.getItem('currentUser'));
     this.reviewerId = userData.user['resourceId'];
+    this.spinner.show();
     this.taskapi.GetPeerReviewTasksById(this.reviewerId).subscribe((data)=>{
       //console.log(data);
       this.rowData = data;
+      this.spinner.hide();
     },(error)=>{
       this.notifier.notify("error", "API Error. Showing Mockup Data");
+      this.spinner.hide();
     });
   }
 

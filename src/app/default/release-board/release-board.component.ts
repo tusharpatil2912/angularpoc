@@ -5,6 +5,7 @@ import { NotifierService } from "angular-notifier";
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { environment } from "../../../environments/environment";
 import { saveAs } from "file-saver";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-release-board',
@@ -18,17 +19,21 @@ export class ReleaseBoardComponent implements OnInit {
 
   constructor(private api: ProjectDetailsService,
     private notifier: NotifierService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getAllReleasesData();
   }
 
   getAllReleasesData() {
+    this.spinner.show();
     this.api.getAllReleases().subscribe((data) => {
       this.rowData = data;
+      this.spinner.hide();
     }, (error) => {
       this.notifier.notify("error", "API Error. Something Went wrong");
+      this.spinner.hide();
     });
   }
 

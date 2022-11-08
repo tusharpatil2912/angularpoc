@@ -38,7 +38,7 @@ import { AgSwimlanesButtonComponent } from './agCustomCells/ag-swimlanes-button/
 import { TasksComponent } from './tasks/tasks.component';
 import { ReportsComponent } from './reports/reports.component';
 import { OpenIssuesComponent } from './open-issues/open-issues.component';
-import { IntegralUIModule } from '../../../node_modules/@lidorsystems/integralui-web/bin/integralui/integralui.module';
+//import { IntegralUIModule } from '../../../node_modules/@lidorsystems/integralui-web/bin/integralui/integralui.module';
 import { TaskreadonlyComponent } from './taskreadonly/taskreadonly.component';
 import { TaskbuttonComponent } from './agCustomCells/taskbutton/taskbutton.component';
 import { ReleaseSettingsComponent } from './release-settings/release-settings.component';
@@ -50,7 +50,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SiteTourComponent } from './site-tour/site-tour.component';
 import {GuidedTourModule, GuidedTourService} from 'ngx-guided-tour';
 import { SwimLaneItemComponent } from './swim-lanes/swim-lane-item/swim-lane-item.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -100,8 +102,18 @@ import { SwimLaneItemComponent } from './swim-lanes/swim-lane-item/swim-lane-ite
     MatSelectModule,
     MatMenuModule,
     MatTabsModule,
-    HttpClientModule,IntegralUIModule,FormsModule,NgxChartsModule,ProgressBarModule,NgStepperModule,CdkStepperModule
-    ,GuidedTourModule
+    HttpClientModule, //IntegralUIModule,
+    NgxSpinnerModule,
+    FormsModule,
+    NgxChartsModule,
+    ProgressBarModule,
+    NgStepperModule,
+    CdkStepperModule
+    ,GuidedTourModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers:[DatePipe,GuidedTourService
    

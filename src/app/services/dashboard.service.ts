@@ -11,11 +11,7 @@ export var projectComplexeity=[
   {
       "name":"Project 3",
       "value":50
-  },
-  {
-      "name":"Project 4",
-      "value":50
-  },
+  }
 ];
 export var ResourceAllocated=[
   {
@@ -29,10 +25,6 @@ export var ResourceAllocated=[
   {
       "name": "Project 3",
       "value": 8
-  },
-  {
-      "name": "Project 4",
-      "value": 12
   }
 ];
 export var ProjectDataMulti=[
@@ -74,19 +66,6 @@ export var ProjectDataMulti=[
           "value":8
       }
   ]
-},
-{
-  "name":"Project 4",
-  "series":[
-      {
-          "name":"Project Complexeity",
-          "value":50
-      },
-      {
-          "name":"Resource Allocated",
-          "value":12
-      }
-  ]
 }
  
 ];
@@ -102,10 +81,6 @@ export var EstimatedTime=[
   {
       "name": "Project 3",
       "value": 70
-  },
-  {
-      "name": "Project 4",
-      "value": 100
   }
 ];
 export var TasksCompleted=[
@@ -120,10 +95,6 @@ export var TasksCompleted=[
   {
       "name": "Project 3",
       "value": 9
-  },
-  {
-      "name": "Project 4",
-      "value": 6
   }
 ];
 
@@ -169,20 +140,6 @@ export var CodeRelease=[
           "value":9
       },
   ]
-},
-{
-  "name":"Project 4",
-  "series":[
-      {
-          "name":"Code Release Month",
-          "value":11
-      },
-      {
-          "name":"Tasks Remaining",
-          "value":6
-      }
-    
-  ]
 }
  
 ];
@@ -197,10 +154,6 @@ export var ProjectStatus=[
   },
   {
       "name": "Project 3",
-      "value": 40
-  },
-  {
-      "name": "Project 4",
       "value": 40
   }
 ];
@@ -245,20 +198,6 @@ export var TasksInProgress=[
           "name":"Not Started",
           "value":2
       },
-  ]
-},
-{
-  "name":"Project 4",
-  "series":[
-      {
-          "name":"In Progress",
-          "value":3
-      },
-      {
-          "name":"Not Started",
-          "value":3
-      }
-    
   ]
 }
  
