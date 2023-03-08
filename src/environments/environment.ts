@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  localrootURL : 'https://localhost:5001/api',
-  rootURL : 'https://projecttrackerdotnetapi.herokuapp.com/api',
+  rootURL : 'https://localhost:5001/api',
+  rootURLheroku : 'https://projecttrackerdotnetapi.herokuapp.com/api',
   production: false
 };
 

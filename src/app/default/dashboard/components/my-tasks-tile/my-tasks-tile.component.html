@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header" style="display: flex; align-items: stretch; justify-content: space-between;">
+        <div>My Tasks</div>
+        <button mat-icon-button style="height: 20px;" (click)="getTasksCount()" title="Refresh">
+          <mat-icon style="font-size: larger; line-height: 5px;">sync</mat-icon>
+        </button>
+      </div>
+    <div class="card-body">
+      <div class="row">
+      <div class="col-4 sm-card" routerLink="/task">
+        <div class="card" style="background-color: orange; color: white; height: 6rem;">
+            <div class="card-block" style="padding: 5px;">
+                <h6 class="m-b-20">To Do</h6>
+                <h2><mat-icon>checklist</mat-icon><span class="text-right">{{ToDoCount}}</span></h2>
+            </div>
+        </div>
+      </div>
+      <div class="col-4 sm-card" routerLink="/task">
+        <div class="card" style="background-color: blueviolet; color: white; height: 6rem;">
+            <div class="card-block"  style="padding: 5px;">
+                <h6 class="m-b-20">In Progress</h6>
+                <h2><mat-icon>cached</mat-icon><span class="text-right">{{InProgressCount}}</span></h2>
+            </div>
+        </div>
+      </div>
+      <div class="col-4 sm-card" routerLink="/task">
+        <div class="card" style="background-color: green; color: white; height: 6rem;">
+            <div class="card-block"  style="padding: 5px;">
+                <h6 class="m-b-20">Completed</h6>
+                <h2><mat-icon>check_circle</mat-icon><span class="text-right">{{CompletedCount}}</span></h2>
+            </div>
+        </div>
+      </div>
+    </div>
+    <ngx-spinner name="tasks-tile" [fullScreen]="false" size="default" color="#fff" type="ball-pulse-sync"></ngx-spinner>
+    </div>
+  </div>

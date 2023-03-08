@@ -25,3 +25,16 @@ table {
     background-color:orange;
     transform: scale(1.1);
 }
+
+.right-panel{
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+}
+
+.right-panel > .row{
+    width: 100%;
+}

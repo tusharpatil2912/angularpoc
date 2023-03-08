@@ -1,0 +1,36 @@
+
+
+.horizontal-scrollable  .row {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+  
+.horizontal-scrollable  .row > .col-lg-4 {
+    display: inline-block;
+    float: none;
+}
+
+
+
+::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: rgb(220, 220, 220) 2px solid;
+    border-radius: 4px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(220, 220, 220);
+    border-radius: 4px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: grey;
+  }

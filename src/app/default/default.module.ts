@@ -53,6 +53,9 @@ import { SwimLaneItemComponent } from './swim-lanes/swim-lane-item/swim-lane-ite
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ProjectsTileComponent } from './dashboard/components/projects-tile/projects-tile.component';
+import { CalendarTileComponent } from './dashboard/components/calendar-tile/calendar-tile.component';
+import { MyTasksTileComponent } from './dashboard/components/my-tasks-tile/my-tasks-tile.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +81,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AgAddTaskButtonComponent,
     UserProfileComponent,
     SiteTourComponent,
-    SwimLaneItemComponent
+    SwimLaneItemComponent,
+    ProjectsTileComponent,
+    CalendarTileComponent,
+    MyTasksTileComponent
     
   ],
   imports: [

@@ -3,6 +3,7 @@ import { ProjectDetailsService } from "../../services/project-details.service";
 import { NotifierService } from "angular-notifier";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-release-create',
@@ -16,7 +17,9 @@ export class ReleaseCreateComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private api: ProjectDetailsService,
     private router: Router,
-    private notifier: NotifierService) { }
+    private notifier: NotifierService,
+    private spinner: NgxSpinnerService) { }
+    
 
   ngOnInit(): void {
     this.releaseDetailsForm = this.fb.group({
@@ -36,6 +39,7 @@ export class ReleaseCreateComponent implements OnInit {
         control.markAsTouched({ onlySelf : true});
       })
     }else{
+    this.spinner.show();
     const jsonForm ={
       name:this.releaseDetailsForm.get('name').value,
       details: this.releaseDetailsForm.get('details').value,
@@ -44,16 +48,17 @@ export class ReleaseCreateComponent implements OnInit {
     };
 
     this.api.addNewRelease(jsonForm).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response) => {
+        this.spinner.hide();
+        this.router.navigate(['/release']);
+        this.notifier.notify("success", "New Release Added Successfully!");
+      },
+      (error) => {
+        this.spinner.hide();
+        console.log(error);
+        this.notifier.notify("error", "Error Occurred while adding New Release");
+      }
     );
-    this.router.navigate(['/release']).then(()=>{
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    });
-
-    this.notifier.notify("success", "New Release Added Successfully!");
   }
   }
 }

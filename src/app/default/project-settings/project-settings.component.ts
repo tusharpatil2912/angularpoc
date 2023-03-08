@@ -6,6 +6,7 @@ import { UserAuthService } from "../../services/user-auth.service";
 import { MilestoneService } from "../../services/milestone.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from "angular-notifier";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-project-settings',
@@ -41,11 +42,12 @@ export class ProjectSettingsComponent implements OnInit {
     private milestoneapi:MilestoneService,
     private notifier: NotifierService, 
     private router: Router,
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.projectId=this.activeRoute.snapshot.params.id;
-    
+    this.spinner.show();
     this.userapi.getUserstList().subscribe((data)=>{
       this.resourceList=data;   
     },(error)=>{
@@ -86,7 +88,8 @@ export class ProjectSettingsComponent implements OnInit {
                                         createdDate:this.projectDetails.createdDate,
                                         complexity:this.projectDetails.complexity,
                                         skills:this.projectDetails.skills,
-                                        releaseId:this.projectDetails.releaseId})                                    
+                                        releaseId:this.projectDetails.releaseId})  ;
+      this.spinner.hide();                                  
     },(error)=>{
       this.notifier.notify("error","API Error. Showing Mockup Data");
       this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};
@@ -98,7 +101,8 @@ export class ProjectSettingsComponent implements OnInit {
         releaseDate: this.projectDetails.releaseDate,
         codeDropDate: this.projectDetails.codeDropDate,
         codeFreezeDate: this.projectDetails.codeFreezeDate,
-        createdDate:this.projectDetails.createdDate})
+        createdDate:this.projectDetails.createdDate});
+        this.spinner.hide(); 
     });
     // setTimeout(() => {
     //   this.onReleaseSelection(this.projectDetails.releaseId); 
@@ -107,6 +111,7 @@ export class ProjectSettingsComponent implements OnInit {
   else{
     this.pageTitile = "Add New Project";
     this.submitbtnTitile = "Submit";
+    this.spinner.hide(); 
   }
   this.projSettingsForm = this.fb.group({
     id: [''],
@@ -240,6 +245,7 @@ selectedReleaseDetails;
         control.markAsTouched({ onlySelf : true});
       })
     }else{
+      this.spinner.show();
     //console.warn(this.projSettingsForm.value);
     const jsonForm ={
       name:this.projSettingsForm.get('name').value,
@@ -273,6 +279,7 @@ selectedReleaseDetails;
       //this.notifier.notify("error", "add update function");
       this.detailsapi.updateProject(this.pId,putjsonForm).subscribe(
         (response) => {
+          this.spinner.hide();
           this.router.navigate(['/projectlist']).then(()=>{
             // setTimeout(() => {
             //   window.location.reload();
@@ -280,7 +287,7 @@ selectedReleaseDetails;
           });
           this.notifier.notify("success", "Project updated successfully");
         },
-        (error) => {this.notifier.notify("error", "Something Went Wrong While Updating Project");}
+        (error) => { this.spinner.hide(); this.notifier.notify("error", "Something Went Wrong While Updating Project");}
       );
       
       
@@ -288,6 +295,7 @@ selectedReleaseDetails;
     else{
     this.detailsapi.addNewProject(jsonForm).subscribe(
       (response) => {
+        this.spinner.hide();
         this.router.navigate(['/projectlist']).then(()=>{
           // setTimeout(() => {
           //   window.location.reload();
@@ -295,7 +303,7 @@ selectedReleaseDetails;
         });
         this.notifier.notify("success", "New Project Added Successfully!");
       },
-      (error) => {this.notifier.notify("error", "Something Went Wrong While Adding New Project");}
+      (error) => { this.spinner.hide(); this.notifier.notify("error", "Something Went Wrong While Adding New Project");}
     );
      }
     }

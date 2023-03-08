@@ -1,0 +1,36 @@
+<div class="card mr-3 horizontal-scrollable" style="width: 100%;">
+    <div class="card-header">Projects</div>
+    <div class="card-body">
+        <div class="container ">
+            <div class="row" *ngIf="isErrored">
+                <div class="col-12"
+                    style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <p>Something went wrong!</p>
+                    <button (click)="getProjectList()" class="btn btn-danger">Retry</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="ProjectList">
+                <div class="card col-lg-4 col-md-12 p-3 m-3" *ngFor="let project of ProjectList">
+                    <div class="ui statistic">
+                        <div class="label" style="font-size:xx-large;">
+                            {{project.name}}
+                        </div>
+                        <div class="value" style="color:#008000;font-size:x-large;">
+                            <b><i>{{project.phase}}</i></b>
+                        </div>
+                        <div class="value" style="color:#800000;font-size:small;">
+                            <b>Code Freeze Date: {{project.codeFreezeDate}}</b>
+                        </div>
+                        <div class="value" style="color:#34282c;font-size:small;">
+                            <b>Release Date: {{project.releaseDate}}</b><br>
+                            <b>Progress:</b>
+                            <progress-bar [progress]="70" [color]="'#41A317'">
+                            </progress-bar>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ngx-spinner name="project-tile" [fullScreen]="false" size="default" color="#fff" type="ball-pulse-sync"></ngx-spinner>
+    </div>
+</div>

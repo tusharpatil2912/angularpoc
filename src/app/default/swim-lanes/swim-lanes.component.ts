@@ -59,16 +59,25 @@ export class SwimLanesComponent implements OnInit {
 
   projectName = "Project 1";
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
+  drop(event: CdkDragDrop<string[]>, status:string) {    
+    console.log(event.previousContainer.data[event.previousIndex]['taskId']);
+    
+    this.detailsapi.updateTaskStatus(event.previousContainer.data[event.previousIndex]['taskId'],status).subscribe(
+      res=>{
+        if (event.previousContainer === event.container) {
+          moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        } else {
+          transferArrayItem(event.previousContainer.data,
+                            event.container.data,
+                            event.previousIndex,
+                            event.currentIndex);
+        }
+        this.notifier.notify("success","Status Updated Successfully.");
+      },
+      err=>{
+        this.notifier.notify("error","Error While Updating Status");
+      }
+    )
   }
   goToBack(){
     window.history.back();

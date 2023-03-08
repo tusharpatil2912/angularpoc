@@ -16,6 +16,10 @@ export class MilestoneService {
     return this.httpClient.get(`${this.rootURL}/Milestone/byProjectId/${pid}`);
   }
 
+  public getAllMilestones(){
+    return this.httpClient.get(`${this.rootURL}/Milestone`);
+  }
+
   public addNewMilestone(milestone) {
     return this.httpClient.post<any>(`${this.rootURL}/Milestone`, milestone);
   }

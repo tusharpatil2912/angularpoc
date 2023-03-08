@@ -107,7 +107,7 @@
   <div cdkDropListGroup>
     <div class="example-container" style="border-style:outset; text-align: center; background-color:blueviolet;">
       <h3 class="laneHeading">To Do</h3>
-      <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList [cdkDropListData]="todo" class="example-list" (cdkDropListDropped)="drop($event,'todo')">
         <div class="example-box" *ngFor="let item of todo" cdkDrag
           style="border: solid;border-width: 1px; border-inline-start-color: red; border-inline-start-width: 8px;margin-bottom: 5px;border-radius: 5px;">
           <app-swim-lane-item [ItemDetails]="item"></app-swim-lane-item>
@@ -117,7 +117,7 @@
 
     <div class="example-container" style="border-style:outset; text-align: center; background-color:blueviolet;">
       <h3 class="laneHeading">In Progress</h3>
-      <div cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList [cdkDropListData]="inProgress" class="example-list" (cdkDropListDropped)="drop($event,'inprogress')">
         <div class="example-box" *ngFor="let item of inProgress" cdkDrag
           style="border: solid;border-width: 1px; border-inline-start-color: blue; border-inline-start-width: 8px;margin-bottom: 5px;border-radius: 5px;">
           <app-swim-lane-item [ItemDetails]="item"></app-swim-lane-item>
@@ -127,7 +127,7 @@
 
     <div class="example-container" style="border-style:outset; text-align: center; background-color:blueviolet;">
       <h3 class="laneHeading">Done</h3>
-      <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList [cdkDropListData]="done" class="example-list" (cdkDropListDropped)="drop($event,'completed')">
         <div class="example-box" *ngFor="let item of done" cdkDrag
           style="border: solid;border-width: 1px; border-inline-start-color: green; border-inline-start-width: 8px;margin-bottom: 1px;border-radius: 5px;">
           <app-swim-lane-item [ItemDetails]="item" style="width: 100%"></app-swim-lane-item>

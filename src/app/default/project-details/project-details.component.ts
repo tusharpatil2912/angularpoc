@@ -8,6 +8,7 @@ import { saveAs } from "file-saver";
 import { environment } from "../../../environments/environment";
 import { MilestoneService } from "../../services/milestone.service";
 import { DatePipe } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -31,9 +32,11 @@ export class ProjectDetailsComponent implements OnInit {
               private notifier:NotifierService,
               private activeRoute: ActivatedRoute,
               private datePipe : DatePipe,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getProjectData();
     this.currentDate = this.datePipe.transform(this.newDate,"yyyy-MM-dd");
   }
@@ -122,6 +125,7 @@ getProjectData(){
   this.detailsapi.getProjectDetails(this.projectId).subscribe((data)=>{
     //console.log(data);
     this.projectDetails = data;
+    this.spinner.hide();
   },(error)=>{
     this.notifier.notify("error","API Error. Showing Mockup Data");
     this.projectDetails={"id":1,"name":"My First Project","description":"Desc 1","owner":"Owner 1","sme":"Sme 1","phase":null,"codeDropDate":null,"codeFreezeDate":null,"releaseDate":null,"createdDate":"2020-11-26"};

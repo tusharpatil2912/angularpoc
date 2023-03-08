@@ -45,4 +45,8 @@ export class TaskDetailsService {
   public GetPeerReviewTasksById(id){
     return this.httpClient.get(`${this.rootURL}/projecttask/GetPeerReviewTasksById/${id}`);
   }
+  public updateTaskStatus(id,status) {
+    // console.warn(project);
+    return this.httpClient.put<any>(`${this.rootURL}/projecttask/updateTaskStatus/${id}?status=${status}`, status);
+  }
 }

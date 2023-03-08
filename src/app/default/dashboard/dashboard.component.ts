@@ -67,30 +67,16 @@ export class DashboardComponent implements OnInit {
 
 }*/
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { projectComplexeity, ResourceAllocated, ProjectDataMulti, EstimatedTime, TasksCompleted, ProjectStatus, CodeRelease, TasksInProgress } from '../../services/dashboard.service';
 import { GuidedTourService, GuidedTour, Orientation } from 'ngx-guided-tour';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 import { Router } from '@angular/router';
 import { addDays } from 'date-fns';
-
+import _ from 'lodash';
 import { EventColor } from 'calendar-utils';
-import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
-
-const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { CalendarEvent, CalendarEventAction, CalendarView } from 'angular-calendar';
+import { TaskDetailsService } from 'src/app/services/task-details.service';
 
 
 @Component({
@@ -99,41 +85,7 @@ const colors: Record<string, EventColor> = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  viewDate: Date = new Date();
   
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        //this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-       // this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
-  events = [
-    {
-      start: (new Date()),
-      title: 'Project 1 Code Drop',
-      color: { ...colors.yellow },
-      actions: this.actions,
-    },
-    {
-      start: addDays(new Date(), 5),
-      title: 'Project 2 Code Drop',
-      //color: { ...colors.yellow },
-      actions: this.actions,
-    },
-  ];
-
   projectComplexeity: any[];
   ResourceAllocated: any[];
   ProjectDataMulti: any[];
@@ -194,9 +146,19 @@ export class DashboardComponent implements OnInit {
   yAxisLabelTasksInProgress: string = 'Tasks In Progress & Not Started';
 
 
+  columnDefs = [
+    { headerName:'Id',field: 'taskId', width: 60, minWidth: 60, resizable: true, sortable: true },
+    { headerName:'Task Name',field: 'taskName', width: 250,minWidth: 100, resizable: true, sortable: true,  filter: true, tooltipField: 'taskName'},
+    { headerName:'ETC',field: 'taskETC', width: 110,minWidth: 100, resizable: true, sortable: true, filter: true, tooltipField: 'taskETC'},
+    { headerName:'Weightage',field: 'taskWeightage', width: 120,minWidth: 100, resizable: true, sortable: true, filter: true, tooltipField: 'taskWeightage'}    
+  ];
 
+  rowData;
+  gridApi: any;
+  gridColumnApi: any;
 
   constructor(private guidedTourService: GuidedTourService,
+    private taskService:TaskDetailsService,
     private authService: UserAuthService,
     private router: Router) {
     Object.assign(this, { projectComplexeity, ResourceAllocated, ProjectDataMulti, EstimatedTime, TasksCompleted, ProjectStatus, CodeRelease, TasksInProgress })
@@ -207,11 +169,40 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit(): void {
     const currentUser = this.authService.currentUserValue;
-    if (currentUser) { }
+    if (currentUser) {
+      this.getTaskList();
+    }
     else {
       this.router.navigate(['/login']);
     }
   }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    const sortModel = [
+        {colId: 'taskETC', sort: 'desc'},
+        {colId: 'taskWeightage', sort: 'desc'}
+    ];
+    this.gridApi.setSortModel(sortModel);
+    this.gridApi.sizeColumnsToFit();
+  }
+  
+  getTaskList(){
+    const currentUser = this.authService.currentUserValue;
+    this.taskService.getTaskByResourceId(currentUser['user'].resourceId).subscribe(
+      (data:any[])=>{
+        if(data){
+          this.rowData = data.filter(d=> d.taskStatus != 'completed');
+        }
+        
+      },
+      err=>{
+
+      }
+    )
+  }
+
   public dashboardTour: GuidedTour = {
     tourId: 'project-tracker-tour',
     useOrb: true,
